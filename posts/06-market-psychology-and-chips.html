@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>為什麼財報漂亮，股價卻不漲？——基本面之外，你還要看誰在買｜AI 學徒筆記 06</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:     #f7f3ec;
+    --surface:  #fffdf8;
+    --ink:      #2c2620;
+    --ink2:     #5f574b;
+    --muted:    #93887a;
+    --grid:     #e7dfd2;
+    --baseline: #cfc5b4;
+    --border:   rgba(44,38,32,0.10);
+    --accent:   #b0492f;
+    --good:     #3e7c46;
+    --bad:      #a03030;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page:     #16130f;
+      --surface:  #1e1a15;
+      --ink:      #f0e9dd;
+      --ink2:     #beb3a2;
+      --muted:    #8d8375;
+      --grid:     #2e2921;
+      --baseline: #4a4336;
+      --border:   rgba(255,255,255,0.10);
+      --accent:   #d9744f;
+      --good:     #6fae77;
+      --bad:      #d97070;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #16130f; --surface: #1e1a15; --ink: #f0e9dd; --ink2: #beb3a2;
+    --muted: #8d8375; --grid: #2e2921; --baseline: #4a4336;
+    --border: rgba(255,255,255,0.10); --accent: #d9744f; --good: #6fae77; --bad: #d97070;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--page); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 48px 24px 80px; max-width: 900px; margin: 0 auto;
+    line-height: 1.85; font-size: 17px;
+  }
+  .serif, h1, h2, h3 { font-family: Georgia, "Noto Serif TC", "Songti TC", serif; }
+  header .series { color: var(--accent); font-size: 14px; letter-spacing: .12em; font-weight: 600; }
+  header .series .no { border: 1.5px solid var(--accent); border-radius: 99px; padding: 1px 9px; margin-right: 8px; }
+  h1 { font-size: 31px; font-weight: 700; margin-top: 14px; line-height: 1.4; }
+  .lede {
+    color: var(--ink2); margin-top: 16px; font-size: 17.5px;
+    border-left: 3px solid var(--accent); padding-left: 16px; line-height: 1.8;
+  }
+  .meta { color: var(--muted); font-size: 14px; margin-top: 16px; }
+  hr.rule { border: 0; border-top: 1px solid var(--grid); margin: 40px 0 0; }
+  section { margin-top: 44px; }
+  h2 { font-size: 23px; font-weight: 700; line-height: 1.45; }
+  h2 .n { color: var(--accent); margin-right: 10px; }
+  h3 { font-size: 18px; font-weight: 700; margin-top: 30px; }
+  p { margin-top: 16px; }
+  .figure {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 22px; margin-top: 22px; overflow-x: auto;
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .figure .cap { color: var(--muted); font-size: 13.5px; margin-top: 12px; line-height: 1.65; }
+  .figure svg { display: block; max-width: 100%; height: auto; }
+  .note {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+    padding: 16px 20px; margin-top: 22px; font-size: 16px;
+  }
+  .note .t { color: var(--accent); font-weight: 700; font-size: 14px; letter-spacing: .08em; }
+  .note p { margin-top: 6px; }
+  table.simple { border-collapse: collapse; margin-top: 18px; font-size: 15.5px; width: 100%; }
+  table.simple th, table.simple td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  table.simple th { color: var(--ink2); font-weight: 650; font-size: 14px; }
+  footer { margin-top: 64px; border-top: 1px solid var(--grid); padding-top: 20px; color: var(--muted); font-size: 14.5px; line-height: 1.8; }
+  footer .next { color: var(--ink2); }
+  footer a { color: var(--accent); }
+  .refs { margin-top: 12px; font-size: 13.5px; }
+  .svg-ink   { fill: var(--ink); }
+  .svg-ink2  { fill: var(--ink2); }
+  .svg-muted { fill: var(--muted); }
+</style>
+</head>
+<body>
+
+<p style="margin-bottom:24px"><a href="../index.html" style="color:var(--accent);text-decoration:none;font-size:15px">← AI 世代的隨手筆記</a></p>
+
+<header>
+  <div class="series"><span class="no">06</span>AI 學徒筆記</div>
+  <h1>為什麼財報漂亮，股價卻不漲？<br>——基本面之外，你還要看誰在買</h1>
+  <p class="lede">前五篇把 AI 的原理、供應鏈與風險講完了。但真的走進市場，最常聽到的困惑是另一種：「營收創新高，股價卻跌給你看。」這一篇講股票市場的底層邏輯——<b>股價是預期的成交價，不是成績單</b>——以及在 AI 這種暴漲暴跌的行情裡，基本面之外你必須同時看的東西：籌碼。</p>
+  <div class="meta">學徒筆記系列・第 6 篇｜閱讀約 12 分鐘｜※ 本篇含作者的投資框架整理，性質與前五篇的知識內容不同，請特別留意文末聲明</div>
+</header>
+
+<hr class="rule">
+
+<section>
+  <h2><span class="n">一</span>那個讓所有人困惑的畫面</h2>
+
+  <p>2026 年的台股你一定看過這種新聞組合：某 AI 概念股公布月營收，年增率創歷史新高——當天股價開高走低，收黑。散戶論壇一片「主力出貨」、「莊家騙線」的陰謀論。但這個現象通常不需要陰謀論解釋，它只需要一句話：</p>
+
+  <p><b>你以為市場在交易「業績」，但市場交易的從頭到尾都是「業績跟預期的落差」。</b></p>
+
+  <p>股票市場不是頒獎典禮，是一個<b>買賣雙方用真金白銀對未來下注的成交平台</b>。每一筆成交價，都是當下所有參與者對這家公司未來的集體定價。所以「營收創新高」這件事，早在公布之前就被買進去了——分析師預估過、法人拜訪過、產業鏈上下游的訂單風聲傳過。<b>公布日交易的不是新高，是「有沒有比大家想的新高更高」。</b>符合預期＝沒有新資訊＝先前為此買進的人開始獲利了結——這就是「利多出盡」的機制，不是莊家的陰謀。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 760 240" role="img" aria-label="預期先於公布被定價的時間軸示意">
+      <text x="0" y="18" font-size="15" font-weight="650" class="svg-ink">「利多出盡」的機制：預期先上車，事實來驗票</text>
+      <g font-size="13">
+        <line x1="30" y1="150" x2="730" y2="150" stroke="var(--baseline)" stroke-width="1.5"/>
+        <path d="M 40 140 Q 200 130 340 80 L 460 60" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+        <text x="60" y="120" class="svg-ink2">財報公布前：預期一路被買進價格</text>
+        <text x="60" y="140" class="svg-muted" font-size="12">（分析師調升、法人卡位、市場風聲）</text>
+        <line x1="460" y1="40" x2="460" y2="160" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <text x="460" y="180" text-anchor="middle" class="svg-ink" font-weight="650">公布日</text>
+        <path d="M 460 60 L 570 40" fill="none" stroke="var(--good)" stroke-width="2.5"/>
+        <text x="580" y="42" class="svg-ink2">大幅優於預期 → 續漲</text>
+        <path d="M 460 60 L 570 92" fill="none" stroke="var(--muted)" stroke-width="2.5"/>
+        <text x="580" y="96" class="svg-ink2">符合預期 → 利多出盡、獲利了結</text>
+        <path d="M 460 60 L 570 140" fill="none" stroke="var(--bad)" stroke-width="2.5"/>
+        <text x="580" y="146" class="svg-ink2">略遜於預期 → 重挫</text>
+      </g>
+      <text x="0" y="222" font-size="13.5" class="svg-muted">同一份「創新高」的財報，三種走勢都有可能——決定方向的不是數字本身，是數字與「已被買進價格的預期」的落差。</text>
+    </svg>
+  </div>
+
+  <p>經濟學家凱因斯一百年前就把這件事講透了：股市像一場選美比賽，你要賭的不是「你覺得誰最漂亮」，是「<b>大家會覺得誰最漂亮</b>」——甚至是「大家覺得大家會覺得誰最漂亮」。基本面研究回答的是第一題，但市場結算的是第二題。</p>
+</section>
+
+<section>
+  <h2><span class="n">二</span>AI 行情的放大器：估值失錨</h2>
+
+  <p>「預期定價」在任何年代都成立，但 AI 行情把它放大到極端。平常我們評估一檔穩定的股票，會看 EPS（每股盈餘）、本益比（股價 ÷ EPS，代表「用幾年的獲利買下這家公司」），跟歷史區間比、跟同業比，判斷貴或便宜——這套方法有一個隱藏前提：<b>分子和分母活在同一個時間</b>。</p>
+
+  <p>AI 行情把這個前提拆了：本益比的分母是「今年的獲利」，但市場的分子買的是「2030 年的夢」——第三篇講的 token 需求 24 倍、供應鏈全面擴產，全部都是未來式。當估值的錨從「現在的獲利」鬆脫、改繫在「未來的敘事」上，會發生兩件事：</p>
+
+  <table class="simple">
+    <tr><th style="width:30%">結構變化</th><th>市場長相</th></tr>
+    <tr><td><b>估值區間失效</b></td><td>「本益比 30 倍太貴」在夢還在的時候擋不住任何人；「跌到 15 倍很便宜」在夢碎的時候接不住任何刀。過去的高低區間參考價值大減</td></tr>
+    <tr><td><b>波動被敘事主導</b></td><td>價格繫在敘事上，而敘事只有「相信」和「懷疑」兩種狀態、切換極快——所以<b>不是爆漲就是爆跌</b>，溫和的中間狀態越來越少</td></tr>
+  </table>
+
+  <p>把第五篇的結論接過來：<b>需求可以是真的，價格可以同時是錯的</b>。在估值失錨的市場裡沿用低波動年代的操作直覺（「跌深就是買點」、「本益比低就安全」），等於拿舊地圖走新地形——這正是這一篇後半要補的東西。</p>
+</section>
+
+<section>
+  <h2><span class="n">三</span>籌碼面：比起「多少人看好」，先看「誰在買、用什麼錢買」</h2>
+
+  <p>基本面研究做完（第三、四篇的功課），你知道了「這家公司值不值得」。但短中線的價格不是由「值不值得」決定的，是由<b>「現在場內的人怎麼站位」</b>決定的——這就是籌碼面。台股在這件事上有一個全球少見的優勢：<b>籌碼資料極度透明</b>——三大法人（外資、投信、自營商）的買賣超每個交易日公布，融資融券餘額每天更新，這些都是公開免費的資訊。多數市場的散戶看不到這些，台股散戶是看得到卻常常不看。</p>
+
+  <h3>法人動態：你的預期，跟大錢對齊了嗎</h3>
+  <p>法人不見得比你聰明，但法人的錢比你大——大到<b>他們的動作本身就是價格的一部分</b>。所以看法人買賣超的意義不是「跟單」，是<b>驗證</b>：你基於基本面看好一檔股票，而法人連續賣超它——這不代表你錯了，但代表「你看到的利多，大錢可能早就定價完了、正在下車」。反過來，你看好、法人也在持續建倉，代表你的預期還沒被完全買進價格。<b>方向對不對是基本面的事，「還剩多少人可以買」是籌碼面的事。</b></p>
+
+  <h3>融資餘額：看多的雙面刃</h3>
+  <p>融資是散戶借錢買股票。融資餘額升高，表面上是「大家看多」——但把它翻譯成籌碼語言，意思其實是：<b>一群用槓桿、耐不住跌的資金，已經滿手都是這檔股票。</b>這會同時製造三個結構效果：</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 760 250" role="img" aria-label="高融資餘額的三個結構效果示意">
+      <text x="0" y="18" font-size="15" font-weight="650" class="svg-ink">融資餘額偏高的股票：三個結構效果</text>
+      <g font-size="13.5">
+        <rect x="270" y="40" width="220" height="52" rx="6" fill="var(--accent)" opacity="0.10"/>
+        <rect x="270" y="40" width="220" height="52" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+        <text x="380" y="62" text-anchor="middle" class="svg-ink" font-weight="650">融資餘額偏高</text>
+        <text x="380" y="83" text-anchor="middle" class="svg-ink2" font-size="12.5">＝槓桿資金滿手、成本集中</text>
+        <path d="M 300 92 L 150 128" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#a6)"/>
+        <path d="M 380 92 L 380 128" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#a6)"/>
+        <path d="M 460 92 L 610 128" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#a6)"/>
+        <rect x="30" y="134" width="228" height="72" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+        <text x="42" y="156" class="svg-ink" font-weight="650">① 上攻更費力</text>
+        <text x="42" y="177" class="svg-ink2" font-size="12.5">頭上全是等解套的賣壓，</text>
+        <text x="42" y="195" class="svg-ink2" font-size="12.5">沒有帶量就很難突破</text>
+        <rect x="272" y="134" width="216" height="72" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+        <text x="284" y="156" class="svg-ink" font-weight="650">② 下跌會加速</text>
+        <text x="284" y="177" class="svg-ink2" font-size="12.5">跌到維持率就被斷頭強賣，</text>
+        <text x="284" y="195" class="svg-ink2" font-size="12.5">賣壓引發更多賣壓（多殺多）</text>
+        <rect x="502" y="134" width="228" height="72" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+        <text x="514" y="156" class="svg-ink" font-weight="650">③ 訊號在「變化」不在絕對值</text>
+        <text x="514" y="177" class="svg-ink2" font-size="12.5">融資急增＝散戶追價過熱；</text>
+        <text x="514" y="195" class="svg-ink2" font-size="12.5">大跌後融資大減＝賣壓釋放</text>
+      </g>
+      <text x="0" y="236" font-size="13.5" class="svg-muted">同一個「看多」訊號，換成籌碼語言就是「未來的賣壓庫存」——這是散戶最常忽略的一層。</text>
+      <defs>
+        <marker id="a6" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--muted)"/></marker>
+      </defs>
+    </svg>
+  </div>
+
+  <h3>量：價格的說服力</h3>
+  <p>最後一個常被跳過的基本功：<b>成交量是價格的說服力</b>。帶大量創新高，代表新的資金真的願意在新的價位接手，突破比較可信；無量創新高，代表只是沒人賣、不是很多人買——一有風吹草動就縮回來。配合上面的融資結構看：高融資＋無量攻高，是短線最脆弱的組合之一。</p>
+</section>
+
+<section>
+  <h2><span class="n">四</span>合起來：短中線的三層檢核</h2>
+
+  <p>把整個系列到這裡的工具收成一個順序——評估一檔 AI 概念股「短中線值不值得投資」，至少過三層：</p>
+
+  <table class="simple">
+    <tr><th style="width:26%">檢核層</th><th style="width:42%">問的問題</th><th>用的工具</th></tr>
+    <tr><td><b>① 基本面</b>——該不該</td><td>它站在生態鏈哪個環節？稀缺還是可替代？需求傳導到它是領先還是落後？</td><td>第三、四篇的地圖與三個問題</td></tr>
+    <tr><td><b>② 籌碼面</b>——誰在買</td><td>法人動態跟我的預期同向嗎？融資是不是已經滿手？突破有沒有量？</td><td>每日法人買賣超、融資餘額變化、量價</td></tr>
+    <tr><td><b>③ 預期面</b>——價格反映到哪</td><td>現在的價格已經把多少好消息買進去了？我看到的利多，是新資訊還是舊聞？</td><td>本篇第一、二節＋第五篇的訊號清單</td></tr>
+  </table>
+
+  <p>三層的關係是「與」不是「或」：<b>基本面好、但法人在退、融資滿手、價格已把三年後的夢買完——這不是好的短中線標的，它只是好公司</b>。好公司和好投資是兩件事，中間隔著的就是價格與籌碼。三層裡任何一層跟你的判斷打架，最理性的動作往往是：等。錯過不會賠錢，追高會。</p>
+
+  <div class="note">
+    <div class="t">寫在系列脈絡裡</div>
+    <p>這一篇跟前五篇的性質不同：01~05 講的是可查證的知識（原理、數據、歷史），這一篇的框架雖然建立在標準的財務概念上（預期定價、籌碼分析、量價關係都不是本文發明的），但<b>「怎麼組合、看重什麼」帶有作者自己的投資經驗與偏好</b>——請把它當成一個老手整理給你的檢查清單，不是唯一正解，更不是操作指令。</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">附</span>名詞備註（給第一次看盤的讀者）</h2>
+  <table class="simple">
+    <tr><th style="width:26%">名詞</th><th>白話</th></tr>
+    <tr><td>三大法人</td><td>外資（外國機構投資人）、投信（國內基金公司）、自營商（券商自己的交易部門）——台股每個交易日收盤後公布三者的買賣超（買進減賣出的淨額），證交所網站免費可查</td></tr>
+    <tr><td>買賣超</td><td>某法人當天「淨買入」或「淨賣出」某檔股票的股數——連續多日同方向，比單日更有意義</td></tr>
+    <tr><td>融資餘額</td><td>散戶向券商借錢買進、還沒還的總金額——每天公布。升高＝槓桿多單累積；「融資使用率」高的股票，上下都會更劇烈</td></tr>
+    <tr><td>斷頭（融資追繳）</td><td>股價跌到擔保維持率不足時，券商強制賣出融資戶的股票——這種賣出不看價格，是下跌加速的常見燃料</td></tr>
+    <tr><td>帶量／無量</td><td>相對自己近期均量，成交量明顯放大／萎縮——量是驗證價格動作可信度的工具</td></tr>
+  </table>
+  <p>制度性資訊（法人買賣超、融資融券每日公布）可在台灣證券交易所與各大看盤軟體免費取得。</p>
+</section>
+
+<footer>
+  <p class="next"><b>系列到這裡</b>：01 接龍原理 → 02 幻覺與成本 → 03 需求鏈 → 04 台股地圖 → 05 泡沫與週期 → 06 市場心理與籌碼。從「AI 是什麼」一路走到「怎麼面對用它定價的市場」。</p>
+  <p class="refs"><b>本篇為作者的投資框架整理與市場觀念教育，不是投資建議、不是個股推薦，也不構成任何買賣邀約；所有投資決策請自行研究並承擔風險。</b>文中「預期定價」「凱因斯選美比賽」為標準財務學概念；籌碼制度為台灣證券市場公開規則。</p>
+  <p>AI 學徒筆記——一個科技與財務背景的人，把 AI 真的學懂的公開筆記。</p>
+</footer>
+
+</body>
+</html>
