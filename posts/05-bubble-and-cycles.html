@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>這條鏈什麼時候會斷？——泡沫論、供過於求與週期的歷史課｜AI 學徒筆記 05</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:     #f7f3ec;
+    --surface:  #fffdf8;
+    --ink:      #2c2620;
+    --ink2:     #5f574b;
+    --muted:    #93887a;
+    --grid:     #e7dfd2;
+    --baseline: #cfc5b4;
+    --border:   rgba(44,38,32,0.10);
+    --accent:   #b0492f;
+    --good:     #3e7c46;
+    --bad:      #a03030;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page:     #16130f;
+      --surface:  #1e1a15;
+      --ink:      #f0e9dd;
+      --ink2:     #beb3a2;
+      --muted:    #8d8375;
+      --grid:     #2e2921;
+      --baseline: #4a4336;
+      --border:   rgba(255,255,255,0.10);
+      --accent:   #d9744f;
+      --good:     #6fae77;
+      --bad:      #d97070;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #16130f; --surface: #1e1a15; --ink: #f0e9dd; --ink2: #beb3a2;
+    --muted: #8d8375; --grid: #2e2921; --baseline: #4a4336;
+    --border: rgba(255,255,255,0.10); --accent: #d9744f; --good: #6fae77; --bad: #d97070;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--page); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 48px 24px 80px; max-width: 900px; margin: 0 auto;
+    line-height: 1.85; font-size: 17px;
+  }
+  .serif, h1, h2, h3 { font-family: Georgia, "Noto Serif TC", "Songti TC", serif; }
+  header .series { color: var(--accent); font-size: 14px; letter-spacing: .12em; font-weight: 600; }
+  header .series .no { border: 1.5px solid var(--accent); border-radius: 99px; padding: 1px 9px; margin-right: 8px; }
+  h1 { font-size: 31px; font-weight: 700; margin-top: 14px; line-height: 1.4; }
+  .lede {
+    color: var(--ink2); margin-top: 16px; font-size: 17.5px;
+    border-left: 3px solid var(--accent); padding-left: 16px; line-height: 1.8;
+  }
+  .meta { color: var(--muted); font-size: 14px; margin-top: 16px; }
+  hr.rule { border: 0; border-top: 1px solid var(--grid); margin: 40px 0 0; }
+  section { margin-top: 44px; }
+  h2 { font-size: 23px; font-weight: 700; line-height: 1.45; }
+  h2 .n { color: var(--accent); margin-right: 10px; }
+  h3 { font-size: 18px; font-weight: 700; margin-top: 30px; }
+  p { margin-top: 16px; }
+  .figure {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 22px; margin-top: 22px; overflow-x: auto;
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .figure .cap { color: var(--muted); font-size: 13.5px; margin-top: 12px; line-height: 1.65; }
+  .figure svg { display: block; max-width: 100%; height: auto; }
+  .note {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+    padding: 16px 20px; margin-top: 22px; font-size: 16px;
+  }
+  .note .t { color: var(--accent); font-weight: 700; font-size: 14px; letter-spacing: .08em; }
+  .note p { margin-top: 6px; }
+  table.simple { border-collapse: collapse; margin-top: 18px; font-size: 15.5px; width: 100%; }
+  table.simple th, table.simple td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  table.simple th { color: var(--ink2); font-weight: 650; font-size: 14px; }
+  footer { margin-top: 64px; border-top: 1px solid var(--grid); padding-top: 20px; color: var(--muted); font-size: 14.5px; line-height: 1.8; }
+  footer .next { color: var(--ink2); }
+  footer a { color: var(--accent); }
+  .refs { margin-top: 12px; font-size: 13.5px; }
+  .svg-ink   { fill: var(--ink); }
+  .svg-ink2  { fill: var(--ink2); }
+  .svg-muted { fill: var(--muted); }
+</style>
+</head>
+<body>
+
+<p style="margin-bottom:24px"><a href="../index.html" style="color:var(--accent);text-decoration:none;font-size:15px">← AI 世代的隨手筆記</a></p>
+
+<header>
+  <div class="series"><span class="no">05</span>AI 學徒筆記</div>
+  <h1>這條鏈什麼時候會斷？<br>——泡沫論、供過於求與週期的歷史課</h1>
+  <p class="lede">前四篇講的都是「為什麼會漲」：接龍原理、token 成本、需求鏈、台股地圖。但只給油門不給煞車的投資內容是不完整的——這一篇正面處理市場吵得最兇的問題：這是不是泡沫？歷史上長得像的那次是怎麼破的？以及最實用的：<b>哪些訊號亮燈，代表故事在轉壞</b>。</p>
+  <div class="meta">學徒筆記系列・第 5 篇（系列完結）｜閱讀約 12 分鐘</div>
+</header>
+
+<hr class="rule">
+
+<section>
+  <h2><span class="n">一</span>泡沫論在吵什麼：三個真實的爭點</h2>
+
+  <h3>爭點一：循環金融——錢在自己人之間轉圈？</h3>
+  <p>懷疑方最常攻擊的一張圖長這樣：輝達宣布向 OpenAI 投資高達 1,000 億美元；OpenAI 跟 Oracle 簽下數千億美元的算力合約（Stargate 資料中心計畫）；而 Oracle 和 CoreWeave（輝達持股的算力租賃商）蓋資料中心要買的晶片，又是輝達的。媒體把這一圈相關交易加總，喊出「7,500 億美元循環金融」的質疑：<b>如果需求的一部分是供應商自己出錢創造的，市場看到的需求訊號就被扭曲了</b>。老手投資人的既視感很具體：1990 年代末的電信設備商，也曾借錢給客戶買自己的設備衝業績——後來客戶付不出錢，一起倒。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 760 300" role="img" aria-label="AI 循環金融的資金流向示意圖">
+      <text x="0" y="18" font-size="15" font-weight="650" class="svg-ink">「循環金融」質疑的資金迴圈（簡化示意）</text>
+      <g font-size="13.5">
+        <rect x="270" y="44" width="220" height="54" rx="6" fill="var(--accent)" opacity="0.10"/>
+        <rect x="270" y="44" width="220" height="54" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+        <text x="380" y="66" text-anchor="middle" class="svg-ink" font-weight="650">輝達（晶片供應商）</text>
+        <text x="380" y="87" text-anchor="middle" class="svg-ink2" font-size="12.5">賣 GPU、也投資自己的客戶</text>
+        <rect x="40" y="190" width="290" height="54" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+        <text x="185" y="212" text-anchor="middle" class="svg-ink" font-weight="650">OpenAI（模型公司）</text>
+        <text x="185" y="233" text-anchor="middle" class="svg-ink2" font-size="12.5">收投資、簽天價算力合約</text>
+        <rect x="430" y="190" width="290" height="54" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+        <text x="575" y="212" text-anchor="middle" class="svg-ink" font-weight="650">Oracle／CoreWeave（算力商）</text>
+        <text x="575" y="233" text-anchor="middle" class="svg-ink2" font-size="12.5">蓋資料中心、採購 GPU</text>
+        <path d="M 300 98 Q 200 140 190 186" fill="none" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#a5)"/>
+        <text x="150" y="140" class="svg-ink2" font-size="12.5">投資高達 1,000 億美元</text>
+        <path d="M 330 220 L 426 220" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#a5)"/>
+        <text x="378" y="210" text-anchor="middle" class="svg-ink2" font-size="12.5">數千億算力合約</text>
+        <path d="M 570 186 Q 560 130 494 92" fill="none" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#a5a)"/>
+        <text x="600" y="140" class="svg-ink2" font-size="12.5">採購 GPU（變回輝達營收）</text>
+      </g>
+      <text x="0" y="286" font-size="13.5" class="svg-muted">質疑方：這一圈裡有多少是「外部真需求」？辯護方：只要終端推理用量持續成長，圈就轉得下去。</text>
+      <defs>
+        <marker id="a5" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--muted)"/></marker>
+        <marker id="a5a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--accent)"/></marker>
+      </defs>
+    </svg>
+  </div>
+
+  <h3>爭點二：回報數學——這麼多錢，賺得回來嗎？</h3>
+  <p>悲觀方的算術很簡單粗暴：把這幾年累計的 AI 資本支出加總，<b>光是要達到 10% 的年報酬，就需要 AI 每年生出約 1,600 億美元的「新增」利潤</b>——而且 10% 這個報酬率根本撐不起這些公司現在的估值。高盛則估 2026~2031 全球 AI 基建投資約 7.6 兆美元。錢已經花下去了，收入端能不能跟上，是整個故事的分母。</p>
+
+  <h3>爭點三：折舊爭議——GPU 到底能用幾年？</h3>
+  <p>這是 2026 年最技術性、也可能最致命的一個爭點。雲端巨頭在帳上把 GPU 伺服器折舊年限設在 4~6 年；但輝達的產品節奏已經改成<b>一年一代</b>（Hopper 2022 → Blackwell 2024 → Rubin 2026 → Rubin Ultra 2027），而且每代是跳躍式升級。如果 GPU 的「經濟壽命」實際上只有 2~3 年（做空者 Michael Burry 的主張——他估這讓 2026~2028 的科技巨頭獲利被高估約 1,760 億美元），那現在財報上的獲利就是被折舊政策撐出來的。高盛的敏感度分析：<b>壽命假設從 5 年改成 3 年，2026~2031 的年均折舊從約 3 兆跳到近 4 兆美元</b>——一個會計假設，一兆美元的差距。</p>
+
+  <div class="note">
+    <div class="t">學徒視角</div>
+    <p>注意這三個爭點沒有一個在否認「AI 有用」——吵的全是<b>價格與時間</b>：需求被誇大了多少？回本要多久？帳算得誠不誠實。這跟「AI 是不是真的」是兩個問題——而歷史上最慘的泡沫，恰恰發生在「技術是真的」的東西上。</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">二</span>歷史課：光纖泡沫——需求是真的，泡沫照樣破</h2>
+
+  <p>2000 年前後的電信光纖熱，是跟今天最像的一面鏡子。當年的敘事引擎是一句話：<b>「網路流量每 100 天翻一倍。」</b>這句話撐起了舉債數千億美元的光纖鋪設狂潮。問題是——它是錯的。實際流量大約<b>一年</b>翻一倍：方向對了，速度誇大了好幾倍。</p>
+
+  <p>2000~2002 年現實追上預期：電信與網路類股市值蒸發約 7 兆美元、約 50 萬人失業、23 家大型電信商接連破產。但故事最深的一層在後面：<b>那些鋪下去的光纖沒有消失</b>——泡沫破後的「暗光纖」（鋪了沒點亮的閒置纖芯）以極低價格易手，十年後成了雲端運算與串流時代的地基。網路真的改變了世界，<b>當年的樂觀者方向全對——但押在 2000 年估值上的錢，大多沒有回來</b>。</p>
+
+  <table class="simple">
+    <tr><th style="width:33%"></th><th>2000 光纖泡沫</th><th>2026 AI 建設潮</th></tr>
+    <tr><td><b>敘事引擎</b></td><td>「流量每 100 天翻倍」（實際約一年翻倍）</td><td>token 需求 2030 前成長 24 倍（高盛預估——方向有共識，速度是預測）</td></tr>
+    <tr><td><b>出錢的人</b></td><td>舉債的電信商與新創（現金流撐不住利息）</td><td>全球現金流最強的幾家公司＋逐漸增加的債務與循環投資</td></tr>
+    <tr><td><b>供應商行為</b></td><td>設備商借錢給客戶買設備</td><td>晶片商投資客戶、入股算力商（循環金融爭議）</td></tr>
+    <tr><td><b>收入端</b></td><td>鋪完才發現沒人付費使用</td><td>推理收入真實存在且成長中——但 token 單價同時暴跌，總收入能否追上投資是未知數</td></tr>
+    <tr><td><b>資產殘值</b></td><td>光纖躺 20 年仍可用——殘值救了下一個時代</td><td>GPU 可能 2~3 年就被下一代淘汰（折舊爭議的核心）——<b>這點比光纖更不利</b></td></tr>
+  </table>
+
+  <p>這張對照表的誠實結論：今天的體質比 2000 年好（買家有錢、收入真實存在），但有一點明確更糟——<b>光纖躺著 20 年還能點亮，GPU 躺三年就是電子廢料</b>。過度建設如果發生，這次的殘值救不了誰。</p>
+
+  <p>再補一句半導體人都知道的常識：<b>記憶體產業每一輪都是同一個劇本</b>——缺貨→漲價→全體擴產→過剩→殺價→減產，週期四到五年。上一篇說 HBM 是賣方市場、三家寡佔——寡佔改變的是週期的振幅，從來沒有取消過週期。</p>
+</section>
+
+<section>
+  <h2><span class="n">三</span>轉壞的訊號清單：第四篇的反向操作</h2>
+
+  <p>學徒的立場不是預測泡沫何時破——2000 年喊泡沫的人，很多喊了三年才對，早三年空手跟錯了沒兩樣。可操作的姿勢是<b>把「預言」換成「監測」</b>：第四篇給了需求傳導的訊號清單，這裡是同一張清單的反向——亮燈越多，故事越接近轉折：</p>
+
+  <table class="simple">
+    <tr><th style="width:34%">訊號</th><th>為什麼是警訊</th></tr>
+    <tr><td><b>① 四大雲端 capex 指引下修或「展延」</b></td><td>水龍頭轉小。特別注意「維持金額但時程往後推」的說法——那是砍單的委婉語</td></tr>
+    <tr><td><b>② CoWoS／HBM 交期縮短、開始議價</b></td><td>最緊的環節鬆了＝供需反轉的第一個實體證據（對照：現在交期 40~52 週、產能訂滿）</td></tr>
+    <tr><td><b>③ 算力租賃價格下跌</b></td><td>GPU 時租價是算力的現貨市場——供過於求最誠實的溫度計</td></tr>
+    <tr><td><b>④ 台股月營收傳導斷裂</b></td><td>上游還在成長、中下游月營收先轉弱（或庫存天數持續攀升）＝訂單在鏈中間蒸發</td></tr>
+    <tr><td><b>⑤ 折舊年限爭議進入財報</b></td><td>會計師關切、公司被迫縮短 GPU 折舊年限、或大額資產減損出現——爭點三從論戰變成數字</td></tr>
+    <tr><td><b>⑥ 循環交易開始拆圈</b></td><td>供應商對客戶的投資縮手、算力合約重談或違約——迴圈是靠信心轉的，拆圈就是信心的價格</td></tr>
+  </table>
+
+  <div class="note">
+    <div class="t">怎麼用這張清單</div>
+    <p>單一訊號亮燈通常是雜訊（例如單月營收波動）；<b>兩個以上同時亮、且橫跨「錢（①⑥）、實體（②③④）、帳（⑤）」不同類別</b>，才是結構性訊號。反過來說：股價大跌但六個訊號全綠，那叫回檔，不叫故事破裂——分清楚這兩件事，就贏過大部分的恐慌。</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">四</span>系列收尾：學徒的完整框架</h2>
+
+  <p>五篇走完，把整個框架收成一段話：</p>
+
+  <p><b>AI 靠接龍說話（01），每塊積木都要燒真實的算力與記憶體（02），所以 token 需求會沿著供應鏈一路傳導到上游（03），而台灣恰好站在這條鏈的製造重心上，但不同環節的議價力天差地遠（04）。這個故事的每一層都是真的——而歷史告訴我們，「技術是真的」從來不保證「價格是對的」，所以用訊號清單監測，不用信仰持有（05）。</b></p>
+
+  <p>寧可錯過，不追高，不接刀——需求是真的就不怕沒有下一次機會；而如果訊號亮了，錯過的那段漲幅，就是你付給風險控制的保險費。</p>
+</section>
+
+<section>
+  <h2><span class="n">附</span>數據出處備註（每個數字是哪來的）</h2>
+  <table class="simple">
+    <tr><th style="width:42%">文中數字／說法</th><th>出處</th></tr>
+    <tr><td>輝達投資 OpenAI 高達 1,000 億美元、Stargate 數千億算力合約、「7,500 億循環金融」總量說法</td><td><a href="https://www.tradingkey.com/analysis/stocks/us-stocks/262068483-nvidia-skhynix-openai-750-billion-deal-cyclical-financing-market-panic-tradingkey">TradingKey 彙整</a>・<a href="https://www.bloomberg.com/graphics/2026-ai-circular-deals/">Bloomberg「AI Circular Deals」圖解</a></td></tr>
+    <tr><td>與 90 年代電信設備商 vendor financing 的類比</td><td><a href="https://www.cnbc.com/2026/07/27/jim-cramer-warns-ai-circular-financing-echoes-dot-com-bubble.html">CNBC（Jim Cramer 評論）</a></td></tr>
+    <tr><td>累計 AI capex 要達 10% 年報酬需約 1,600 億美元新增年利潤</td><td><a href="https://anomalyinvestments.substack.com/p/this-obviously-is-an-ai-bubble-the">Anomaly Investments（看空方測算，注意立場）</a></td></tr>
+    <tr><td>高盛：2026~2031 全球 AI 基建約 7.6 兆美元；折舊敏感度（壽命 5→3 年＝年均折舊約 3 兆→近 4 兆）</td><td>高盛研究報告，經 <a href="https://news.cnyes.com/news/id/6250733">鉅亨網</a> 等轉述</td></tr>
+    <tr><td>Michael Burry：GPU 實際壽命 2~3 年、2026~2028 獲利恐被高估約 1,760 億美元</td><td><a href="https://news.cnyes.com/news/id/6250733">鉅亨網彙整</a>（做空者觀點，注意立場）</td></tr>
+    <tr><td>光纖泡沫：「每 100 天翻倍」神話 vs 實際一年翻倍、市值蒸發約 7 兆美元、約 50 萬人失業、23 家電信商破產、暗光纖成雲端地基</td><td><a href="https://thetimelessinvestor.substack.com/p/they-buried-a-trillion-dollars-underground">The Timeless Investor</a>・<a href="https://www.opusinteractive.com/opus-blog/post/the-telecom-overbuild-that-built-the-cloud-lessons-from-fiber-glut-to-hyperscale-success/">Opus Interactive</a>・<a href="https://www.lpl.com/research/blog/fiber-optics-vs-data-centers-dotcom-and-ai-comparisons.html">LPL Research</a></td></tr>
+    <tr><td>輝達年度換代節奏（Hopper→Blackwell→Rubin→Rubin Ultra）</td><td>NVIDIA 公開路線圖（見第 3、4 篇出處）</td></tr>
+  </table>
+  <p>看空方與看多方的數字都標了立場——<b>這篇引用的每一個「爆雷數字」本身也是預測，跟看多方的 24 倍一樣需要打折聽</b>。</p>
+</section>
+
+<footer>
+  <p class="next"><b>AI 學徒筆記第一季完結</b>（01 接龍原理 → 02 幻覺與成本 → 03 需求鏈 → 04 台股地圖 → 05 泡沫與週期）。之後的篇章會深挖單一環節、或把新的市場變化放回這套框架檢驗。</p>
+  <p class="refs"><b>本文是產業結構的學習筆記，不是投資建議；文中看多與看空的數字皆為各方預測或主張，請自行判斷。</b></p>
+  <p>AI 學徒筆記——一個非本科的人，把 AI 真的學懂的公開筆記。</p>
+</footer>
+
+</body>
+</html>
