@@ -43,12 +43,12 @@
     background: var(--page); color: var(--ink);
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     padding: 56px 32px 80px; max-width: 1120px; margin: 0 auto;
-    line-height: 1.8; font-size: 15.5px;
+    line-height: 1.8; font-size: 16.5px;
   }
   h1, h2, .serif, .card .title { font-family: Georgia, "Noto Serif TC", "Songti TC", serif; }
-  h1 { font-size: 34px; font-weight: 700; line-height: 1.35; }
-  .intro { color: var(--ink2); margin-top: 14px; font-size: 16px; max-width: 820px; }
-  .author { color: var(--muted); font-size: 13.5px; margin-top: 12px; }
+  h1 { font-size: 35px; font-weight: 700; line-height: 1.35; }
+  .intro { color: var(--ink2); margin-top: 14px; font-size: 17px; max-width: 820px; }
+  .author { color: var(--muted); font-size: 14.5px; margin-top: 12px; }
   .author a { color: var(--accent); }
 
   nav.tabs {
@@ -57,7 +57,7 @@
   }
   nav.tabs button {
     appearance: none; background: none; border: 0; cursor: pointer;
-    font: inherit; font-size: 14.5px; color: var(--ink2);
+    font: inherit; font-size: 15.5px; color: var(--ink2);
     padding: 10px 16px 12px; position: relative;
   }
   nav.tabs button:hover { color: var(--ink); }
@@ -68,7 +68,7 @@
     content: ""; position: absolute; left: 12px; right: 12px; bottom: -1px;
     height: 2.5px; background: var(--accent); border-radius: 2px;
   }
-  .tabdesc { color: var(--muted); font-size: 13.5px; margin-top: 16px; }
+  .tabdesc { color: var(--muted); font-size: 14.5px; margin-top: 16px; }
 
   .cards { margin-top: 20px; display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); }
   @media (max-width: 760px) { .cards { grid-template-columns: 1fr; } }
@@ -80,27 +80,27 @@
   }
   a.card:hover { border-color: var(--accent); }
   .card .k {
-    color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .1em;
+    color: var(--accent); font-size: 13px; font-weight: 700; letter-spacing: .1em;
   }
   .card .k .no {
     border: 1.5px solid var(--accent); border-radius: 99px; padding: 0 8px; margin-right: 8px;
   }
-  .card .title { font-size: 19px; font-weight: 700; margin-top: 8px; line-height: 1.5; }
-  .card .desc { color: var(--ink2); font-size: 14px; margin-top: 8px; line-height: 1.7; }
-  .card .meta { color: var(--muted); font-size: 12.5px; margin-top: 10px; }
+  .card .title { font-size: 20px; font-weight: 700; margin-top: 8px; line-height: 1.5; }
+  .card .desc { color: var(--ink2); font-size: 15px; margin-top: 8px; line-height: 1.7; }
+  .card .meta { color: var(--muted); font-size: 13.5px; margin-top: 10px; }
   .card.soon { opacity: .75; }
   .card.soon .title { color: var(--ink2); }
   .badge-soon {
-    display: inline-block; font-size: 11.5px; color: var(--muted);
+    display: inline-block; font-size: 12.5px; color: var(--muted);
     border: 1px solid var(--baseline); border-radius: 99px; padding: 1px 9px; margin-left: 8px;
     vertical-align: 2px; font-family: system-ui, sans-serif; font-weight: 500;
   }
   .panel[hidden] { display: none; }
-  .mediumcta { margin-top: 18px; font-size: 14px; }
+  .mediumcta { margin-top: 18px; font-size: 15px; }
   .mediumcta a { color: var(--accent); }
   footer {
     margin-top: 64px; border-top: 1px solid var(--grid); padding-top: 18px;
-    color: var(--muted); font-size: 13px; line-height: 1.8;
+    color: var(--muted); font-size: 14px; line-height: 1.8;
   }
 </style>
 </head>
@@ -133,16 +133,18 @@
       <div class="desc">幻覺不是故障，是接龍機制的本性；而每個 token 背後，是一次參數整套搬運的全力衝刺。</div>
       <div class="meta">2026-08｜閱讀約 9 分鐘</div>
     </a>
-    <div class="card soon">
-      <div class="k"><span class="no">03</span>AI 學徒筆記<span class="badge-soon">撰寫中</span></div>
+    <a class="card" href="posts/03-demand-to-supply-chain.html">
+      <div class="k"><span class="no">03</span>AI 學徒筆記</div>
       <div class="title">從 token 需求到 AI 供應鏈——需求為什麼一路漲到上游</div>
-      <div class="desc">token 用量暴增之後，誰做晶片、誰疊記憶體、誰封裝、誰供電散熱——把需求鏈一層層往上游推。</div>
-    </div>
-    <div class="card soon">
-      <div class="k"><span class="no">04</span>AI 學徒筆記<span class="badge-soon">撰寫中</span></div>
+      <div class="desc">推理超車訓練、需求撞上算力、HBM、先進封裝，最後撞上電力——越上游玩家越少，瓶頸在哪議價力就在哪。</div>
+      <div class="meta">2026-08｜閱讀約 10 分鐘</div>
+    </a>
+    <a class="card" href="posts/04-taiwan-stock-map.html">
+      <div class="k"><span class="no">04</span>AI 學徒筆記</div>
       <div class="title">AI 生態鏈的台股地圖——每個環節看什麼、誰有議價力</div>
-      <div class="desc">整條生態鏈一張圖：台廠站在哪些環節、瓶頸在誰手上，以及用什麼指標判讀需求訊號的傳導。</div>
-    </div>
+      <div class="desc">全鏈一張圖：台廠站在哪些環節、三種議價力位置、四個傳導訊號，以及判讀任何 AI 概念股的三個問題。</div>
+      <div class="meta">2026-08｜閱讀約 11 分鐘</div>
+    </a>
   </div>
 </section>
 

@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>從 token 需求到 AI 供應鏈——需求為什麼一路漲到上游｜AI 學徒筆記 03</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:     #f7f3ec;
+    --surface:  #fffdf8;
+    --ink:      #2c2620;
+    --ink2:     #5f574b;
+    --muted:    #93887a;
+    --grid:     #e7dfd2;
+    --baseline: #cfc5b4;
+    --border:   rgba(44,38,32,0.10);
+    --accent:   #b0492f;
+    --good:     #3e7c46;
+    --bad:      #a03030;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page:     #16130f;
+      --surface:  #1e1a15;
+      --ink:      #f0e9dd;
+      --ink2:     #beb3a2;
+      --muted:    #8d8375;
+      --grid:     #2e2921;
+      --baseline: #4a4336;
+      --border:   rgba(255,255,255,0.10);
+      --accent:   #d9744f;
+      --good:     #6fae77;
+      --bad:      #d97070;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #16130f; --surface: #1e1a15; --ink: #f0e9dd; --ink2: #beb3a2;
+    --muted: #8d8375; --grid: #2e2921; --baseline: #4a4336;
+    --border: rgba(255,255,255,0.10); --accent: #d9744f; --good: #6fae77; --bad: #d97070;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--page); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 48px 24px 80px; max-width: 900px; margin: 0 auto;
+    line-height: 1.85; font-size: 17px;
+  }
+  .serif, h1, h2, h3 { font-family: Georgia, "Noto Serif TC", "Songti TC", serif; }
+  header .series { color: var(--accent); font-size: 14px; letter-spacing: .12em; font-weight: 600; }
+  header .series .no { border: 1.5px solid var(--accent); border-radius: 99px; padding: 1px 9px; margin-right: 8px; }
+  h1 { font-size: 31px; font-weight: 700; margin-top: 14px; line-height: 1.4; }
+  .lede {
+    color: var(--ink2); margin-top: 16px; font-size: 17.5px;
+    border-left: 3px solid var(--accent); padding-left: 16px; line-height: 1.8;
+  }
+  .meta { color: var(--muted); font-size: 14px; margin-top: 16px; }
+  hr.rule { border: 0; border-top: 1px solid var(--grid); margin: 40px 0 0; }
+  section { margin-top: 44px; }
+  h2 { font-size: 23px; font-weight: 700; line-height: 1.45; }
+  h2 .n { color: var(--accent); margin-right: 10px; }
+  h3 { font-size: 18px; font-weight: 700; margin-top: 30px; }
+  p { margin-top: 16px; }
+  .figure {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 22px; margin-top: 22px; overflow-x: auto;
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .figure .cap { color: var(--muted); font-size: 13.5px; margin-top: 12px; line-height: 1.65; }
+  .figure svg { display: block; max-width: 100%; height: auto; }
+  .note {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+    padding: 16px 20px; margin-top: 22px; font-size: 16px;
+  }
+  .note .t { color: var(--accent); font-weight: 700; font-size: 14px; letter-spacing: .08em; }
+  .note p { margin-top: 6px; }
+  table.simple { border-collapse: collapse; margin-top: 18px; font-size: 15.5px; width: 100%; }
+  table.simple th, table.simple td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  table.simple th { color: var(--ink2); font-weight: 650; font-size: 14px; }
+  footer { margin-top: 64px; border-top: 1px solid var(--grid); padding-top: 20px; color: var(--muted); font-size: 14.5px; line-height: 1.8; }
+  footer .next { color: var(--ink2); }
+  footer a { color: var(--accent); }
+  .refs { margin-top: 12px; font-size: 13.5px; }
+  .svg-ink   { fill: var(--ink); }
+  .svg-ink2  { fill: var(--ink2); }
+  .svg-muted { fill: var(--muted); }
+</style>
+</head>
+<body>
+
+<p style="margin-bottom:24px"><a href="../index.html" style="color:var(--accent);text-decoration:none;font-size:15px">← AI 世代的隨手筆記</a></p>
+
+<header>
+  <div class="series"><span class="no">03</span>AI 學徒筆記</div>
+  <h1>從 token 需求到 AI 供應鏈<br>——需求為什麼一路漲到上游</h1>
+  <p class="lede">前兩篇搞懂了「AI 靠接龍說話」和「每個 token 都要整套搬運參數」。這一篇把鏡頭拉遠：當全世界的 token 用量一起爆炸，這股需求會依序撞上哪些東西？答案是一條清楚的鏈——算力、記憶體、封裝、晶圓，最後撞上電力。下一篇會把台灣的公司放上這張地圖。</p>
+  <div class="meta">學徒筆記系列・第 3 篇｜閱讀約 10 分鐘</div>
+</header>
+
+<hr class="rule">
+
+<section>
+  <h2><span class="n">一</span>需求端正在發生的事：推理超車了訓練</h2>
+
+  <p>很多人對 AI 算力的印象還停在「訓練一個大模型要燒幾億美元」。但 2026 年的主戰場已經換了：<b>推理（inference）——也就是模型每天回答問題、跑 agent 的日常運轉——吃掉的算力已經超過訓練</b>。業界估計，推理佔 AI 算力的比重從 2023 年的約三分之一，一路爬到 2026 年的約三分之二。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 720 170" role="img" aria-label="推理佔 AI 算力比重逐年上升">
+      <text x="0" y="18" font-size="15" font-weight="650" class="svg-ink">推理佔 AI 算力的比重（業界估計）</text>
+      <g transform="translate(110,44)" font-size="14">
+        <line x1="0" y1="-4" x2="0" y2="106" stroke="var(--baseline)" stroke-width="1"/>
+        <text x="-12" y="18" text-anchor="end" class="svg-ink2">2023</text>
+        <rect x="0" y="4" width="165" height="20" rx="3" fill="var(--accent)"/>
+        <text x="173" y="19" class="svg-ink2">約 1/3</text>
+        <text x="-12" y="54" text-anchor="end" class="svg-ink2">2025</text>
+        <rect x="0" y="40" width="250" height="20" rx="3" fill="var(--accent)"/>
+        <text x="258" y="55" class="svg-ink2">約 1/2</text>
+        <text x="-12" y="90" text-anchor="end" class="svg-ink2">2026</text>
+        <rect x="0" y="76" width="330" height="20" rx="3" fill="var(--accent)"/>
+        <text x="338" y="91" class="svg-ink2">約 2/3</text>
+      </g>
+    </svg>
+    <div class="cap">訓練是「一次性的大工程」，推理是「全年無休的水電費」——當 AI 從展示品變成日用品，水電費超過工程款只是時間問題。</div>
+  </div>
+
+  <p>而且這條需求曲線比「使用人數」陡得多。第二篇說過原因：應用形態正從聊天走向<b>推理模型</b>（作答前先「想」幾千個 token）和 <b>agent 工作流</b>（一個任務拆幾十步、每步都帶完整脈絡重算）——單一任務的 token 用量放大百倍千倍。業界對 token 總需求的預估，是<b>到 2030 年再成長 20 倍以上</b>，主要驅動力正是企業導入 agent。</p>
+
+  <p>需求端的錢也真金白銀地到位了：美系四大超大規模雲端業者（hyperscaler——Google、Microsoft、Amazon、Meta 這種自建全球資料中心、再把算力租給全世界的公司），<b>2026 年合計資本支出超過 6,000 億美元</b>，其中大宗就是 AI 基礎設施。這個數字比很多國家的年度總預算還大。</p>
+</section>
+
+<section>
+  <h2><span class="n">二</span>第一層：算力晶片——GPU 與自研 ASIC</h2>
+
+  <p>需求撞上的第一層是算力晶片。主力是 <b>GPU</b>（Graphics Processing Unit，圖形處理器——原本為遊戲畫面設計，因為擅長同時做海量簡單計算，成了 AI 運算的標準配備），這個市場目前由 NVIDIA（輝達）主導。</p>
+
+  <p>但雲端巨頭不想永遠只當客戶：它們同時在自研 <b>ASIC</b>（Application-Specific Integrated Circuit，特定用途晶片——不求萬能、只為自家 AI 工作負載量身打造，例如 Google 的 TPU）。對台灣讀者來說這條線特別重要：<b>不管是 NVIDIA 的 GPU 還是巨頭的自研晶片，絕大多數都在同一個地方製造</b>——這是下一篇台股地圖的起點。</p>
+</section>
+
+<section>
+  <h2><span class="n">三</span>第二層：HBM——三家公司分食的咽喉</h2>
+
+  <p>第二篇的結論在這裡變現：推理的真瓶頸是「搬運」，所以 <b>HBM</b>（High Bandwidth Memory，高頻寬記憶體——把記憶體晶片像疊疊樂一樣堆高、緊貼在處理器旁邊，一切為了搬運速度）成了 AI 晶片上最關鍵的零組件之一。沒有 HBM，再強的 GPU 也只是一個等食材的廚師。</p>
+
+  <p>這個市場的結構極度集中：<b>全世界只有三家公司做得出來</b>——SK 海力士（市佔約五成多，居首）、三星、美光。2026 年的態勢是標準的賣方市場：主流世代 HBM3e 的合約價逐季上漲，下一代 HBM4 正在起量，三家的產能都被 AI 晶片的訂單預訂一空。</p>
+
+  <div class="note">
+    <div class="t">結構筆記</div>
+    <p>需求越往上游走，玩家越少：用 AI 的人數以億計，做 AI 服務的公司數以萬計，做 GPU 的主要就一家，做 HBM 的只有三家。<b>集中度，就是議價力的來源。</b></p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">四</span>第三層：先進封裝——整條鏈的節拍器</h2>
+
+  <p>GPU 晶片和 HBM 是分開製造的，要有人把它們「組裝」到一起——而且是在微米尺度上並排黏在同一塊底板，讓訊號距離短到極致。這道工序叫先進封裝，代表技術是台積電的 <b>CoWoS</b>（Chip on Wafer on Substrate——晶片疊在晶圓上、再疊在基板上的 2.5D 封裝技術）。</p>
+
+  <p>CoWoS 是過去三年整條 AI 供應鏈<b>最緊的一段</b>：台積電的月產能從 2023 年的約 1.3~1.5 萬片，擴到 2025 年的約 7.5 萬片，2026 年底目標 10.5~12.5 萬片——<b>三年擴產七、八倍，訂單還是排滿，交期仍長達 40~52 週</b>。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 720 190" role="img" aria-label="台積電 CoWoS 月產能逐年成長">
+      <text x="0" y="18" font-size="15" font-weight="650" class="svg-ink">台積電 CoWoS 月產能（約略值，千片/月）</text>
+      <g transform="translate(130,46)" font-size="14">
+        <line x1="0" y1="-4" x2="0" y2="122" stroke="var(--baseline)" stroke-width="1"/>
+        <text x="-12" y="18" text-anchor="end" class="svg-ink2">2023</text>
+        <rect x="0" y="4" width="52" height="20" rx="3" fill="var(--accent)"/>
+        <text x="60" y="19" class="svg-ink2">13~15</text>
+        <text x="-12" y="56" text-anchor="end" class="svg-ink2">2025</text>
+        <rect x="0" y="42" width="280" height="20" rx="3" fill="var(--accent)"/>
+        <text x="288" y="57" class="svg-ink2">~75</text>
+        <text x="-12" y="94" text-anchor="end" class="svg-ink2">2026 底</text>
+        <rect x="0" y="80" width="430" height="20" rx="3" fill="var(--accent)"/>
+        <text x="438" y="95" class="svg-ink2">105~125（目標）</text>
+      </g>
+      <text x="0" y="184" font-size="13.5" class="svg-muted">擴產七、八倍仍供不應求——產能訂滿至 2026、交期 40~52 週。數字為業界研究機構估計。</text>
+    </svg>
+    <div class="cap">當一個環節「擴產最兇卻依然最缺」，它就是整條鏈的節拍器：它的產能決定全世界能生出多少 AI 晶片。</div>
+  </div>
+
+  <p>先進封裝再往上游，就是<b>晶圓代工</b>本身——GPU 晶片、自研 ASIC 的先進製程製造。這一層的集中度比 HBM 更極端：最先進的製程，全世界實質上只有一個選擇。</p>
+</section>
+
+<section>
+  <h2><span class="n">五</span>晶片之外：電力、散熱、機櫃——新的瓶頸正在換位</h2>
+
+  <p>故事到晶片沒有結束。2026 年業界最常講的一句話是：<b>「瓶頸正在從晶片轉向電力。」</b>真實案例：雲端業者手上有 GPU 躺在倉庫，不是不想用，是資料中心的電力還沒接上——晶片等電開機。</p>
+
+  <p>電力之外還有兩個被需求推著升級的環節：</p>
+  <table class="simple">
+    <tr><th style="width:26%">環節</th><th>發生了什麼</th></tr>
+    <tr><td><b>散熱</b></td><td>最新一代 AI 機櫃（一整櫃 GPU 伺服器）功耗逼近 600 千瓦——相當於幾百戶家庭同時用電擠在一個櫃子裡。風扇吹不動了，<b>液冷（用水管把熱帶走）從選配變成標配</b>。</td></tr>
+    <tr><td><b>電源</b></td><td>要把這麼大的電穩定餵進機櫃，電源供應器的功率密度與轉換效率都要升級（48V 高壓供電等新架構）——電源從配角變成技術門檻。</td></tr>
+  </table>
+
+  <div class="figure">
+    <svg viewBox="0 0 760 260" role="img" aria-label="從 token 需求到上游供應鏈的傳導鏈">
+      <text x="0" y="18" font-size="15" font-weight="650" class="svg-ink">整條傳導鏈：一張圖</text>
+      <g transform="translate(10,44)" font-size="13.5">
+        <rect x="0" y="0" width="170" height="44" rx="6" fill="var(--accent)" opacity="0.12"/>
+        <rect x="0" y="0" width="170" height="44" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+        <text x="85" y="19" text-anchor="middle" class="svg-ink">token 需求爆炸</text>
+        <text x="85" y="36" text-anchor="middle" font-size="12" class="svg-muted">agent 化・推理模型</text>
+        <path d="M 178 22 L 216 22" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#a)"/>
+        <rect x="220" y="0" width="150" height="44" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+        <text x="295" y="19" text-anchor="middle" class="svg-ink">算力晶片</text>
+        <text x="295" y="36" text-anchor="middle" font-size="12" class="svg-muted">GPU／自研 ASIC</text>
+        <path d="M 378 22 L 416 22" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#a)"/>
+        <rect x="420" y="0" width="150" height="44" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+        <text x="495" y="19" text-anchor="middle" class="svg-ink">HBM 記憶體</text>
+        <text x="495" y="36" text-anchor="middle" font-size="12" class="svg-muted">全球僅三家</text>
+        <path d="M 578 22 L 616 22" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#a)"/>
+        <rect x="620" y="0" width="130" height="44" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+        <text x="685" y="19" text-anchor="middle" class="svg-ink">先進封裝</text>
+        <text x="685" y="36" text-anchor="middle" font-size="12" class="svg-muted">CoWoS・節拍器</text>
+        <path d="M 685 52 L 685 84 L 95 84 L 95 116" fill="none" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#a)"/>
+        <rect x="10" y="120" width="170" height="44" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+        <text x="95" y="139" text-anchor="middle" class="svg-ink">晶圓代工</text>
+        <text x="95" y="156" text-anchor="middle" font-size="12" class="svg-muted">先進製程・實質獨家</text>
+        <path d="M 188 142 L 226 142" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#a)"/>
+        <rect x="230" y="120" width="340" height="44" rx="6" fill="var(--accent)" opacity="0.08"/>
+        <rect x="230" y="120" width="340" height="44" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+        <text x="400" y="139" text-anchor="middle" class="svg-ink">基礎設施：電力・散熱（液冷）・電源・機櫃・網路</text>
+        <text x="400" y="156" text-anchor="middle" font-size="12" class="svg-muted">2026 年的新瓶頸——晶片等電開機</text>
+      </g>
+      <text x="10" y="248" font-size="13.5" class="svg-muted">每往上游一層，玩家越少、集中度越高；瓶頸會沿著這條鏈移動——三年前在晶片，現在往電力走。</text>
+      <defs>
+        <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--muted)"/></marker>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="note">
+    <div class="t">本篇一句話</div>
+    <p>token 需求不是抽象名詞——它沿著「算力 → HBM → 先進封裝 → 晶圓 → 電力散熱」一路往上游傳導；<b>越上游玩家越少，瓶頸在哪裡，議價力就在哪裡，而瓶頸會移動。</b></p>
+  </div>
+</section>
+
+<footer>
+  <p class="next"><b>下一篇</b>：把台灣的公司放上這張地圖——每個環節有哪些台廠、誰站在稀缺的位置、誰在打價格戰，以及判讀需求訊號傳導的具體指標。</p>
+  <p class="refs">參考資料：<a href="https://epoch.ai/gradient-updates/is-a-compute-crunch-coming">Epoch AI</a>・<a href="https://agentmarketcap.ai/blog/2026/04/17/ai-inference-overtakes-training-two-thirds-2026-compute">AgentMarketCap（推理佔比）</a>・<a href="https://www.trendforce.com/news/2026/01/05/news-sk-hynix-2026-outlook-hbm3e-remains-mainstream-hbm4-dual-strategy-amid-triple-market-headwinds/">TrendForce（HBM）</a>・<a href="https://news.skhynix.com/2026-market-outlook-focus-on-the-hbm-led-memory-supercycle/">SK hynix 2026 展望</a>。文中數字為研究機構估計之約略值，用於建立結構直覺。<b>本文是產業結構的學習筆記，不是投資建議。</b></p>
+  <p>AI 學徒筆記——一個非本科的人，把 AI 真的學懂的公開筆記。</p>
+</footer>
+
+</body>
+</html>
