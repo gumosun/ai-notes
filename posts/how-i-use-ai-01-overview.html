@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>我用 AI 做了哪些事？——一張圖的全景導覽｜我如何使用 AI 01</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:     #f7f3ec;
+    --surface:  #fffdf8;
+    --ink:      #2c2620;
+    --ink2:     #5f574b;
+    --muted:    #93887a;
+    --grid:     #e7dfd2;
+    --baseline: #cfc5b4;
+    --border:   rgba(44,38,32,0.10);
+    --accent:   #b0492f;
+    --good:     #3e7c46;
+    --bad:      #a03030;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page:     #16130f;
+      --surface:  #1e1a15;
+      --ink:      #f0e9dd;
+      --ink2:     #beb3a2;
+      --muted:    #8d8375;
+      --grid:     #2e2921;
+      --baseline: #4a4336;
+      --border:   rgba(255,255,255,0.10);
+      --accent:   #d9744f;
+      --good:     #6fae77;
+      --bad:      #d97070;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #16130f; --surface: #1e1a15; --ink: #f0e9dd; --ink2: #beb3a2;
+    --muted: #8d8375; --grid: #2e2921; --baseline: #4a4336;
+    --border: rgba(255,255,255,0.10); --accent: #d9744f; --good: #6fae77; --bad: #d97070;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--page); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 48px 24px 80px; max-width: 900px; margin: 0 auto;
+    line-height: 1.85; font-size: 17px;
+  }
+  .serif, h1, h2, h3 { font-family: Georgia, "Noto Serif TC", "Songti TC", serif; }
+  header .series {
+    color: var(--accent); font-size: 14px; letter-spacing: .12em; font-weight: 600;
+  }
+  header .series .no { border: 1.5px solid var(--accent); border-radius: 99px; padding: 1px 9px; margin-right: 8px; }
+  h1 { font-size: 31px; font-weight: 700; margin-top: 14px; line-height: 1.4; }
+  .lede {
+    color: var(--ink2); margin-top: 16px; font-size: 17.5px;
+    border-left: 3px solid var(--accent); padding-left: 16px; line-height: 1.8;
+  }
+  .meta { color: var(--muted); font-size: 14px; margin-top: 16px; }
+  hr.rule { border: 0; border-top: 1px solid var(--grid); margin: 40px 0 0; }
+  section { margin-top: 44px; }
+  h2 { font-size: 23px; font-weight: 700; line-height: 1.45; }
+  h2 .n { color: var(--accent); margin-right: 10px; }
+  h3 { font-size: 18px; font-weight: 700; margin-top: 30px; }
+  h3 .role { color: var(--accent); }
+  p { margin-top: 16px; }
+  .figure {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 22px; margin-top: 22px; overflow-x: auto;
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .figure .cap { color: var(--muted); font-size: 13.5px; margin-top: 12px; line-height: 1.65; }
+  .figure svg { display: block; max-width: 100%; height: auto; min-width: 640px; }
+  .note {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+    padding: 16px 20px; margin-top: 22px; font-size: 16px;
+  }
+  .note .t { color: var(--accent); font-weight: 700; font-size: 14px; letter-spacing: .08em; }
+  .note p { margin-top: 6px; }
+  footer { margin-top: 64px; border-top: 1px solid var(--grid); padding-top: 20px; color: var(--muted); font-size: 14.5px; line-height: 1.8; }
+  footer .next { color: var(--ink2); }
+  footer a { color: var(--accent); }
+  .svg-ink   { fill: var(--ink); }
+  .svg-ink2  { fill: var(--ink2); }
+  .svg-muted { fill: var(--muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="series"><span class="no">01</span>我如何使用 AI</div>
+  <h1>我用 AI 做了哪些事？<br>——一張圖的全景導覽</h1>
+  <p class="lede">前陣子跟一位前輩聊天，被點到一個痛處：這幾個月我用 AI 做了一堆事——自己的 agent、幾個真的在用的產品、一整組工作用的 PM 工具箱、一套學習系統——但全部悶著自己做。他說：你不拿出來分享，很多對這件事有興趣的人根本沒機會看到。這個系列就是回應那句話：把我怎麼用 AI，攤開來給你看。</p>
+  <div class="meta">我如何使用 AI・第 1 篇｜閱讀約 7 分鐘</div>
+</header>
+
+<hr class="rule">
+
+<section>
+  <h2><span class="n">一</span>為什麼現在才開始講</h2>
+
+  <p>老實說不是藏私，是沒想過要講。做的時候每一步都覺得「這不就是把工具用起來而已嗎」，直到那次對話我才意識到：對還沒開始用的人來說，<b>「一個人＋AI 到底能做到什麼程度」這件事本身，就是最有價值的資訊</b>。網路上教 prompt 技巧的文章很多，但把「一個普通人的完整 AI 使用版圖」攤開來的很少。</p>
+
+  <p>先交代我的背景：我不是工程師出身，本業是科技產品和投資——當過產品總監，現在一邊求職、一邊把時間投在幾個自己的專案上。接下來你看到的所有東西，都是過去幾個月在這個狀態下，用 AI 協作做出來的。</p>
+</section>
+
+<section>
+  <h2><span class="n">二</span>一張圖：AI 在我這裡的六個角色</h2>
+
+  <p>盤點下來，我發現與其列「我做了哪些專案」，不如講 <b>AI 在我這裡扮演了哪六種角色</b>——因為專案會換，角色是穩定的：</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 820 560" role="img" aria-label="AI 的六個角色樹狀圖：幕僚長、開發工廠、百寶箱、家教、研究員、執筆者">
+      <!-- 根節點 -->
+      <g>
+        <rect x="16" y="251" width="128" height="64" rx="6" fill="var(--accent)" opacity="0.13"/>
+        <rect x="16" y="251" width="128" height="64" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+        <text x="80" y="278" text-anchor="middle" font-size="15.5" font-weight="700" class="svg-ink">我怎麼用 AI</text>
+        <text x="80" y="300" text-anchor="middle" font-size="12.5" class="svg-ink2">六個角色</text>
+      </g>
+
+      <!-- 連接線（肘形） -->
+      <g fill="none" stroke="var(--baseline)" stroke-width="1.5">
+        <path d="M144 283 H 190 V 53  H 240"/>
+        <path d="M144 283 H 190 V 145 H 240"/>
+        <path d="M144 283 H 190 V 237 H 240"/>
+        <path d="M144 283 H 190 V 329 H 240"/>
+        <path d="M144 283 H 190 V 421 H 240"/>
+        <path d="M144 283 H 190 V 513 H 240"/>
+        <path d="M496 145 H 520 V 93  H 546"/>
+        <path d="M496 145 H 520 V 145 H 546"/>
+        <path d="M496 145 H 520 V 197 H 546"/>
+      </g>
+
+      <!-- 六個角色節點 -->
+      <g>
+        <rect x="240" y="24" width="256" height="58" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="258" y="48" font-size="15" font-weight="700" fill="var(--accent)">幕僚長</text>
+        <text x="258" y="70" font-size="13" class="svg-ink2">個人 agent：管全局、記得我說過的話</text>
+
+        <rect x="240" y="116" width="256" height="58" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="258" y="140" font-size="15" font-weight="700" fill="var(--accent)">開發工廠</text>
+        <text x="258" y="162" font-size="13" class="svg-ink2">自己設計的流水線，量產工具與產品</text>
+
+        <rect x="240" y="208" width="256" height="58" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="258" y="232" font-size="15" font-weight="700" fill="var(--accent)">百寶箱</text>
+        <text x="258" y="254" font-size="13" class="svg-ink2">為正職打造的 PM 工具組，隨身可攜</text>
+
+        <rect x="240" y="300" width="256" height="58" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="258" y="324" font-size="15" font-weight="700" fill="var(--accent)">家教</text>
+        <text x="258" y="346" font-size="13" class="svg-ink2">陪我把 AI 產業真的學懂</text>
+
+        <rect x="240" y="392" width="256" height="58" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="258" y="416" font-size="15" font-weight="700" fill="var(--accent)">研究員</text>
+        <text x="258" y="438" font-size="13" class="svg-ink2">讀資料、提假設、跑驗證</text>
+
+        <rect x="240" y="484" width="256" height="58" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="258" y="508" font-size="15" font-weight="700" fill="var(--accent)">執筆者</text>
+        <text x="258" y="530" font-size="13" class="svg-ink2">寫這個站，包含你正在讀的這篇</text>
+      </g>
+
+      <!-- 開發工廠的三個子節點 -->
+      <g>
+        <rect x="546" y="71" width="248" height="44" rx="5" fill="var(--accent)" opacity="0.08"/>
+        <rect x="546" y="71" width="248" height="44" rx="5" fill="none" stroke="var(--border)"/>
+        <text x="562" y="98" font-size="13.5" class="svg-ink">求職輔助產品（開發中）</text>
+
+        <rect x="546" y="123" width="248" height="44" rx="5" fill="var(--accent)" opacity="0.08"/>
+        <rect x="546" y="123" width="248" height="44" rx="5" fill="none" stroke="var(--border)"/>
+        <text x="562" y="150" font-size="13.5" class="svg-ink">台股回檔掃描器（每天在用）</text>
+
+        <rect x="546" y="175" width="248" height="44" rx="5" fill="var(--accent)" opacity="0.08"/>
+        <rect x="546" y="175" width="248" height="44" rx="5" fill="none" stroke="var(--border)"/>
+        <text x="562" y="202" font-size="13.5" class="svg-ink">個人理財儀表板（記帳可視）</text>
+      </g>
+    </svg>
+    <div class="cap">六個角色都是同一套工具（Claude）扮演的，差別在我給它的任務設計。每個角色之後會各寫一篇展開。</div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">三</span>每個角色，白話講一遍</h2>
+
+  <h3><span class="role">幕僚長</span>——一個記得我所有事、還敢跟我頂嘴的 agent</h3>
+  <p>我開了一個資料夾，跟 AI 說：你來當這個資料夾的主人，追蹤我所有專案的狀態。它每次開工自動去掃各專案的進度、跟我對齊目標，最重要的是我給了它一個授權：<b>當我說要做 A、實際上卻一直在做 B 的時候，要主動講</b>。它上工第一天就抓到一個：我以為自己平均推進兩個重點專案，實際數據是投入比 90% 比 8%。被自己的 agent 拍數據在桌上，是很微妙的體驗。</p>
+
+  <h3><span class="role">開發工廠</span>——我不寫 code，但我設計了生產 code 的流程</h3>
+  <p>我手上真的在用的幾個工具——一個求職輔助產品（開發中）、一個每天開盤在用的台股回檔掃描器、一個自己的理財記帳儀表板——都不是我一行一行寫出來的，而是用一套我自己設計的 sprint 流水線讓 AI 開發：需求、架構、開發、視覺檢查、獨立 QA、回顧，每關有守門標準，品質不過就退回重做。其中兩個主力專案到今天加起來跑了 <b>89 個 sprint</b>。我的角色只出現在幾個裁決點——確認方向、驗收品質、拍板取捨。一個人的時間有限，所以我把自己放在只有人能做的位置上。</p>
+
+  <h3><span class="role">百寶箱</span>——把 PM 的日常武裝起來</h3>
+  <p>我當了很多年產品經理，很清楚 PM 的日常長什麼樣：評估提案、寫 BRD 和 PRD、做 prototype、開不完的會、寫週報。我把這些做成了六個隨叫隨用的 AI 工具：會議雜記丟進去、結構化的決議和行動項出來；一段功能描述丟進去、可以實際點擊的 prototype 出來，還能再變成 demo 影片。設計上最得意的一點是<b>引擎和公司脈絡分離</b>——工具邏輯是通用的，每到一間公司只要灌一份該公司的脈絡包（策略、品牌、決策準則），整組就能直接開工。等於把「PM 的手藝」做成了可以隨身攜帶的裝備。</p>
+
+  <h3><span class="role">家教</span>——用 AI 學 AI</h3>
+  <p>我給自己開了一套課：讓 AI 當家教，把 token、算力、供應鏈、投資邏輯這些東西逐一教懂，每個單元產出圖解教材，我再逐字驗收——包含抓它的幻覺。這套學習的公開版就是本站的「AI 學徒筆記」系列，已經寫了六篇。有一次它在草稿裡寫錯了一個關鍵數字，被我對出處抓到——那次之後我們建立了「公開數字必須逐條溯源」的規矩。用 AI 學習不是聽它講就好，<b>驗收是學習的一半</b>。</p>
+
+  <h3><span class="role">研究員</span>——把「我覺得」變成「數據說」</h3>
+  <p>投資工具的背後有一條研究線：AI 讀資料、提出策略假設、寫回測驗證，通過了才進到我每天在用的掃描器裡。我的原則是寧可錯過、不可追高，而這個原則能被系統性執行，是因為有個不知疲倦的研究員在背後把假設一個一個驗掉。</p>
+
+  <h3><span class="role">執筆者</span>——這個站本身就是成果</h3>
+  <p>坦白講：這個站的文章是 AI 執筆、我當總編的合作產物。我丟觀點和素材、定方向出題，AI 收斂成結構和初稿，我逐字修改、抓錯、決定發不發。你現在讀的這篇也是這樣生出來的。我認為這不減損內容的真實性——每個判斷、每次踩坑、每個被抓到的錯都是真的——但這件事應該讓讀者知道。</p>
+</section>
+
+<section>
+  <h2><span class="n">四</span>回頭看：學習、使用、應用</h2>
+
+  <p>盤點完才發現，這六個角色其實疊成三層：<b>學習</b>（家教）、<b>使用</b>（幕僚長、研究員、執筆者）、<b>應用</b>（開發工廠和百寶箱，做出真的在用的東西）。我不是先想好這三層才開始做的——是做著做著，回頭一看它自己長成了這個結構。這大概是我想分享的第一個心得：不用等想清楚全貌才開始，<b>先讓 AI 進到一件你真的在乎的事情裡，版圖會自己長出來</b>。</p>
+
+  <p>這個系列接下來會把每個角色展開一篇：它是怎麼設計的、踩過什麼坑、哪些做法你可以直接拿去用。如果你對哪個角色特別好奇，歡迎告訴我，我先寫那篇。</p>
+</section>
+
+<footer>
+  <div class="next">系列預告：02 幕僚長篇｜03 開發工廠篇｜04 百寶箱篇｜05 家教篇｜06 研究員篇｜07 執筆者篇（順序可能依讀者回饋調整）</div>
+  <div style="margin-top:12px">數據出處備註：90%/8%（agent 對齊檢查，2026-08-10 四週 git 統計）｜89 sprints（兩專案 sprint 編號 36＋53，2026-08-11）｜學徒筆記六篇（本站 published 列表）。</div>
+</footer>
+
+</body>
+</html>
