@@ -107,71 +107,128 @@
 </section>
 
 <section>
-  <h2><span class="n">二</span>全鏈地圖：環節 × 代表台廠</h2>
+  <h2><span class="n">二</span>需求有多大：上游的預測，才是台股故事的起點</h2>
+
+  <p>在看地圖之前，先把上一篇的需求端數字帶過來——因為<b>台股每一個環節「被看好」的邏輯，源頭都是同一組預測</b>：</p>
+
+  <table class="simple">
+    <tr><th style="width:44%">需求端預測</th><th>對台股的意義</th></tr>
+    <tr><td>高盛研究：token 月消耗量 2026→2030 <b>成長 24 倍</b>（企業 agent 驅動）</td><td>算力需求的長期能見度——這是整條鏈敢擴產的底氣</td></tr>
+    <tr><td>四大雲端 2026 年 AI 資本支出<b>約 6,300~6,900 億美元</b></td><td>已經下訂的錢——轉成 AI 伺服器訂單，一路發包到台灣</td></tr>
+    <tr><td>AI 機櫃功耗：現役約 130~140 千瓦 → 2027 年 Rubin Ultra <b>上看 600 千瓦</b></td><td>不只「出貨變多」，是<b>每一櫃的規格全面換代</b>——散熱、電源、載板、板材的單櫃價值量跟著跳</td></tr>
+  </table>
+
+  <p>把最後一行講白：台股 AI 供應鏈的成長故事其實是<b>兩顆引擎</b>——①<b>量的引擎</b>：capex 變成伺服器出貨量；②<b>規格的引擎</b>：機櫃功耗三年翻四、五倍，逼著散熱從風冷換液冷、電源換高壓架構、板材換高階料——<b>同樣一櫃，台廠能收的錢變多了</b>。看懂一檔台股 AI 概念股，第一步就是分辨它吃到的是哪顆引擎（或兩顆都吃到）。</p>
+</section>
+
+<section>
+  <h2><span class="n">三</span>全鏈地圖：上中下游一次看懂</h2>
+  <p>下面這張圖照「上游 → 中游 → 下游」排：<b>產品往下流</b>（上游做出晶片、中游做零組件、下游組成整櫃出貨），<b>訂單往上流</b>（最底端的雲端客戶用資本支出當水龍頭，由下往上層層發包）。位置越上游，玩家越少、議價力越強——這正是上一篇「越上游越集中」在台股的具體長相。</p>
 
   <div class="figure">
-    <svg viewBox="0 0 780 430" role="img" aria-label="AI 生態鏈各環節與代表台廠地圖">
-      <text x="0" y="18" font-size="15" font-weight="650" class="svg-ink">AI 生態鏈的台股地圖（代表性列舉，非完整名單）</text>
+    <svg viewBox="0 0 780 648" role="img" aria-label="AI 生態鏈上中下游與代表台廠地圖">
+      <text x="0" y="18" font-size="15" font-weight="650" class="svg-ink">AI 生態鏈的台股地圖：上游 → 中游 → 下游（代表性列舉，非完整名單）</text>
       <g font-size="13.5">
-        <g transform="translate(0,40)">
-          <rect x="0" y="0" width="250" height="52" rx="6" fill="var(--accent)" opacity="0.12"/>
-          <rect x="0" y="0" width="250" height="52" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
-          <text x="14" y="21" class="svg-ink" font-weight="650">晶圓代工（先進製程）</text>
-          <text x="14" y="41" class="svg-ink2">台積電</text>
-          <rect x="266" y="0" width="250" height="52" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
-          <text x="280" y="21" class="svg-ink" font-weight="650">ASIC 設計服務</text>
-          <text x="280" y="41" class="svg-ink2">世芯-KY・創意</text>
-          <rect x="532" y="0" width="240" height="52" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
-          <text x="546" y="21" class="svg-ink" font-weight="650">封測</text>
-          <text x="546" y="41" class="svg-ink2">日月光投控・京元電</text>
+        <!-- 側邊流向 -->
+        <path d="M 20 56 L 20 520" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#am)"/>
+        <text x="14" y="46" class="svg-muted" font-size="12">產品流</text>
+        <path d="M 762 520 L 762 56" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#aa)"/>
+        <text x="738" y="46" class="svg-muted" font-size="12">訂單流</text>
+
+        <!-- 上游 -->
+        <text x="44" y="52" class="svg-ink" font-weight="700" fill="var(--accent)">上游・晶片設計與製造</text>
+        <text x="220" y="52" class="svg-muted" font-size="12.5">價值與稀缺最集中——訂單的最終匯集點</text>
+        <g transform="translate(44,62)">
+          <rect x="0" y="0" width="222" height="54" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+          <text x="12" y="21" class="svg-ink" font-weight="650">ASIC 設計服務</text>
+          <text x="12" y="42" class="svg-ink2" font-size="12.5">世芯-KY・創意</text>
+          <rect x="234" y="0" width="222" height="54" rx="6" fill="var(--accent)" opacity="0.10"/>
+          <rect x="234" y="0" width="222" height="54" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+          <text x="246" y="21" class="svg-ink" font-weight="650">晶圓代工（先進製程）</text>
+          <text x="246" y="42" class="svg-ink2" font-size="12.5">台積電</text>
+          <rect x="468" y="0" width="226" height="54" rx="6" fill="var(--accent)" opacity="0.10"/>
+          <rect x="468" y="0" width="226" height="54" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+          <text x="480" y="21" class="svg-ink" font-weight="650">先進封裝／封測</text>
+          <text x="480" y="42" class="svg-ink2" font-size="12.5">台積電 CoWoS・日月光投控・京元電</text>
         </g>
-        <g transform="translate(0,108)">
-          <rect x="0" y="0" width="250" height="52" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
-          <text x="14" y="21" class="svg-ink" font-weight="650">ABF 載板</text>
-          <text x="14" y="41" class="svg-ink2">欣興・南電・景碩</text>
-          <rect x="266" y="0" width="250" height="52" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
-          <text x="280" y="21" class="svg-ink" font-weight="650">PCB／CCL 板材</text>
-          <text x="280" y="41" class="svg-ink2">健鼎・台光電・金像電</text>
-          <rect x="532" y="0" width="240" height="52" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
-          <text x="546" y="21" class="svg-ink" font-weight="650">伺服器組裝／代工</text>
-          <text x="546" y="41" class="svg-ink2">廣達・緯創・緯穎・鴻海</text>
+        <text x="44" y="140" class="svg-muted" font-size="12.5">上游的缺席者：GPU 設計（輝達／美國）・HBM（SK 海力士、三星、美光／韓・美）——台灣不是全鏈都有</text>
+
+        <path d="M 390 152 L 390 176" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#am)"/>
+        <text x="404" y="170" class="svg-ink2" font-size="12.5">晶片交付——晶片與機櫃的世代規格，決定中游所有零組件要不要跟著換代</text>
+
+        <!-- 中游 -->
+        <text x="44" y="200" class="svg-ink" font-weight="700" fill="var(--accent)">中游・關鍵零組件</text>
+        <text x="190" y="200" class="svg-muted" font-size="12.5">規格隨上游換代——「每櫃價值量」引擎所在</text>
+        <g transform="translate(44,210)">
+          <rect x="0" y="0" width="222" height="54" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+          <text x="12" y="21" class="svg-ink" font-weight="650">ABF 載板</text>
+          <text x="12" y="42" class="svg-ink2" font-size="12.5">欣興・南電・景碩</text>
+          <rect x="234" y="0" width="222" height="54" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+          <text x="246" y="21" class="svg-ink" font-weight="650">PCB／CCL 板材</text>
+          <text x="246" y="42" class="svg-ink2" font-size="12.5">健鼎・台光電・金像電</text>
+          <rect x="468" y="0" width="226" height="54" rx="6" fill="var(--accent)" opacity="0.10"/>
+          <rect x="468" y="0" width="226" height="54" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+          <text x="480" y="21" class="svg-ink" font-weight="650">散熱（風冷→液冷）</text>
+          <text x="480" y="42" class="svg-ink2" font-size="12.5">奇鋐・雙鴻</text>
         </g>
-        <g transform="translate(0,176)">
-          <rect x="0" y="0" width="250" height="52" rx="6" fill="var(--accent)" opacity="0.08"/>
-          <rect x="0" y="0" width="250" height="52" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
-          <text x="14" y="21" class="svg-ink" font-weight="650">散熱（液冷升級中）</text>
-          <text x="14" y="41" class="svg-ink2">奇鋐・雙鴻</text>
-          <rect x="266" y="0" width="250" height="52" rx="6" fill="var(--accent)" opacity="0.08"/>
-          <rect x="266" y="0" width="250" height="52" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
-          <text x="280" y="21" class="svg-ink" font-weight="650">電源（48V 升級中）</text>
-          <text x="280" y="41" class="svg-ink2">台達電・光寶科</text>
-          <rect x="532" y="0" width="240" height="52" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
-          <text x="546" y="21" class="svg-ink" font-weight="650">網通／交換器</text>
-          <text x="546" y="41" class="svg-ink2">智邦</text>
+        <g transform="translate(44,274)">
+          <rect x="0" y="0" width="222" height="54" rx="6" fill="var(--accent)" opacity="0.10"/>
+          <rect x="0" y="0" width="222" height="54" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+          <text x="12" y="21" class="svg-ink" font-weight="650">電源（48V 高壓化）</text>
+          <text x="12" y="42" class="svg-ink2" font-size="12.5">台達電・光寶科</text>
+          <rect x="234" y="0" width="222" height="54" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+          <text x="246" y="21" class="svg-ink" font-weight="650">網通／交換器</text>
+          <text x="246" y="42" class="svg-ink2" font-size="12.5">智邦</text>
+          <rect x="468" y="0" width="226" height="54" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+          <text x="480" y="21" class="svg-ink" font-weight="650">機殼／滑軌</text>
+          <text x="480" y="42" class="svg-ink2" font-size="12.5">勤誠・川湖</text>
         </g>
-        <g transform="translate(0,244)">
-          <rect x="0" y="0" width="250" height="52" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
-          <text x="14" y="21" class="svg-ink" font-weight="650">機殼／滑軌</text>
-          <text x="14" y="41" class="svg-ink2">勤誠・川湖</text>
-          <rect x="266" y="0" width="506" height="52" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5" stroke-dasharray="5 4"/>
-          <text x="280" y="21" class="svg-ink" font-weight="650">上游之外的缺席者</text>
-          <text x="280" y="41" class="svg-ink2">GPU 設計（美國）・HBM（韓國/美國）・電力（各地電網）——台灣不是全鏈都有</text>
+
+        <path d="M 390 340 L 390 364" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#am)"/>
+        <text x="404" y="358" class="svg-ink2" font-size="12.5">零組件與模組供應——中游做的東西，全部裝進下游的那一櫃</text>
+
+        <!-- 下游 -->
+        <text x="44" y="388" class="svg-ink" font-weight="700" fill="var(--accent)">下游・系統組裝</text>
+        <text x="172" y="388" class="svg-muted" font-size="12.5">「出貨量」引擎所在——比規模與交付，毛利薄</text>
+        <g transform="translate(44,398)">
+          <rect x="0" y="0" width="694" height="54" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+          <text x="12" y="21" class="svg-ink" font-weight="650">AI 伺服器／整櫃組裝</text>
+          <text x="12" y="42" class="svg-ink2" font-size="12.5">廣達・緯創・緯穎・鴻海——把上游晶片與中游零組件整合成一櫃、大規模交付</text>
         </g>
-        <g transform="translate(0,316)">
-          <text x="0" y="16" class="svg-muted" font-size="13">圖例：</text>
-          <rect x="52" y="4" width="16" height="16" rx="3" fill="var(--accent)" opacity="0.12" stroke="var(--accent)" stroke-width="1.5"/>
-          <text x="76" y="17" class="svg-ink2" font-size="13">稀缺／技術門檻升級中的環節</text>
-          <rect x="290" y="4" width="16" height="16" rx="3" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
-          <text x="314" y="17" class="svg-ink2" font-size="13">競爭較充分的環節</text>
+
+        <path d="M 390 460 L 390 484" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#am)"/>
+        <text x="404" y="478" class="svg-ink2" font-size="12.5">整櫃交付</text>
+
+        <!-- 終端 -->
+        <g transform="translate(44,492)">
+          <rect x="0" y="0" width="694" height="58" rx="6" fill="var(--accent)" opacity="0.06"/>
+          <rect x="0" y="0" width="694" height="58" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <text x="12" y="23" class="svg-ink" font-weight="650">終端需求：四大雲端（Google・Microsoft・Amazon・Meta）</text>
+          <text x="12" y="44" class="svg-ink2" font-size="12.5">2026 年 AI 資本支出約 6,300~6,900 億美元——整條鏈的水龍頭，訂單由此往上層層發包</text>
+        </g>
+
+        <!-- 圖例 -->
+        <g transform="translate(44,570)">
+          <text x="0" y="13" class="svg-muted" font-size="12.5">圖例：</text>
+          <rect x="46" y="1" width="15" height="15" rx="3" fill="var(--accent)" opacity="0.10" stroke="var(--accent)" stroke-width="1.5"/>
+          <text x="68" y="13" class="svg-ink2" font-size="12.5">稀缺／技術門檻升級中</text>
+          <rect x="220" y="1" width="15" height="15" rx="3" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+          <text x="242" y="13" class="svg-ink2" font-size="12.5">競爭較充分</text>
+          <text x="340" y="13" class="svg-ink2" font-size="12.5">左＝產品流（上→下）｜右＝訂單流（下→上）</text>
         </g>
       </g>
-      <text x="0" y="412" font-size="13.5" class="svg-muted">環節分類與「稀缺／競爭」標記是本文的判讀框架，不是任何機構的正式分類；公司列舉為教學用代表例。</text>
+      <text x="0" y="632" font-size="13.5" class="svg-muted">環節分類與「稀缺／競爭」標記是本文的判讀框架，非任何機構的正式分類；公司列舉為教學用代表例，不是推薦名單。</text>
+      <defs>
+        <marker id="am" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--muted)"/></marker>
+        <marker id="aa" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--accent)"/></marker>
+      </defs>
     </svg>
+    <div class="cap">怎麼讀依賴關係：中游零組件「裝進」下游的整櫃，所以下游出貨量決定中游的量；但中游的「單價與規格」由上游晶片世代決定（機櫃功耗一跳，散熱電源全換代）。上游則同時吃到所有人的訂單——這就是它議價力的來源。</div>
   </div>
 </section>
 
 <section>
-  <h2><span class="n">三</span>議價力怎麼看：三種位置</h2>
+  <h2><span class="n">四</span>議價力怎麼看：三種位置</h2>
 
   <table class="simple">
     <tr><th style="width:24%">位置</th><th style="width:38%">特徵</th><th>例子</th></tr>
@@ -184,7 +241,7 @@
 </section>
 
 <section>
-  <h2><span class="n">四</span>需求訊號怎麼傳導：看什麼、在哪看</h2>
+  <h2><span class="n">五</span>需求訊號怎麼傳導：看什麼、在哪看</h2>
 
   <p>需求不會同時到達每個環節——它有傳導順序，而台股有一個全世界少見的優勢：<b>上市公司每月 10 日前公布月營收</b>，讓你能用月頻率追蹤傳導走到哪了。</p>
 
@@ -204,7 +261,7 @@
 
 <footer>
   <p class="next"><b>系列到這裡收成一個完整的迴路</b>：01 接龍原理 → 02 幻覺與成本 → 03 需求鏈 → 04 台股地圖。之後的篇章會回頭深挖單一環節，或把新的市場變化放回這張地圖上檢驗。</p>
-  <p class="refs">參考資料：<a href="https://www.trendforce.com/news/2026/01/05/news-sk-hynix-2026-outlook-hbm3e-remains-mainstream-hbm4-dual-strategy-amid-triple-market-headwinds/">TrendForce</a>・<a href="https://epoch.ai/gradient-updates/is-a-compute-crunch-coming">Epoch AI</a>・<a href="https://www.sinotrade.com.tw/richclub/hotstock/2026%E5%B9%B4AI%E6%A6%82%E5%BF%B5%E8%82%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E5%85%AC%E5%8F%B8-%E9%82%84%E5%80%BC%E5%BE%97%E6%8A%95%E8%B3%87%E5%97%8E-4%E5%9C%96%E8%A1%A8%E5%B8%B6%E4%BD%A0%E7%9C%8B%E6%87%82%E4%B8%8A%E4%B8%AD%E4%B8%8B%E6%B8%B8%E7%94%A2%E6%A5%AD%E8%B6%A8%E5%8B%A2--65af4cb1880d9e29902a677f">永豐豐雲學堂（台股 AI 供應鏈）</a>。公司列舉為產業結構的教學用代表例，非推薦名單；<b>本文是學習筆記，不是投資建議，投資請自行研究判斷。</b></p>
+  <p class="refs">數據出處：token 24 倍預估＝<a href="https://www.goldmansachs.com/insights/articles/ai-agents-forecast-to-boost-tech-cash-flow-as-usage-soars">Goldman Sachs Research</a>；四大雲端 capex＝<a href="https://agentmarketcap.ai/blog/2026/04/17/ai-inference-overtakes-training-two-thirds-2026-compute">AgentMarketCap</a>／<a href="https://futurumgroup.com/insights/ai-capex-2026-the-690b-infrastructure-sprint/">Futurum</a> 彙整；機櫃功耗（GB300 約 130~140kW、Rubin Ultra 600kW）＝<a href="https://www.tomshardware.com/pc-components/gpus/nvidia-shows-off-rubin-ultra-with-600-000-watt-kyber-racks-and-infrastructure-coming-in-2027">Tom's Hardware</a>；「組裝毛利常在個位數」為台灣代工廠公開財報之常態描述。其他參考：<a href="https://www.trendforce.com/news/2026/01/05/news-sk-hynix-2026-outlook-hbm3e-remains-mainstream-hbm4-dual-strategy-amid-triple-market-headwinds/">TrendForce</a>・<a href="https://epoch.ai/gradient-updates/is-a-compute-crunch-coming">Epoch AI</a>・<a href="https://www.sinotrade.com.tw/richclub/hotstock/2026%E5%B9%B4AI%E6%A6%82%E5%BF%B5%E8%82%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E5%85%AC%E5%8F%B8-%E9%82%84%E5%80%BC%E5%BE%97%E6%8A%95%E8%B3%87%E5%97%8E-4%E5%9C%96%E8%A1%A8%E5%B8%B6%E4%BD%A0%E7%9C%8B%E6%87%82%E4%B8%8A%E4%B8%AD%E4%B8%8B%E6%B8%B8%E7%94%A2%E6%A5%AD%E8%B6%A8%E5%8B%A2--65af4cb1880d9e29902a677f">永豐豐雲學堂（台股 AI 供應鏈）</a>。公司列舉為產業結構的教學用代表例，非推薦名單；<b>本文是學習筆記，不是投資建議，投資請自行研究判斷。</b></p>
   <p>AI 學徒筆記——一個非本科的人，把 AI 真的學懂的公開筆記。</p>
 </footer>
 
