@@ -94,13 +94,23 @@
   <div class="series"><span class="no">01</span>AI 學徒筆記</div>
   <h1>AI 是怎麼「說話」的？<br>——token 與接龍推理</h1>
   <p class="lede">我的本業是科技產品與投資，不是機器學習——但我發現只要真的搞懂一件事——「這台機器的本質是接龍」——AI 為什麼強、為什麼會一本正經地胡說、為什麼這麼燒錢，就全都說得通了。這是系列的第一篇：它到底是怎麼說話的。</p>
-  <div class="meta">學徒筆記系列・第 1 篇｜閱讀約 8 分鐘</div>
+  <div class="meta">學徒筆記系列・第 1 篇｜閱讀約 10 分鐘</div>
 </header>
 
 <hr class="rule">
 
 <section>
-  <h2><span class="n">一</span>模型從來沒有「看過字」</h2>
+  <h2><span class="n">一</span>開始之前：token 是什麼，為什麼整個系列從它講起</h2>
+
+  <p>先回答一個很多教學直接跳過的問題：<b>token 到底是什麼、我為什麼要在意它？</b></p>
+
+  <p>可以這樣想：食物的世界裡有一個你看不見、但一切都用它計算的單位——卡路里。你吃的是飯和菜，但熱量、代謝、減肥計畫，全部用卡路里算。AI 的世界裡也有這樣一個單位，就叫 <b>token</b>。你打給 AI 的是字，但在它的世界裡，<b>讀進來的量、寫出去的量、記得住的量、你要付的錢，全部用 token 計算</b>。用多少 token 計費、記憶容量是多少 token、每秒能吐多少 token——它是 AI 世界的公分和公斤。</p>
+
+  <p>所以這個系列的第一課就是它。搞懂 token 是什麼、AI 怎麼用它「說話」，後面的一切——為什麼 AI 會一本正經地胡說、為什麼這麼燒錢、為什麼聊久了會忘記前面說過的話——就全都有了地基。</p>
+</section>
+
+<section>
+  <h2><span class="n">二</span>模型從來沒有「看過字」</h2>
 
   <p>你打給 ChatGPT 或 Claude 的是文字，但模型從頭到尾沒有看過字。輸入的第一步，是把文字切成一段一段的 <b>token</b>——可以想成模型的積木：常見的英文單字通常一塊積木就是一個字，長字會被切成幾塊，中文則大多一～兩個字一塊。</p>
 
@@ -151,7 +161,7 @@
 </section>
 
 <section>
-  <h2><span class="n">二</span>推理＝接龍：一次只吐一個 token</h2>
+  <h2><span class="n">三</span>推理＝接龍：一次只吐一個 token</h2>
 
   <p>所謂「推理（inference）」，就是模型回答你的整個過程。它的核心動作簡單到令人意外：<b>看著目前為止的所有 token，猜下一塊積木是什麼。猜完，把它接上去，再猜下一塊。</b>如此重複，直到吐出一個代表「說完了」的特殊 token。你看到答案一個字一個字冒出來，不是打字特效——它真的就是這樣一塊一塊生出來的。</p>
 
@@ -204,8 +214,56 @@
         <text x="43" y="114" class="svg-ink2">7%（字典裡其餘所有積木分掉）</text>
       </g>
     </svg>
-    <div class="cap">接著從表裡「抽」一塊。抽法可以調：<b>溫度（temperature）</b>低＝幾乎永遠拿最高分的（穩定、保守）；溫度高＝偶爾拿低分的（有創意、也更容易出軌）。同一個問題兩次答案不同，就是因為每輪都在抽籤。</div>
+    <div class="cap">注意用詞：接著是從表裡「<b>抽</b>」一塊，不是永遠「挑」最高分的那塊。抽法可以調——這就是下一段的溫度。</div>
   </div>
+
+  <h3>溫度：抽籤時的膽子大小</h3>
+  <p>從機率表選下一塊的方式有一顆可以調的旋鈕，叫<b>溫度（temperature）</b>。白話說，它就是抽籤時的膽子：<b>溫度調低</b>，幾乎永遠拿最高分的那塊——答案穩定、保守，適合查資料、寫正式文件；<b>溫度調高</b>，偶爾會抽到分數較低的——答案有變化、有驚喜，也更容易出軌，適合腦力激盪、想標語文案。</p>
+
+  <p>你平常用的 ChatGPT 或 Claude 介面通常沒有讓你調溫度，但你其實一直感受得到它的存在：<b>同一個問題問兩次，答案不會一模一樣</b>——因為每一輪都在抽籤。哪天你用 API 自己接 AI 做工具時，溫度就是手上第一顆可以轉的旋鈕：要它當嚴謹的查表員，調低；要它當點子王，調高。</p>
+
+  <h3>等等——「接龍」怎麼會變成「推理」？</h3>
+  <p>講到這裡，最多人卡住的地方是：一次猜一塊積木的接龍，怎麼可能解數學、寫程式、分析財報？關鍵在它是拿什麼練的：<b>幾乎整個網路的人類文字</b>。人類寫下的文字本身就充滿因果與邏輯——「因為」後面接「所以」、「3+2=」後面接「5」、程式碼每一行都有嚴格規則。要把「接得順」練到極致，模型就被迫把這些規律內化成自己的一部分。<b>接得夠好，看起來就像會想。</b></p>
+
+  <div class="figure">
+    <svg viewBox="0 0 760 250" role="img" aria-label="接龍逐步生成答案的示意圖">
+      <text x="0" y="18" font-size="14" font-weight="650" class="svg-ink">接龍解數學（示意）：「小明有 3 顆蘋果，再買 2 顆，共幾顆？答：」</text>
+      <g font-size="13.5" transform="translate(0,40)">
+        <text x="0" y="20" class="svg-ink2">桌上目前的內容</text>
+        <text x="560" y="20" class="svg-ink2">模型接的下一塊</text>
+
+        <text x="0" y="56" class="svg-muted">……共幾顆？答：</text>
+        <path d="M 500 51 L 540 51" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr3)"/>
+        <rect x="552" y="38" width="64" height="26" rx="4" fill="var(--accent)" opacity="0.13"/>
+        <text x="584" y="56" text-anchor="middle" class="svg-ink">一共</text>
+
+        <text x="0" y="100" class="svg-muted">……共幾顆？答：一共</text>
+        <path d="M 500 95 L 540 95" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr3)"/>
+        <rect x="552" y="82" width="64" height="26" rx="4" fill="var(--accent)" opacity="0.13"/>
+        <text x="584" y="100" text-anchor="middle" class="svg-ink">有</text>
+
+        <text x="0" y="144" class="svg-muted">……共幾顆？答：一共有</text>
+        <path d="M 500 139 L 540 139" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr3)"/>
+        <rect x="552" y="126" width="64" height="26" rx="4" fill="var(--accent)" opacity="0.30"/>
+        <rect x="552" y="126" width="64" height="26" rx="4" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+        <text x="584" y="144" text-anchor="middle" font-weight="700" class="svg-ink">5</text>
+        <text x="630" y="144" font-size="12.5" class="svg-ink2">← 這一塊要「接得順」，就必須算對</text>
+
+        <text x="0" y="188" class="svg-muted">……共幾顆？答：一共有 5</text>
+        <path d="M 500 183 L 540 183" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr3)"/>
+        <rect x="552" y="170" width="64" height="26" rx="4" fill="var(--accent)" opacity="0.13"/>
+        <text x="584" y="188" text-anchor="middle" class="svg-ink">顆</text>
+      </g>
+      <defs>
+        <marker id="arr3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 z" fill="var(--muted)"/>
+        </marker>
+      </defs>
+    </svg>
+    <div class="cap">對模型來說，「5」不是按計算機算出來的，而是「接在這裡最順的一塊」——但要讓 5 永遠比 4 和 6 順，訓練時它就必須真的把加法的規律內化。像不像「思考」見仁見智；接得準不準，決定它能不能用。</div>
+  </div>
+
+  <p>這也解釋了一個你可能聽過的技巧：要求 AI「先一步一步想，再給答案」為什麼有效。回到桌面的比喻——它每猜一塊，只能看桌上已經有的東西。讓它先把推理過程寫出來，等於<b>把中間步驟一塊一塊攤到桌上</b>，後面的接龍就有據可依；直接逼它跳到最終答案，就像要求你心算跳過過程，出錯機率自然高。現在許多模型內建的「思考模式」，本質上就是把這件事自動化。</p>
 
   <h3>兩個階段：先「讀題」再「作答」</h3>
   <p>實際跑起來分兩段，這個區分在下一篇談成本時會非常重要：</p>
@@ -235,7 +293,7 @@
   </div>
 
   <h3>它的記憶：只有這張桌面</h3>
-  <p>模型每輪能「看著」的範圍叫<b>上下文視窗（context window）</b>——想成一張桌面，你的問題、之前的對話、它已生成的答案全攤在上面。桌面有大小上限（現在的模型約幾十萬 token）。關鍵是：<b>桌面就是它的全部記憶。</b>對話結束桌面一收，什麼都不留；下次對話它「記得你」，是因為系統偷偷把舊對話重新攤回桌上，不是它腦中真的存了你。</p>
+  <p>模型每輪能「看著」的範圍叫<b>上下文視窗（context window）</b>——想成一張桌面，你的問題、之前的對話、它已生成的答案全攤在上面。桌面有大小上限，而且這個上限一直在長大：到 2026 年中，主流旗艦模型（GPT、Gemini、Claude）多已來到 <b>100 萬 token</b> 的等級——粗略換算是幾十萬字的中文，塞得下好幾本長篇小說。不過「標稱裝得下」和「真的用得好」是兩回事：實測顯示桌面堆得越滿，模型找東西的準頭通常會下降。關鍵是：<b>桌面就是它的全部記憶。</b>對話結束桌面一收，什麼都不留；下次對話它「記得你」，是因為系統偷偷把舊對話重新攤回桌上，不是它腦中真的存了你。</p>
 
   <div class="note">
     <div class="t">本篇一句話</div>
@@ -246,6 +304,7 @@
 <footer>
   <p class="next"><b>下一篇</b>：懂了接龍，兩個大哉問就有答案了——AI 為什麼會一本正經地胡說八道？以及，它為什麼這麼燒錢？（第二題會一路通到 AI 供應鏈與台股。）</p>
   <p>AI 學徒筆記——一個科技與財務背景的人，把 AI 真的學懂的公開筆記。</p>
+  <p>數據出處備註：主流模型 context window 達 100 萬 token 等級（GPT-5.5、Gemini 3 Pro、Claude Opus／Sonnet 官方規格，2026-08 查證）；「裝得下≠用得好」出自 2026 年多份長上下文實測的普遍觀察。中文 token 換算比例隨模型字典而異。</p>
 </footer>
 
 </body>
