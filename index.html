@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 世代的隨手筆記</title>
+<meta name="description" content="一個軟體 PM 在 AI 世代下的隨身分享——實用工具、打造產品、以及觀察投資機會的公開筆記。">
+<style>
+  :root {
+    color-scheme: light;
+    --page:     #f7f3ec;
+    --surface:  #fffdf8;
+    --ink:      #2c2620;
+    --ink2:     #5f574b;
+    --muted:    #93887a;
+    --grid:     #e7dfd2;
+    --baseline: #cfc5b4;
+    --border:   rgba(44,38,32,0.10);
+    --accent:   #b0492f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page:     #16130f;
+      --surface:  #1e1a15;
+      --ink:      #f0e9dd;
+      --ink2:     #beb3a2;
+      --muted:    #8d8375;
+      --grid:     #2e2921;
+      --baseline: #4a4336;
+      --border:   rgba(255,255,255,0.10);
+      --accent:   #d9744f;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #16130f; --surface: #1e1a15; --ink: #f0e9dd; --ink2: #beb3a2;
+    --muted: #8d8375; --grid: #2e2921; --baseline: #4a4336;
+    --border: rgba(255,255,255,0.10); --accent: #d9744f;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--page); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 56px 32px 80px; max-width: 1120px; margin: 0 auto;
+    line-height: 1.8; font-size: 15.5px;
+  }
+  h1, h2, .serif, .card .title { font-family: Georgia, "Noto Serif TC", "Songti TC", serif; }
+  h1 { font-size: 34px; font-weight: 700; line-height: 1.35; }
+  .intro { color: var(--ink2); margin-top: 14px; font-size: 16px; max-width: 820px; }
+  .author { color: var(--muted); font-size: 13.5px; margin-top: 12px; }
+  .author a { color: var(--accent); }
+
+  nav.tabs {
+    display: flex; gap: 4px; margin-top: 36px;
+    border-bottom: 1px solid var(--grid); flex-wrap: wrap;
+  }
+  nav.tabs button {
+    appearance: none; background: none; border: 0; cursor: pointer;
+    font: inherit; font-size: 14.5px; color: var(--ink2);
+    padding: 10px 16px 12px; position: relative;
+  }
+  nav.tabs button:hover { color: var(--ink); }
+  nav.tabs button[aria-selected="true"] {
+    color: var(--ink); font-weight: 650;
+  }
+  nav.tabs button[aria-selected="true"]::after {
+    content: ""; position: absolute; left: 12px; right: 12px; bottom: -1px;
+    height: 2.5px; background: var(--accent); border-radius: 2px;
+  }
+  .tabdesc { color: var(--muted); font-size: 13.5px; margin-top: 16px; }
+
+  .cards { margin-top: 20px; display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); }
+  @media (max-width: 760px) { .cards { grid-template-columns: 1fr; } }
+  .card {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 20px 22px;
+    box-shadow: 0 1px 0 var(--border);
+  }
+  a.card:hover { border-color: var(--accent); }
+  .card .k {
+    color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .1em;
+  }
+  .card .k .no {
+    border: 1.5px solid var(--accent); border-radius: 99px; padding: 0 8px; margin-right: 8px;
+  }
+  .card .title { font-size: 19px; font-weight: 700; margin-top: 8px; line-height: 1.5; }
+  .card .desc { color: var(--ink2); font-size: 14px; margin-top: 8px; line-height: 1.7; }
+  .card .meta { color: var(--muted); font-size: 12.5px; margin-top: 10px; }
+  .card.soon { opacity: .75; }
+  .card.soon .title { color: var(--ink2); }
+  .badge-soon {
+    display: inline-block; font-size: 11.5px; color: var(--muted);
+    border: 1px solid var(--baseline); border-radius: 99px; padding: 1px 9px; margin-left: 8px;
+    vertical-align: 2px; font-family: system-ui, sans-serif; font-weight: 500;
+  }
+  .panel[hidden] { display: none; }
+  .mediumcta { margin-top: 18px; font-size: 14px; }
+  .mediumcta a { color: var(--accent); }
+  footer {
+    margin-top: 64px; border-top: 1px solid var(--grid); padding-top: 18px;
+    color: var(--muted); font-size: 13px; line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>AI 世代的隨手筆記</h1>
+  <p class="intro">我是一個軟體產品經理。這裡記錄我在 AI 世代下的隨身分享——把 AI 真的學懂的筆記、拿 AI 打造產品與求職的實戰，以及從原理一路看到投資機會的觀察。</p>
+  <p class="author">曾任 Hahow、17LIVE 產品總監，現在致力於學習 AI 並且思考如何應用｜PM 職涯文章另見 <a href="https://mikehaosun.medium.com/" rel="me">Medium</a></p>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="內容分類">
+  <button role="tab" id="tab-notes"   aria-selected="true"  aria-controls="panel-notes">AI 學徒筆記</button>
+  <button role="tab" id="tab-build"   aria-selected="false" aria-controls="panel-build">AI 求職與產品</button>
+  <button role="tab" id="tab-pm"      aria-selected="false" aria-controls="panel-pm">產品經理隨筆</button>
+</nav>
+
+<section class="panel" id="panel-notes" role="tabpanel" aria-labelledby="tab-notes">
+  <p class="tabdesc">從「LLM 到底怎麼運作」出發，一路走到「AI 供應鏈與台股投資機會」——原理是地基，投資判斷是屋頂。一個非本科的人，把 AI 真的學懂的公開筆記。</p>
+  <div class="cards">
+    <a class="card" href="posts/01-token-and-inference.html">
+      <div class="k"><span class="no">01</span>AI 學徒筆記</div>
+      <div class="title">AI 是怎麼「說話」的？——token 與接龍推理</div>
+      <div class="desc">模型從來沒有看過字。搞懂 token、機率表與接龍迴圈，AI 的強與怪就全都說得通了。</div>
+      <div class="meta">2026-08｜閱讀約 8 分鐘</div>
+    </a>
+    <a class="card" href="posts/02-hallucination-and-cost.html">
+      <div class="k"><span class="no">02</span>AI 學徒筆記</div>
+      <div class="title">AI 為什麼一本正經地胡說？以及它為什麼這麼燒錢</div>
+      <div class="desc">幻覺不是故障，是接龍機制的本性；而每個 token 背後，是一次參數整套搬運的全力衝刺。</div>
+      <div class="meta">2026-08｜閱讀約 9 分鐘</div>
+    </a>
+    <div class="card soon">
+      <div class="k"><span class="no">03</span>AI 學徒筆記<span class="badge-soon">撰寫中</span></div>
+      <div class="title">從 token 需求到 AI 供應鏈——需求為什麼一路漲到上游</div>
+      <div class="desc">token 用量暴增之後，誰做晶片、誰疊記憶體、誰封裝、誰供電散熱——把需求鏈一層層往上游推。</div>
+    </div>
+    <div class="card soon">
+      <div class="k"><span class="no">04</span>AI 學徒筆記<span class="badge-soon">撰寫中</span></div>
+      <div class="title">AI 生態鏈的台股地圖——每個環節看什麼、誰有議價力</div>
+      <div class="desc">整條生態鏈一張圖：台廠站在哪些環節、瓶頸在誰手上，以及用什麼指標判讀需求訊號的傳導。</div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="panel-build" role="tabpanel" aria-labelledby="tab-build" hidden>
+  <p class="tabdesc">拿 AI 當工具的實戰紀錄：怎麼用 AI 求職、怎麼從零打造產品、怎麼讓 agent 替你工作——都是自己真的做過的事，不是轉述。</p>
+  <div class="cards">
+    <div class="card soon">
+      <div class="k">AI 求職與產品<span class="badge-soon">即將發佈</span></div>
+      <div class="title">我用 Claude 當個人幕僚長：一個控制塔＋教練系統的設計</div>
+      <div class="desc">把多個個人專案交給一個 agent 統籌：狀態追蹤、目標對齊檢查、還會主動頂嘴的教練層。</div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="panel-pm" role="tabpanel" aria-labelledby="tab-pm" hidden>
+  <p class="tabdesc">AI 之前的本業：軟體產品經理的職涯與產品思維。這些文章發佈於 Medium，之後會陸續同步到這裡。</p>
+  <div class="cards">
+    <a class="card" href="https://mikehaosun.medium.com/">
+      <div class="k">Medium</div>
+      <div class="title">從產品主管的面試題目，來聊聊該如何準備以及提升自己？</div>
+      <div class="meta">2025-10</div>
+    </a>
+    <a class="card" href="https://mikehaosun.medium.com/">
+      <div class="k">Medium</div>
+      <div class="title">在台灣當軟體產品經理特別有挑戰？</div>
+      <div class="meta">2025-08</div>
+    </a>
+    <a class="card" href="https://mikehaosun.medium.com/">
+      <div class="k">Medium</div>
+      <div class="title">從 PM 晉升產品主管，你需要具備哪些能力？</div>
+      <div class="meta">2025-07</div>
+    </a>
+    <a class="card" href="https://mikehaosun.medium.com/">
+      <div class="k">Medium</div>
+      <div class="title">AI 時代下，Product Sense 還重要嗎？</div>
+      <div class="meta">2025-03</div>
+    </a>
+  </div>
+  <p class="mediumcta">全部 PM 文章 → <a href="https://mikehaosun.medium.com/">mikehaosun.medium.com</a></p>
+</section>
+
+<footer>
+  AI 世代的隨手筆記——實用工具、打造產品、投資觀察的隨身分享。
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('nav.tabs button');
+  tabs.forEach(btn => btn.addEventListener('click', () => {
+    tabs.forEach(b => {
+      const on = b === btn;
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+      document.getElementById(b.getAttribute('aria-controls')).hidden = !on;
+    });
+  }));
+</script>
+
+</body>
+</html>

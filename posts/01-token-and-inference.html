@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 是怎麼「說話」的？——token 與接龍推理｜AI 學徒筆記 01</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:     #f7f3ec;
+    --surface:  #fffdf8;
+    --ink:      #2c2620;
+    --ink2:     #5f574b;
+    --muted:    #93887a;
+    --grid:     #e7dfd2;
+    --baseline: #cfc5b4;
+    --border:   rgba(44,38,32,0.10);
+    --accent:   #b0492f;
+    --good:     #3e7c46;
+    --bad:      #a03030;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page:     #16130f;
+      --surface:  #1e1a15;
+      --ink:      #f0e9dd;
+      --ink2:     #beb3a2;
+      --muted:    #8d8375;
+      --grid:     #2e2921;
+      --baseline: #4a4336;
+      --border:   rgba(255,255,255,0.10);
+      --accent:   #d9744f;
+      --good:     #6fae77;
+      --bad:      #d97070;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #16130f; --surface: #1e1a15; --ink: #f0e9dd; --ink2: #beb3a2;
+    --muted: #8d8375; --grid: #2e2921; --baseline: #4a4336;
+    --border: rgba(255,255,255,0.10); --accent: #d9744f; --good: #6fae77; --bad: #d97070;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--page); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 48px 24px 80px; max-width: 900px; margin: 0 auto;
+    line-height: 1.85; font-size: 16px;
+  }
+  .serif, h1, h2, h3 { font-family: Georgia, "Noto Serif TC", "Songti TC", serif; }
+  header .series {
+    color: var(--accent); font-size: 13px; letter-spacing: .12em; font-weight: 600;
+  }
+  header .series .no { border: 1.5px solid var(--accent); border-radius: 99px; padding: 1px 9px; margin-right: 8px; }
+  h1 { font-size: 30px; font-weight: 700; margin-top: 14px; line-height: 1.4; }
+  .lede {
+    color: var(--ink2); margin-top: 16px; font-size: 16.5px;
+    border-left: 3px solid var(--accent); padding-left: 16px; line-height: 1.8;
+  }
+  .meta { color: var(--muted); font-size: 13px; margin-top: 16px; }
+  hr.rule { border: 0; border-top: 1px solid var(--grid); margin: 40px 0 0; }
+  section { margin-top: 44px; }
+  h2 { font-size: 22px; font-weight: 700; line-height: 1.45; }
+  h2 .n { color: var(--accent); margin-right: 10px; }
+  h3 { font-size: 17px; font-weight: 700; margin-top: 30px; }
+  p { margin-top: 16px; }
+  .figure {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 22px; margin-top: 22px; overflow-x: auto;
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .figure .cap { color: var(--muted); font-size: 12.5px; margin-top: 12px; line-height: 1.65; }
+  .figure svg { display: block; max-width: 100%; height: auto; }
+  .note {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+    padding: 16px 20px; margin-top: 22px; font-size: 15px;
+  }
+  .note .t { color: var(--accent); font-weight: 700; font-size: 13px; letter-spacing: .08em; }
+  .note p { margin-top: 6px; }
+  footer { margin-top: 64px; border-top: 1px solid var(--grid); padding-top: 20px; color: var(--muted); font-size: 13.5px; line-height: 1.8; }
+  footer .next { color: var(--ink2); }
+  footer a { color: var(--accent); }
+  .svg-ink   { fill: var(--ink); }
+  .svg-ink2  { fill: var(--ink2); }
+  .svg-muted { fill: var(--muted); }
+</style>
+</head>
+<body>
+
+<p style="margin-bottom:24px"><a href="../index.html" style="color:var(--accent);text-decoration:none;font-size:14px">← AI 世代的隨手筆記</a></p>
+
+<header>
+  <div class="series"><span class="no">01</span>AI 學徒筆記</div>
+  <h1>AI 是怎麼「說話」的？<br>——token 與接龍推理</h1>
+  <p class="lede">我不是資工背景，但我發現只要真的搞懂一件事——「這台機器的本質是接龍」——AI 為什麼強、為什麼會一本正經地胡說、為什麼這麼燒錢，就全都說得通了。這是系列的第一篇：它到底是怎麼說話的。</p>
+  <div class="meta">學徒筆記系列・第 1 篇｜閱讀約 8 分鐘</div>
+</header>
+
+<hr class="rule">
+
+<section>
+  <h2><span class="n">一</span>模型從來沒有「看過字」</h2>
+
+  <p>你打給 ChatGPT 或 Claude 的是文字，但模型從頭到尾沒有看過字。輸入的第一步，是把文字切成一段一段的 <b>token</b>——可以想成模型的積木：常見的英文單字通常一塊積木就是一個字，長字會被切成幾塊，中文則大多一～兩個字一塊。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 800 170" role="img" aria-label="句子被切成 token 再變成編號的示意圖">
+      <text x="0" y="20" font-size="14" class="svg-ink2">你輸入的句子</text>
+      <text x="0" y="48" font-size="16" class="svg-ink">台積電是全球最大的晶圓代工廠</text>
+      <g transform="translate(0,70)">
+        <text x="0" y="16" font-size="14" class="svg-ink2">模型看到的：切成 token（示意）</text>
+        <g transform="translate(0,28)" font-size="14">
+          <rect x="0"   y="0" width="72" height="28" rx="4" fill="var(--accent)" opacity="0.13"/><text x="36"  y="19" text-anchor="middle" class="svg-ink">台積電</text>
+          <rect x="78"  y="0" width="40" height="28" rx="4" fill="var(--accent)" opacity="0.13"/><text x="98"  y="19" text-anchor="middle" class="svg-ink">是</text>
+          <rect x="124" y="0" width="56" height="28" rx="4" fill="var(--accent)" opacity="0.13"/><text x="152" y="19" text-anchor="middle" class="svg-ink">全球</text>
+          <rect x="186" y="0" width="64" height="28" rx="4" fill="var(--accent)" opacity="0.13"/><text x="218" y="19" text-anchor="middle" class="svg-ink">最大的</text>
+          <rect x="256" y="0" width="56" height="28" rx="4" fill="var(--accent)" opacity="0.13"/><text x="284" y="19" text-anchor="middle" class="svg-ink">晶圓</text>
+          <rect x="318" y="0" width="56" height="28" rx="4" fill="var(--accent)" opacity="0.13"/><text x="346" y="19" text-anchor="middle" class="svg-ink">代工</text>
+          <rect x="380" y="0" width="40" height="28" rx="4" fill="var(--accent)" opacity="0.13"/><text x="400" y="19" text-anchor="middle" class="svg-ink">廠</text>
+        </g>
+        <g transform="translate(0,70)" font-size="13">
+          <text x="0" y="0" class="svg-ink2" font-size="14">再變成編號（每塊積木在字典裡有固定號碼）</text>
+          <text x="0" y="24" class="svg-muted" font-family="ui-monospace,monospace">[48122, 5613, 20981, 33812, 60233, 41577, 8891]</text>
+        </g>
+      </g>
+    </svg>
+    <div class="cap">token 切法與編號為示意，非任何真實模型的實際值。重點是：模型的世界裡只有「編號的序列」，沒有字、沒有詞、沒有句子。</div>
+  </div>
+
+  <p>每個模型都帶著一本固定的<b>字典（詞彙表）</b>，通常十幾萬塊積木。字典是訓練前用統計方法從海量文字裡「學」出來的：越常出現的片段，越有資格自成一塊。這就是為什麼英文常見字一塊搞定、罕見字被剁碎——也是為什麼<b>同樣意思的中文通常比英文花更多 token</b>：字典是以英文為大宗的語料練出來的，中文的「壓縮率」天生比較差。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 720 150" role="img" aria-label="同樣一句話英文與中文 token 數比較">
+      <text x="0" y="18" font-size="14" font-weight="650" class="svg-ink">同一句話的 token 帳單（示意）</text>
+      <g transform="translate(150,44)">
+        <text x="-12" y="16" text-anchor="end" font-size="13.5" class="svg-ink2">英文</text>
+        <rect x="0" y="2" width="220" height="22" rx="3" fill="var(--accent)"/>
+        <text x="228" y="18" font-size="13" class="svg-ink2">~10 tokens</text>
+        <text x="-12" y="52" text-anchor="end" font-size="13.5" class="svg-ink2">中文</text>
+        <rect x="0" y="38" width="330" height="22" rx="3" fill="var(--accent)"/>
+        <text x="338" y="54" font-size="13" class="svg-ink2">~15 tokens（貴 30~60%）</text>
+        <line x1="0" y1="-6" x2="0" y2="70" stroke="var(--baseline)" stroke-width="1"/>
+      </g>
+      <text x="0" y="140" font-size="12.5" class="svg-muted">例句：“TSMC is the world's largest chip foundry” vs「台積電是全球最大的晶圓代工廠」</text>
+    </svg>
+    <div class="cap">API 按 token 計價，所以這不只是冷知識——同樣的內容，中文使用者付的帳單就是比較貴。比例隨模型字典不同而異。</div>
+  </div>
+
+  <p>切完、編號完之後，每個編號會再被換成一長串數字（術語叫向量），意思相近的 token 在數字上也相近——「國王」和「皇帝」在模型的空間裡是鄰居。這是它能「理解」語意的基礎：<b>相似的意思，被放在相近的位置。</b></p>
+</section>
+
+<section>
+  <h2><span class="n">二</span>推理＝接龍：一次只吐一個 token</h2>
+
+  <p>所謂「推理（inference）」，就是模型回答你的整個過程。它的核心動作簡單到令人意外：<b>看著目前為止的所有 token，猜下一塊積木是什麼。猜完，把它接上去，再猜下一塊。</b>如此重複，直到吐出一個代表「說完了」的特殊 token。你看到答案一個字一個字冒出來，不是打字特效——它真的就是這樣一塊一塊生出來的。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 800 190" role="img" aria-label="自迴歸接龍迴圈示意圖">
+      <text x="0" y="18" font-size="14" font-weight="650" class="svg-ink">接龍迴圈</text>
+      <g transform="translate(0,40)">
+        <rect x="0" y="0" width="250" height="52" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+        <text x="125" y="22" text-anchor="middle" font-size="13.5" class="svg-ink">目前為止的全部 token</text>
+        <text x="125" y="40" text-anchor="middle" font-size="12" class="svg-muted">（你的問題＋已生成的部分）</text>
+        <path d="M 258 26 L 300 26" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="304" y="0" width="150" height="52" rx="6" fill="var(--accent)" opacity="0.10"/>
+        <rect x="304" y="0" width="150" height="52" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+        <text x="379" y="30" text-anchor="middle" font-size="13.5" class="svg-ink">模型算一次</text>
+        <path d="M 462 26 L 504 26" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="508" y="0" width="180" height="52" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+        <text x="598" y="22" text-anchor="middle" font-size="13.5" class="svg-ink">吐出 1 個新 token</text>
+        <text x="598" y="40" text-anchor="middle" font-size="12" class="svg-muted">從機率表裡挑一塊</text>
+        <path d="M 598 60 L 598 96 L 125 96 L 125 60" fill="none" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <text x="360" y="90" text-anchor="middle" font-size="12.5" class="svg-ink2">接回序列尾巴，整個重來一輪（每個 token 都要跑一整圈）</text>
+      </g>
+      <text x="0" y="180" font-size="12.5" class="svg-muted">迴圈出口：吐出「結束」token，或達到長度上限。</text>
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 z" fill="var(--muted)"/>
+        </marker>
+      </defs>
+    </svg>
+  </div>
+
+  <h3>「猜」是什麼意思：一張機率表</h3>
+  <p>每一輪，模型其實是對字典裡<b>所有</b>積木各給一個分數，變成一張機率表。「台灣最高的山是——」的下一塊，機率表可能長這樣：</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 700 190" role="img" aria-label="下一個 token 的機率分布長條圖">
+      <text x="0" y="18" font-size="14" font-weight="650" class="svg-ink">「台灣最高的山是」→ 下一個 token 的機率（示意）</text>
+      <g transform="translate(110,42)" font-size="13">
+        <line x1="0" y1="-4" x2="0" y2="128" stroke="var(--baseline)" stroke-width="1"/>
+        <text x="-10" y="16" text-anchor="end" class="svg-ink2">玉</text>
+        <rect x="0" y="4" width="410" height="18" rx="3" fill="var(--accent)"/>
+        <text x="418" y="18" class="svg-ink">82%</text>
+        <text x="-10" y="48" text-anchor="end" class="svg-ink2">雪</text>
+        <rect x="0" y="36" width="35" height="18" rx="3" fill="var(--accent)"/>
+        <text x="43" y="50" class="svg-ink2">7%</text>
+        <text x="-10" y="80" text-anchor="end" class="svg-ink2">阿</text>
+        <rect x="0" y="68" width="20" height="18" rx="3" fill="var(--accent)"/>
+        <text x="28" y="82" class="svg-ink2">4%</text>
+        <text x="-10" y="112" text-anchor="end" class="svg-ink2">其他…</text>
+        <rect x="0" y="100" width="35" height="18" rx="3" fill="var(--accent)" opacity="0.4"/>
+        <text x="43" y="114" class="svg-ink2">7%（字典裡其餘所有積木分掉）</text>
+      </g>
+    </svg>
+    <div class="cap">接著從表裡「抽」一塊。抽法可以調：<b>溫度（temperature）</b>低＝幾乎永遠拿最高分的（穩定、保守）；溫度高＝偶爾拿低分的（有創意、也更容易出軌）。同一個問題兩次答案不同，就是因為每輪都在抽籤。</div>
+  </div>
+
+  <h3>兩個階段：先「讀題」再「作答」</h3>
+  <p>實際跑起來分兩段，這個區分在下一篇談成本時會非常重要：</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 760 150" role="img" aria-label="prefill 與 decode 兩階段示意">
+      <g transform="translate(0,6)">
+        <rect x="0" y="0" width="360" height="120" rx="6" fill="var(--accent)" opacity="0.07"/>
+        <text x="18" y="30" font-size="15" font-weight="680" class="svg-ink">① Prefill／讀題</text>
+        <text x="18" y="56" font-size="13" class="svg-ink2">把你的輸入「一口氣平行」處理完</text>
+        <text x="18" y="78" font-size="13" class="svg-ink2">吃運算力，快而猛</text>
+        <text x="18" y="100" font-size="13" class="svg-muted">你感受到的：按下送出後的首字延遲</text>
+        <rect x="392" y="0" width="360" height="120" rx="6" fill="none" stroke="var(--baseline)" stroke-width="1.5"/>
+        <text x="410" y="30" font-size="15" font-weight="680" class="svg-ink">② Decode／作答</text>
+        <text x="410" y="56" font-size="13" class="svg-ink2">一塊接一塊吐 token，沒法平行</text>
+        <text x="410" y="78" font-size="13" class="svg-ink2">吃記憶體搬運速度，慢工出細活</text>
+        <text x="410" y="100" font-size="13" class="svg-muted">你感受到的：答案冒出來的打字速度</text>
+        <path d="M 366 60 L 386 60" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr2)"/>
+      </g>
+      <defs>
+        <marker id="arr2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 z" fill="var(--muted)"/>
+        </marker>
+      </defs>
+    </svg>
+    <div class="cap">這也是 API「輸入 token 便宜、輸出 token 貴幾倍」的原因：讀題可以平行量產，作答只能一塊一塊磨。</div>
+  </div>
+
+  <h3>它的記憶：只有這張桌面</h3>
+  <p>模型每輪能「看著」的範圍叫<b>上下文視窗（context window）</b>——想成一張桌面，你的問題、之前的對話、它已生成的答案全攤在上面。桌面有大小上限（現在的模型約幾十萬 token）。關鍵是：<b>桌面就是它的全部記憶。</b>對話結束桌面一收，什麼都不留；下次對話它「記得你」，是因為系統偷偷把舊對話重新攤回桌上，不是它腦中真的存了你。</p>
+
+  <div class="note">
+    <div class="t">本篇一句話</div>
+    <p>推理＝「看全桌 → 出機率表 → 抽一塊 → 接上去」的無限重複。它不是先想好整段話再說——<b>它說到哪、想到哪，而且每說一塊都要重新看一次全桌。</b></p>
+  </div>
+</section>
+
+<footer>
+  <p class="next"><b>下一篇</b>：懂了接龍，兩個大哉問就有答案了——AI 為什麼會一本正經地胡說八道？以及，它為什麼這麼燒錢？（第二題會一路通到 AI 供應鏈與台股。）</p>
+  <p>AI 學徒筆記——一個非本科的人，把 AI 真的學懂的公開筆記。</p>
+</footer>
+
+</body>
+</html>
