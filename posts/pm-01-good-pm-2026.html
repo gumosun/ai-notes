@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>如何進階成為一個優秀的產品經理——2026 AI 時代更新版｜PM 隨筆</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:     #f7f3ec;
+    --surface:  #fffdf8;
+    --ink:      #2c2620;
+    --ink2:     #5f574b;
+    --muted:    #93887a;
+    --grid:     #e7dfd2;
+    --baseline: #cfc5b4;
+    --border:   rgba(44,38,32,0.10);
+    --accent:   #b0492f;
+    --good:     #3e7c46;
+    --bad:      #a03030;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page:     #16130f;
+      --surface:  #1e1a15;
+      --ink:      #f0e9dd;
+      --ink2:     #beb3a2;
+      --muted:    #8d8375;
+      --grid:     #2e2921;
+      --baseline: #4a4336;
+      --border:   rgba(255,255,255,0.10);
+      --accent:   #d9744f;
+      --good:     #6fae77;
+      --bad:      #d97070;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #16130f; --surface: #1e1a15; --ink: #f0e9dd; --ink2: #beb3a2;
+    --muted: #8d8375; --grid: #2e2921; --baseline: #4a4336;
+    --border: rgba(255,255,255,0.10); --accent: #d9744f; --good: #6fae77; --bad: #d97070;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--page); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 48px 24px 80px; max-width: 900px; margin: 0 auto;
+    line-height: 1.85; font-size: 17px;
+  }
+  .serif, h1, h2, h3 { font-family: Georgia, "Noto Serif TC", "Songti TC", serif; }
+  header .series {
+    color: var(--accent); font-size: 14px; letter-spacing: .12em; font-weight: 600;
+  }
+  header .series .no { border: 1.5px solid var(--accent); border-radius: 99px; padding: 1px 9px; margin-right: 8px; }
+  h1 { font-size: 31px; font-weight: 700; margin-top: 14px; line-height: 1.4; }
+  .lede {
+    color: var(--ink2); margin-top: 16px; font-size: 17.5px;
+    border-left: 3px solid var(--accent); padding-left: 16px; line-height: 1.8;
+  }
+  .meta { color: var(--muted); font-size: 14px; margin-top: 16px; }
+  .meta a { color: var(--accent); }
+  hr.rule { border: 0; border-top: 1px solid var(--grid); margin: 40px 0 0; }
+  section { margin-top: 44px; }
+  h2 { font-size: 23px; font-weight: 700; line-height: 1.45; }
+  h2 .n { color: var(--accent); margin-right: 10px; }
+  h3 { font-size: 18px; font-weight: 700; margin-top: 30px; }
+  p { margin-top: 16px; }
+  ul.pts { margin: 16px 0 0 2px; padding-left: 22px; }
+  ul.pts li { margin-top: 10px; }
+  .callout {
+    background: var(--surface); border-left: 3px solid var(--accent); border-radius: 0 4px 4px 0;
+    padding: 14px 18px; margin-top: 22px; font-size: 16.5px; color: var(--ink2);
+  }
+  footer { margin-top: 64px; border-top: 1px solid var(--grid); padding-top: 20px; color: var(--muted); font-size: 14.5px; line-height: 1.8; }
+  footer .next { color: var(--ink2); }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<p style="margin-bottom:24px"><a href="../index.html" style="color:var(--accent);text-decoration:none;font-size:15px">← AI 世代的隨手筆記</a></p>
+
+<header>
+  <div class="series"><span class="no">PM</span>產品經理隨筆</div>
+  <h1>如何進階成為一個優秀的產品經理<br>——2026 AI 時代更新版</h1>
+  <p class="lede">五年前我寫下〈如何進階成為一個優秀的產品經理〉，談用戶優先、排序方法、MVP、指標與利害關係人。2026 年回頭看：骨架幾乎都還成立，但每一項的「及格線」都被 AI 抬高了。這篇是那篇文章的更新版——而且這次不是用推論寫的，是用這段時間親手實作的經驗寫的。</p>
+  <div class="meta">產品經理隨筆｜閱讀約 9 分鐘｜原文：<a href="https://medium.com/tactic-wisdom-product-group/%E5%A6%82%E4%BD%95%E9%80%B2%E9%9A%8E%E6%88%90%E7%82%BA%E4%B8%80%E5%80%8B%E5%84%AA%E7%A7%80%E7%9A%84%E7%94%A2%E5%93%81%E7%B6%93%E7%90%86-a3329359b183">2021 年 1 月發佈於 Medium</a></div>
+</header>
+
+<hr class="rule">
+
+<section>
+  <p>五年前那篇文章，我有一個好消息和一個壞消息。</p>
+  <p>好消息是：文章的骨架幾乎都還成立——用戶優先沒有過時、價值導向沒有過時、管理利害關係人更沒有過時。壞消息是：<b>每一項的「及格線」都被 AI 抬高了</b>。過去做到那些事需要的時間和人力，現在大幅下降；這代表「做不做得到」不再是分水嶺，「你怎麼用省下來的時間」才是。</p>
+  <p>結構照舊，我只重寫被 AI 真正改變的部分——過去這段時間，我自己用 AI 從零打造了真的上線的產品、做了一整組 PM 工作流工具，下面每一段的更新都有實作背書。</p>
+</section>
+
+<section>
+  <h2><span class="n">一</span>產品經理最重要的特點——沒變，但藉口沒了</h2>
+  <p>用戶優先、價值導向、在對的時間做出最適合的決定——這三件事一個字都不用改。要改的是這句話的重量：</p>
+  <p>2021 年我寫過，面試時聽到「我經驗豐富、判斷多半正確」就直接判定失格。2026 年這條紅線變得更嚴了。過去你還可以說「訪談要排程、數據要等分析師、我先憑經驗擋一下」；現在用戶訪談的逐字稿 AI 幾分鐘就能整理出痛點聚類，行為數據丟給 AI 能直接對話式追問，競品的公開評論一個下午就能掃完一輪。<b>洞察的取得成本崩落之後，「憑感覺」從偷懶升級成失職。</b></p>
+  <p>那五個永恆的問題——我的用戶是誰、為什麼用我的產品、什麼情境用、為什麼不繼續用、數據告訴我什麼——問題本身不變，變的是你再也沒有理由答不出來。</p>
+</section>
+
+<section>
+  <h2><span class="n">二</span>專注於最重要的事情——排序照舊，MVP 要翻新</h2>
+  <p>問題層的排序（商業價值×權重＋用戶價值×權重／開發成本）和功能層的 RICE，2026 年都還好用，這裡不重複。真正需要重寫的是 MVP 那一節。</p>
+
+  <h3>MVP 的重心：從「做多小」變成「驗證什麼」</h3>
+  <p>2021 年我教大家用 MoSCoW 把功能拆成 Must／Should／Could／Won't，只做 Must Have——因為當時開發很貴，砍功能是在省命。</p>
+  <p>2026 年，打造成本崩落了。一個 PM 配上 AI，幾天內能做出可以點擊操作的 prototype，甚至能對外上線的產品雛形——這是我自己驗證過的，不是聽說。當「做出來」不再昂貴，MVP 的核心問題就從「<b>哪些功能非做不可</b>」翻轉成「<b>我到底要驗證什麼假設？</b>」</p>
+  <p>操作上的差別很具體：</p>
+  <ul class="pts">
+    <li><b>舊思路</b>：列功能清單 → 痛苦地砍到最小 → 開發一個月 → 上線看數據</li>
+    <li><b>新思路</b>：先寫下這次要驗證的假設（例如「用戶願意為了點數回饋改變消費行為」）→ 問「驗證這個假設的最小做法是什麼」→ 答案常常根本不是完整功能：可能是一個 AI 做的可點擊 prototype 給二十個目標用戶試、一個假門按鈕、一週就上線的粗糙版</li>
+    <li>甚至，因為成本夠低，<b>同一個假設可以同時做兩三個版本比較</b>——過去這是大公司才有的奢侈</li>
+  </ul>
+  <p>MoSCoW 沒有死，它降級了：從「決定做什麼」的主框架，變成假設確認之後整理實作範圍的工具。金字塔原則也還在——再小的驗證物也要給用戶完整的價值體驗，這點沒變。</p>
+  <p>2021 年那個 Loyalty Program 的例子，2026 年的正確打開方式是：先讓 AI 做一個含「功能提示＋反饋提示＋兌換」的可互動 prototype，找一批真實用戶走一遍，再決定要不要真的開發。當年我教你怎麼「砍得漂亮」，現在我會先問你「你確定要蓋嗎？先讓二十個人點點看。」</p>
+</section>
+
+<section>
+  <h2><span class="n">三</span>假設、驗證、分析——迭代週期從月變週</h2>
+  <p>敏感指標 vs 戰略指標的區分、上線功能要盯副作用指標（提升廣告點擊的同時看觀看時長和留言率）——這些判斷框架完全沒變，因為這是判斷力，不是執行力。</p>
+  <p>變的是節奏。分析的執行成本下降（拉數據、切維度、找異常，AI 都能代勞大半），驗證物的生產成本下降，兩頭一夾，<b>迭代週期從「月」壓縮到「週」甚至更短</b>。這對 PM 的實質意義是：你的判斷次數變多了。過去一季拍三個板，現在一季可能拍十五個——判斷的品質與速度，取代執行的協調能力，成為 PM 的主要瓶頸。</p>
+  <p>這也是為什麼我把下一節視為這次更新裡最重要的一章。</p>
+</section>
+
+<section>
+  <h2><span class="n">四</span>【2026 新增】把你的 day-to-day 用 AI 放大——打造自己的工作流</h2>
+  <p>這一章 2021 年的我寫不出來，因為當時不存在。它回答的問題是：判斷次數變多、單件執行變便宜之後，PM 該怎麼重新組織自己的一天？</p>
+  <p>我的答案，是我自己踩出來的：<b>不要「使用 AI 工具」，要「打造自己的 AI 工作流」</b>。兩者的差別在於前者是每次遇到任務臨時開一個對話，後者是把你重複發生的工作型態做成可以重複執行的流程。</p>
+  <p>盤點一個 PM 的 day-to-day：開會＋會後整理、評估提案、寫 BRD/PRD、做 prototype、跟 stakeholder 溝通、寫週報。每一項都是高度重複的認知勞動——而重複，就是流程化的訊號。我自己做了一組工作流工具，例子：</p>
+  <ul class="pts">
+    <li><b>會議雜記丟進去 → 結構化的決議、行動項、待通知名單出來</b>，決議自動沉澱成可追溯的紀錄</li>
+    <li><b>一段功能描述丟進去 → 可點擊的 prototype 出來</b>，再一步變成能給老闆看的 demo 影片</li>
+    <li><b>週間的足跡自動彙整 → 對不同受眾客製的週報</b></li>
+  </ul>
+  <p>關鍵設計只有一條，讓這些工具真正可攜：<b>把「引擎」和「公司脈絡」分離</b>。工具邏輯是通用的，每到一間公司只要灌一份該公司的脈絡包（策略、品牌語言、決策準則），整組直接開工。你的手藝從「存在你腦中」變成「裝備在身上」。</p>
+  <div class="callout">原則性的總結：<b>把重複的認知勞動流程化，把自己留在判斷點。</b>這句話同時是這整篇更新版的主旋律——AI 接手的是執行的量，你要守住的是判斷的質。</div>
+</section>
+
+<section>
+  <h2><span class="n">五</span>管理好你的利害關係人——矩陣照舊，武器升級</h2>
+  <p>Stakeholder 矩陣（影響程度×決策影響×興趣）、互動方式／內容／頻率的合作計畫、價值導向而非時程表的 roadmap——整套方法論不用改一個字。AI 改變的是執行成本和預演能力：</p>
+  <ul class="pts">
+    <li><b>溝通材料客製化</b>：同一份 roadmap，過去你只有力氣做一個版本打天下；現在可以讓 AI 針對每一類 stakeholder 產出他視角的版本——給營運的看數字影響、給老闆的看商業目標、給技術的看架構含義。內容一致、視角客製，這在過去是奢侈品</li>
+    <li><b>會議紀錄與承諾追蹤自動化</b>：誰承諾過什麼、哪些決議懸著，不再靠記性——這正是信任感的來源，而信任是 stakeholder 管理的真正貨幣</li>
+    <li><b>異議預演</b>：把你的提案丟給 AI，要它扮演最難搞的那位 stakeholder 挑戰你。上場前先被打過一輪，勝率完全不同</li>
+  </ul>
+  <p>要提醒的是：AI 能放大你的溝通頻寬，但<b>信任本身無法外包</b>。關係的存量還是靠你一次次兌現承諾累積的，這件事 2021 年怎樣，2026 年還是怎樣。</p>
+</section>
+
+<section>
+  <h2><span class="n">六</span>無止盡的學習——從「找時間學」到「隨手學」</h2>
+  <p>2021 年我說 PM 要懂點財會、懂點技術，要不停學習。2026 年這件事的成本結構也變了：你身邊隨時有一個什麼都能問的家教——看財報遇到不懂的科目、技術評審聽到不懂的名詞，當場問、當場懂，學習從「排時間的專案」變成「隨手的動作」。</p>
+  <p>但要補一個 2021 年不需要講的警告：<b>AI 讓「淺淺知道」變得太容易了。</b>問一句就有答案的世界裡，「知道」和「懂」的差距反而被拉大。我自己的解法是給學習掛上輸出：每學一個東西就問「這能用在我手上哪個決策？」——學了直接用，用不上的就先不學。深度理解的來源從來不是問答，是應用。</p>
+</section>
+
+<section>
+  <h2>結語：門檻更低了，天花板更高了</h2>
+  <p>2021 年我在結尾寫：成為一個 PM 很容易，要把產品真正做好非常難。</p>
+  <p>2026 年，這句話的兩端被同時拉開了。門檻更低——AI 讓任何人都能把想法做成東西，「會做產品」本身不再稀缺。天花板更高——判斷的品質、品味、以及利害關係人對你的信任，這些 AI 給不了的東西，濃度變得前所未有地高。</p>
+  <p>所以 2026 年的進階路徑，我會濃縮成三句話：<b>讓 AI 接手執行的量，把自己練在判斷的質；把重複的工作做成流程，把省下的時間花在用戶和信任上；然後，親手用 AI 做一次產品——那會改變你對「可能性」的所有直覺。</b></p>
+  <p>一起成為 AI 時代裡優秀的 Product Manager。</p>
+</section>
+
+<footer>
+  <p class="next">2021 年原版：<a href="https://medium.com/tactic-wisdom-product-group/%E5%A6%82%E4%BD%95%E9%80%B2%E9%9A%8E%E6%88%90%E7%82%BA%E4%B8%80%E5%80%8B%E5%84%AA%E7%A7%80%E7%9A%84%E7%94%A2%E5%93%81%E7%B6%93%E7%90%86-a3329359b183">如何進階成為一個優秀的產品經理（Medium）</a></p>
+  <p class="next">延伸閱讀：<a href="how-i-use-ai-03-dev-factory.html">透過 AI 打造開發流程，實現開發產品的願望</a>——本文第四節那條「工作流」的完整實作紀錄</p>
+  <p>產品經理隨筆——AI 之前的本業：軟體產品經理的職涯與產品思維。</p>
+</footer>
+
+<script data-goatcounter="https://ai-notes.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
