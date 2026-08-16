@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>透過 AI 打造開發流程，實現開發產品的願望｜我如何使用 AI 03</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:     #f7f3ec;
+    --surface:  #fffdf8;
+    --ink:      #2c2620;
+    --ink2:     #5f574b;
+    --muted:    #93887a;
+    --grid:     #e7dfd2;
+    --baseline: #cfc5b4;
+    --border:   rgba(44,38,32,0.10);
+    --accent:   #b0492f;
+    --good:     #3e7c46;
+    --bad:      #a03030;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page:     #16130f;
+      --surface:  #1e1a15;
+      --ink:      #f0e9dd;
+      --ink2:     #beb3a2;
+      --muted:    #8d8375;
+      --grid:     #2e2921;
+      --baseline: #4a4336;
+      --border:   rgba(255,255,255,0.10);
+      --accent:   #d9744f;
+      --good:     #6fae77;
+      --bad:      #d97070;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #16130f; --surface: #1e1a15; --ink: #f0e9dd; --ink2: #beb3a2;
+    --muted: #8d8375; --grid: #2e2921; --baseline: #4a4336;
+    --border: rgba(255,255,255,0.10); --accent: #d9744f; --good: #6fae77; --bad: #d97070;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--page); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 48px 24px 80px; max-width: 900px; margin: 0 auto;
+    line-height: 1.85; font-size: 17px;
+  }
+  .serif, h1, h2, h3 { font-family: Georgia, "Noto Serif TC", "Songti TC", serif; }
+  header .series {
+    color: var(--accent); font-size: 14px; letter-spacing: .12em; font-weight: 600;
+  }
+  header .series .no { border: 1.5px solid var(--accent); border-radius: 99px; padding: 1px 9px; margin-right: 8px; }
+  h1 { font-size: 31px; font-weight: 700; margin-top: 14px; line-height: 1.4; }
+  .lede {
+    color: var(--ink2); margin-top: 16px; font-size: 17.5px;
+    border-left: 3px solid var(--accent); padding-left: 16px; line-height: 1.8;
+  }
+  .meta { color: var(--muted); font-size: 14px; margin-top: 16px; }
+  hr.rule { border: 0; border-top: 1px solid var(--grid); margin: 40px 0 0; }
+  section { margin-top: 44px; }
+  h2 { font-size: 23px; font-weight: 700; line-height: 1.45; }
+  h2 .n { color: var(--accent); margin-right: 10px; }
+  p { margin-top: 16px; }
+  ol.steps { margin: 16px 0 0 2px; padding-left: 22px; }
+  ol.steps li { margin-top: 10px; }
+  .figure {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 22px; margin-top: 22px; overflow-x: auto;
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .figure .cap { color: var(--muted); font-size: 13.5px; margin-top: 12px; line-height: 1.65; }
+  .figure svg { display: block; max-width: 100%; height: auto; min-width: 640px; }
+  .note {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+    padding: 16px 20px; margin-top: 22px; font-size: 16px;
+  }
+  .note .t { color: var(--accent); font-weight: 700; font-size: 14px; letter-spacing: .08em; }
+  .note p { margin-top: 6px; }
+  table { border-collapse: collapse; margin-top: 14px; font-size: 14.5px; width: 100%; }
+  th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--grid); vertical-align: top; line-height: 1.6; }
+  th { color: var(--muted); font-weight: 600; font-size: 13.5px; }
+  footer { margin-top: 64px; border-top: 1px solid var(--grid); padding-top: 20px; color: var(--muted); font-size: 14.5px; line-height: 1.8; }
+  footer .next { color: var(--ink2); }
+  footer a { color: var(--accent); }
+  .svg-ink   { fill: var(--ink); }
+  .svg-ink2  { fill: var(--ink2); }
+  .svg-muted { fill: var(--muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="series"><span class="no">03</span>我如何使用 AI</div>
+  <h1>透過 AI 打造開發流程，<br>實現開發產品的願望</h1>
+  <p class="lede">當產品經理這些年，我從來不缺想法，缺的是把想法變成東西的手。AI 把想法與實現之間的距離縮到史上最短——但真的動手就知道，要「完整地」做出一個產品，還是沒那麼容易。這篇講我花掉最多時間的那件事：來回迭代出一條 AI 開發流水線。</p>
+  <div class="meta">我如何使用 AI・第 3 篇｜閱讀約 8 分鐘</div>
+</header>
+
+<hr class="rule">
+
+<section>
+  <h2><span class="n">一</span>想法與實現，從來沒有這麼近過</h2>
+  <p>當產品經理這些年，我從來不缺想法。缺的是把想法變成東西的手——過去任何一個像樣的產品，背後都是一支團隊和好幾個月的時間。想法很多，能排進資源裡被實現的很少，大部分連被驗證的機會都沒有。</p>
+  <p>AI 把這件事改寫了。現在，一個不寫 code 的人，有機會<b>親手</b>把產品雛形做出來。對產品人來說，這是很難不心動的時刻，而且我認為不該錯過——想法與實現之間的距離，從來沒有這麼短過。</p>
+  <p>不過說是這麼說，真的動手就知道：有了 AI，要把一個產品「完整地」做出來，還是沒那麼容易。從能動的雛形到經得起使用的產品，中間隔著品質、一致性、可維護性這些不性感的東西。所以我花掉最多時間的，其實不是做產品本身，而是<b>研究和來回迭代「開發的工作流程」</b>——這篇要講的，就是這條被迭代出來的生產線。</p>
+</section>
+
+<section>
+  <h2><span class="n">二</span>我要的是成為 AI builder</h2>
+  <p>為什麼捨得把最多的時間花在「流程」，而不是直接衝產品？因為我要的，從一開始就不只是某一個產品被做出來。這個系列第一篇提過，我把 AI 時代的功課分成三層：<b>學習、使用、應用</b>。前兩層說到底都還是「AI 幫我做事」；第三層的意思是親手把想法變成真的在運轉的東西。我給自己的目標就是走到第三層：<b>成為一個 AI builder</b>。</p>
+  <p>從這個目標看，「蓋一條生產線」就不是繞路，它本身就是目標的形狀——我要的是「<b>我能重複地做出產品</b>」這件事成立，而不是這一次運氣好。</p>
+  <p>剩下的問題只有一個：我這種不寫 code 的人，能成為哪一種 builder？答案藏在我最熟的事情裡：<b>軟體公司能穩定出貨，靠的從來不是「有很會寫 code 的人」，是一套讓專業角色互相制衡的流程</b>——規格有人審、設計有人挑戰、代碼有人驗、上線有人守門。而「設計讓一群專業角色協作出貨的流程」，正是 PM 的本業。我不需要變成工程師，我需要把一間軟體公司的組織，設計成 AI 的流水線。</p>
+</section>
+
+<section>
+  <h2><span class="n">三</span>生產線長什麼樣</h2>
+  <p>每個功能跑一輪 sprint（衝刺，軟體業的小批量開發循環），一輪裡 AI 扮演不同角色依序接力：規格 → 使用者體驗設計 → 技術架構 → 開發 → 視覺檢查 → 獨立 QA（品質驗證）→ 收尾歸檔 → 回顧。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 820 350" role="img" aria-label="八站流水線：規格、UX 設計、技術架構、開發、視覺檢查、獨立 QA、收尾歸檔、回顧；人只出現在三個裁決點；回顧的教訓寫回流程">
+      <defs>
+        <marker id="arr3a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"/>
+        </marker>
+        <marker id="arr3b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+        </marker>
+        <g id="person3">
+          <circle cx="0" cy="-20" r="5" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
+          <path d="M0 -15 V-4 M-7 -10 H7 M0 -4 L-5 4 M0 -4 L5 4" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/>
+        </g>
+      </defs>
+
+      <!-- 上排：規格 → UX 設計 → 技術架構 → 開發 -->
+      <g>
+        <rect x="24"  y="64" width="172" height="54" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="110" y="87"  font-size="14" font-weight="700" class="svg-ink" text-anchor="middle">規格</text>
+        <text x="110" y="106" font-size="11.5" class="svg-ink2" text-anchor="middle">要做什麼、怎樣算做到</text>
+        <rect x="224" y="64" width="172" height="54" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="310" y="87"  font-size="14" font-weight="700" class="svg-ink" text-anchor="middle">UX 設計</text>
+        <text x="310" y="106" font-size="11.5" class="svg-ink2" text-anchor="middle">流程與畫面</text>
+        <rect x="424" y="64" width="172" height="54" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="510" y="87"  font-size="14" font-weight="700" class="svg-ink" text-anchor="middle">技術架構</text>
+        <text x="510" y="106" font-size="11.5" class="svg-ink2" text-anchor="middle">怎麼蓋、切幾個任務</text>
+        <rect x="624" y="64" width="172" height="54" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="710" y="87"  font-size="14" font-weight="700" class="svg-ink" text-anchor="middle">開發</text>
+        <text x="710" y="106" font-size="11.5" class="svg-ink2" text-anchor="middle">照規格逐項交付</text>
+      </g>
+      <!-- 下排（右到左）：視覺檢查 → 獨立 QA → 收尾歸檔 → 回顧 -->
+      <g>
+        <rect x="624" y="214" width="172" height="54" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="710" y="237" font-size="14" font-weight="700" class="svg-ink" text-anchor="middle">視覺檢查</text>
+        <text x="710" y="256" font-size="11.5" class="svg-ink2" text-anchor="middle">好不好看、好不好用</text>
+        <rect x="424" y="214" width="172" height="54" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="510" y="237" font-size="14" font-weight="700" class="svg-ink" text-anchor="middle">獨立 QA</text>
+        <text x="510" y="256" font-size="11.5" class="svg-ink2" text-anchor="middle">另一個 AI，只拿規格驗收</text>
+        <rect x="224" y="214" width="172" height="54" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="310" y="237" font-size="14" font-weight="700" class="svg-ink" text-anchor="middle">收尾歸檔</text>
+        <text x="310" y="256" font-size="11.5" class="svg-ink2" text-anchor="middle">紀錄與待辦歸位</text>
+        <rect x="24"  y="214" width="172" height="54" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="110" y="237" font-size="14" font-weight="700" class="svg-ink" text-anchor="middle">回顧</text>
+        <text x="110" y="256" font-size="11.5" class="svg-ink2" text-anchor="middle">這輪學到什麼</text>
+      </g>
+      <!-- 流向箭頭 -->
+      <g fill="none" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#arr3a)">
+        <path d="M196 91 H 220"/>
+        <path d="M396 91 H 420"/>
+        <path d="M596 91 H 620"/>
+        <path d="M796 91 C 812 91 812 241 800 241"/>
+        <path d="M624 241 H 600"/>
+        <path d="M424 241 H 400"/>
+        <path d="M224 241 H 200"/>
+      </g>
+      <!-- retro 回流（虛線） -->
+      <path d="M110 214 V 122" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arr3b)"/>
+      <text x="122" y="160" font-size="12" fill="var(--accent)">教訓寫回流程，</text>
+      <text x="122" y="178" font-size="12" fill="var(--accent)">下一輪照新流程跑</text>
+      <!-- 裁決點人形 -->
+      <use href="#person3" x="110" y="44"/>
+      <use href="#person3" x="710" y="194"/>
+      <use href="#person3" x="310" y="194"/>
+      <text x="110" y="16" font-size="11.5" fill="var(--accent)" text-anchor="middle">方向確認</text>
+      <text x="710" y="166" font-size="11.5" fill="var(--accent)" text-anchor="middle">視覺驗收</text>
+      <text x="310" y="166" font-size="11.5" fill="var(--accent)" text-anchor="middle">收尾裁決</text>
+      <!-- 底註 -->
+      <text x="410" y="322" font-size="12.5" class="svg-muted" text-anchor="middle">每一站的產出是一份文件，下一站只認文件——AI 不憑記憶接力</text>
+      <text x="410" y="342" font-size="12.5" class="svg-muted" text-anchor="middle">人形＝人只出現在這三個裁決點，其餘時間生產線自己跑</text>
+    </svg>
+    <div class="cap">圖 1｜八站流水線。從真實軟體公司抄來的三個設計：檔案交接（不憑記憶）、寫的和驗的分開（獨立 QA）、人只站在裁決點。回顧站的虛線是整條線最值錢的部分——教訓會寫回流程本身。</div>
+  </div>
+
+  <p>三個關鍵設計，都是從真實公司抄來的：</p>
+  <p><b>一、檔案交接，不憑記憶。</b>每一站的產出是一份文件（規格書、設計稿、測試報告），下一站只認文件。這解決了 AI 最大的弱點——它不記得三天前的事，但它讀得懂三天前寫下的規格。</p>
+  <p><b>二、寫的和驗的，是不同的 AI。</b>開發的 agent 和 QA 的 agent 是分開的，QA 拿到的是規格而不是實作說明——像真的公司一樣，不讓任何人自己改自己的考卷。品質不過關就退回重做，沒有商量。</p>
+  <p><b>三、人只站在裁決點。</b>我出現在三種地方：方向對不對（規格關）、東西好不好看好不好用（視覺關）、這輪要不要收（收尾關）。判斷力是我唯一的稀缺資源，所以只花在只有人能做的判斷上。其餘時間，生產線自己跑。</p>
+  <p>這套流水線至今在兩個專案上跑了一百多輪 sprint：一個每天開盤真的在用的台股掃描工具（三千五百多個自動化測試守著它），和一個已經對外上線的求職產品。</p>
+</section>
+
+<section>
+  <h2><span class="n">四</span>被真實世界打臉的兩課</h2>
+  <p><b>第一課：機器測機器，有共同的盲區。</b>求職產品上線前，有個 bug 在六輪測試裡都沒被抓到——直到我自己拿真實資料用，功能當場崩掉。事後回顧的結論很誠實：測試資料太乖了。AI 產的測試資料跟 AI 寫的解析邏輯，是同一種「規格思維」的產物，它們對彼此太客氣；真人講話不照規格來。品質關卡擋得住「沒照規格做」，擋不住「規格本身沒想到真實世界長怎樣」。</p>
+  <p><b>第二課：上線是另一個物種的考試。</b>產品對外上線後不久就出了一次生產事故，整條流水線的守門都沒攔住——因為那類問題只在真實環境、真實流量、真實使用者的組合下才會出現。流水線能保證的是「做出來的東西符合規格」，「規格是否經得起真實世界」是另一門課。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 820 380" role="img" aria-label="流水線的管轄邊界：內圈是流水線管得住的，外圈是真實世界，bug 住在兩者之間的環狀地帶">
+      <!-- 外圈（真實世界內側的環） -->
+      <circle cx="410" cy="192" r="152" fill="var(--bad)" opacity="0.06"/>
+      <circle cx="410" cy="192" r="152" fill="none" stroke="var(--baseline)" stroke-width="1.6"/>
+      <!-- 內圈 -->
+      <circle cx="410" cy="192" r="86" fill="var(--surface)"/>
+      <circle cx="410" cy="192" r="86" fill="var(--good)" opacity="0.08"/>
+      <circle cx="410" cy="192" r="86" fill="none" stroke="var(--good)" stroke-width="1.8"/>
+      <text x="410" y="176" font-size="13.5" font-weight="700" fill="var(--good)" text-anchor="middle">流水線管得住的</text>
+      <text x="410" y="199" font-size="12" class="svg-ink2" text-anchor="middle">符合規格・測試通過</text>
+      <text x="410" y="219" font-size="12" class="svg-ink2" text-anchor="middle">品質關卡</text>
+      <!-- 環狀地帶標註 -->
+      <text x="410" y="86" font-size="14" font-weight="700" fill="var(--bad)" text-anchor="middle">bug 住在這裡</text>
+      <!-- 外部標籤 -->
+      <text x="150" y="60" font-size="13" class="svg-muted">外面：流水線管不住的</text>
+      <g font-size="13" class="svg-ink2">
+        <text x="128" y="200" text-anchor="end" fill="var(--ink2)">真實資料</text>
+        <text x="692" y="200" fill="var(--ink2)">真實環境</text>
+        <text x="410" y="372" text-anchor="middle" fill="var(--ink2)">真實使用者</text>
+      </g>
+      <g stroke="var(--muted)" stroke-width="1.2">
+        <line x1="136" y1="196" x2="252" y2="196"/>
+        <line x1="684" y1="196" x2="568" y2="196"/>
+        <line x1="410" y1="358" x2="410" y2="350"/>
+      </g>
+    </svg>
+    <div class="cap">圖 2｜流水線的管轄邊界。內圈的事（照規格做、測試通過）流水線管得死死的；但 bug 最喜歡住在內外圈之間——規格沒想到、只有真實世界才會出現的地帶。兩課都來自那裡。</div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">五</span>針對這兩課的 fine-tune</h2>
+  <p><b>讓教訓自動回流。</b>開頭說我花最多時間的是「來回迭代工作流程」——迭代的引擎就是這個：每輪 sprint 結束的回顧不是儀式，結論會寫回流程文件本身，下一輪的 AI 照新流程跑。那次六輪漏抓的 bug，回顧直接產出兩條流程修正提案。流水線最值錢的性質是這個：<b>它會累積，一次學會的事不會再犯</b>，這是單次對話永遠給不了的。</p>
+  <p><b>把真實資料放進生產線。</b>測試資料太乖的解法，就是別再只用乖資料——我開始把自己的真實資料餵進測試，後來更進一步把自己變成第一個真實用戶。這件事引出了下一篇的故事：我把兩場真實面試押在自己的產品上。</p>
+  <p>還有一個誠實的補充：這條流水線到上個月為止，生產的都是給我自己用的工具。自己用，再嚴的標準都有折扣。所以求職產品從立項起就背著雙重任務——產品本身是一層，<b>驗證這條流水線能不能從 0 到 1 做出真正對外上線的產品</b>是另一層。畢業考的過程，下一篇講。</p>
+</section>
+
+<section>
+  <h2><span class="n">六</span>給你帶走的：三條可搬走的設計原則</h2>
+  <p>如果你也不寫 code 但想做產品，流水線的細節不必照抄，這三條原則可以直接搬：</p>
+  <ol class="steps">
+    <li><b>角色分離、檔案交接</b>——別讓一個 AI 從頭包到尾。拆成角色、用文件交接，AI 的健忘就不再是問題，而且每個角色可以被單獨要求品質</li>
+    <li><b>關卡而非信任</b>——每一站設可檢查的過關標準，不過就退回。對 AI 的產出，「驗證」永遠比「信任」便宜</li>
+    <li><b>人只站在裁決點</b>——你的判斷力是系統裡唯一不能量產的東西，把它花在方向、品味、取捨上，不要花在盯過程</li>
+  </ol>
+  <p>最小起步版只有一步：<b>把「寫的 AI」和「驗的 AI」分開</b>——用兩個獨立對話，驗的那個只給規格、不給實作。光這一件事，就能超過絕大多數單次對話的品質。</p>
+</section>
+
+<section>
+  <div class="note">
+    <div class="t">數據出處備註</div>
+    <table>
+      <thead><tr><th>文中數字</th><th>出處</th></tr></thead>
+      <tbody>
+        <tr><td>兩專案合計一百多輪 sprint（51＋56＝107）</td><td>兩個專案 repo 的 sprint 紀錄（截至 2026-08-16）</td></tr>
+        <tr><td>三千五百多個自動化測試（3573）</td><td>台股掃描工具 sprint-56 收尾紀錄（2026-08-15）</td></tr>
+        <tr><td>六輪測試未抓到的 bug、兩條流程修正提案</td><td>求職產品 sprint-49 回顧紀錄（2026-08-13~15）</td></tr>
+        <tr><td>生產事故</td><td>求職產品上線週紀錄（2026-08-15）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <p class="next">上一篇：<a href="how-i-use-ai-02-personal-agent.html">02 Personal agent：我把「全局」交給了一個空資料夾</a></p>
+  <p class="next">下一篇：04 我一邊找工作，一邊把找工作做成了產品（即將發佈）</p>
+  <p>「我如何使用 AI」系列——一個科技與財務背景的人，把 AI 真的用起來的實戰紀錄。</p>
+</footer>
+
+<script data-goatcounter="https://ai-notes.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

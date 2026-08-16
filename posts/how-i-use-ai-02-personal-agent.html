@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personal agent：我把「全局」交給了一個空資料夾｜我如何使用 AI 02</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:     #f7f3ec;
+    --surface:  #fffdf8;
+    --ink:      #2c2620;
+    --ink2:     #5f574b;
+    --muted:    #93887a;
+    --grid:     #e7dfd2;
+    --baseline: #cfc5b4;
+    --border:   rgba(44,38,32,0.10);
+    --accent:   #b0492f;
+    --good:     #3e7c46;
+    --bad:      #a03030;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page:     #16130f;
+      --surface:  #1e1a15;
+      --ink:      #f0e9dd;
+      --ink2:     #beb3a2;
+      --muted:    #8d8375;
+      --grid:     #2e2921;
+      --baseline: #4a4336;
+      --border:   rgba(255,255,255,0.10);
+      --accent:   #d9744f;
+      --good:     #6fae77;
+      --bad:      #d97070;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #16130f; --surface: #1e1a15; --ink: #f0e9dd; --ink2: #beb3a2;
+    --muted: #8d8375; --grid: #2e2921; --baseline: #4a4336;
+    --border: rgba(255,255,255,0.10); --accent: #d9744f; --good: #6fae77; --bad: #d97070;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--page); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 48px 24px 80px; max-width: 900px; margin: 0 auto;
+    line-height: 1.85; font-size: 17px;
+  }
+  .serif, h1, h2, h3 { font-family: Georgia, "Noto Serif TC", "Songti TC", serif; }
+  header .series {
+    color: var(--accent); font-size: 14px; letter-spacing: .12em; font-weight: 600;
+  }
+  header .series .no { border: 1.5px solid var(--accent); border-radius: 99px; padding: 1px 9px; margin-right: 8px; }
+  h1 { font-size: 31px; font-weight: 700; margin-top: 14px; line-height: 1.4; }
+  .lede {
+    color: var(--ink2); margin-top: 16px; font-size: 17.5px;
+    border-left: 3px solid var(--accent); padding-left: 16px; line-height: 1.8;
+  }
+  .meta { color: var(--muted); font-size: 14px; margin-top: 16px; }
+  hr.rule { border: 0; border-top: 1px solid var(--grid); margin: 40px 0 0; }
+  section { margin-top: 44px; }
+  h2 { font-size: 23px; font-weight: 700; line-height: 1.45; }
+  h2 .n { color: var(--accent); margin-right: 10px; }
+  h3 { font-size: 18px; font-weight: 700; margin-top: 30px; }
+  p { margin-top: 16px; }
+  ol.steps { margin: 16px 0 0 2px; padding-left: 22px; }
+  ol.steps li { margin-top: 10px; }
+  .figure {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 22px; margin-top: 22px; overflow-x: auto;
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .figure .cap { color: var(--muted); font-size: 13.5px; margin-top: 12px; line-height: 1.65; }
+  .figure svg { display: block; max-width: 100%; height: auto; min-width: 640px; }
+  .note {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+    padding: 16px 20px; margin-top: 22px; font-size: 16px;
+  }
+  .note .t { color: var(--accent); font-weight: 700; font-size: 14px; letter-spacing: .08em; }
+  .note p { margin-top: 6px; }
+  table { border-collapse: collapse; margin-top: 14px; font-size: 14.5px; width: 100%; }
+  th, td { text-align: left; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--grid); vertical-align: top; line-height: 1.6; }
+  th { color: var(--muted); font-weight: 600; font-size: 13.5px; }
+  footer { margin-top: 64px; border-top: 1px solid var(--grid); padding-top: 20px; color: var(--muted); font-size: 14.5px; line-height: 1.8; }
+  footer .next { color: var(--ink2); }
+  footer a { color: var(--accent); }
+  .svg-ink   { fill: var(--ink); }
+  .svg-ink2  { fill: var(--ink2); }
+  .svg-muted { fill: var(--muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="series"><span class="no">02</span>我如何使用 AI</div>
+  <h1>Personal agent：<br>我把「全局」交給了一個空資料夾</h1>
+  <p class="lede">我的每個專案各自都跑得不錯，問題是「全局」只存在我的腦袋裡——而我的腦袋是一個會忘記事情、還會自我欺騙的儀表板。這篇講我怎麼把全局交給一個 AI agent：從一個空資料夾和一份職位說明書開始，到它變成一顆跟我共用記憶的附屬大腦。</p>
+  <div class="meta">我如何使用 AI・第 2 篇｜閱讀約 9 分鐘</div>
+</header>
+
+<hr class="rule">
+
+<section>
+  <h2><span class="n">一</span>我根本不知道自己的注意力長這樣</h2>
+  <p>我的桌面上有十幾個資料夾。一個開發中的求職產品、一個每天在用的台股掃描器、理財儀表板、求職資料，還有幾個已經沒在動的顧問案。</p>
+  <p>自我欺騙不是形容詞，是有數據的。我一直「覺得」自己在平均推進兩個重點專案。直到有一天把四週的 git 紀錄（程式碼的變更歷史，每次存檔都有時間戳）拉出來算：九成的投入集中在同一個專案上，另一個號稱並列主力的，只拿到零頭。</p>
+  <p>不是那個專案不值得做。是<b>我根本不知道自己的注意力長這樣</b>。</p>
+</section>
+
+<section>
+  <h2><span class="n">二</span>動手前，我想過的三條路</h2>
+  <p><b>第一條：更認真地用工具。</b>看板、週報模板、Notion 儀表板——我都認識，有的還試過。它們的共同死因：更新和回顧都靠我自己記得做。一個需要我維護的「全局」，忙起來第一個被犧牲的就是它，而忙起來恰恰是最需要全局的時候。</p>
+  <p><b>第二條：每次問 AI。</b>我本來就常把狀態貼給 AI 請它幫我分析。單次效果不錯，致命傷是<b>它不記得我</b>——每次都要重新解釋背景，分析品質取決於我當下餵了什麼，而「我會漏餵什麼」正是問題本身。</p>
+  <p><b>第三條（我選的）：給 AI 一個資料夾和一份職位說明書，讓它長期上班。</b>我開了一個空資料夾，只放一份 markdown 文件，跟 Claude Code 說：這裡歸你管，你是我的 personal agent。一開始我叫它「幕僚長」，因為最初的任務就是替我看專案全局——後來發現這個名字太小看它了，這個到文末再講。關鍵差異在於記憶的歸屬——資料夾裡的檔案就是它的長期記憶，它自己寫、自己維護，我不用記得更新任何東西。附帶的好處：全部在本機、有 git 版本紀錄，我的財務和求職資料不用上任何雲端服務。</p>
+</section>
+
+<section>
+  <h2><span class="n">三</span>職位說明書裡寫了什麼</h2>
+  <p>事後整理，那份文件其實就五件事，這也是整個系統的骨架：</p>
+  <ol class="steps">
+    <li><b>追蹤名單</b>：它管哪幾個專案、各自的資料夾在哪</li>
+    <li><b>開場例行</b>：每次我打開對話，不等我開口，先去各專案的 git 紀錄 diff 出「上次之後發生了什麼」、更新狀態卡、給我 30 秒簡報</li>
+    <li><b>收尾例行</b>：每次結束前寫工作日誌，並且把「這次對我這個人的新理解」合併進一份人物模型文件</li>
+    <li><b>紅線</b>：什麼不准做——例如任何東西要對外發佈，永遠是我手動按的</li>
+    <li><b>講話授權</b>：當我說要做 A 卻一直在做 C，它必須主動講，不用客氣</li>
+  </ol>
+  <p>第 3 點值得展開，因為它是這個系統跟「待辦清單工具」的本質差別。它的記憶是兩層的：下層是原始日誌（每次談了什麼，只增不改），上層是<b>人物模型</b>——它對我的目標、做事風格、決策習慣的持續理解，每次對話後更新、過時的理解會被改掉。建議是從這個模型長出來的，所以它越用越準。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 820 330" role="img" aria-label="三路輸入匯進人物模型，輸出簡報與教練提醒">
+      <defs>
+        <marker id="arr2a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"/>
+        </marker>
+      </defs>
+      <!-- 左側三路輸入 -->
+      <g>
+        <rect x="24" y="40"  width="190" height="56" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="44" y="63" font-size="14.5" font-weight="700" class="svg-ink">專案掃描</text>
+        <text x="44" y="84" font-size="12.5" class="svg-ink2">git 紀錄：我實際做了什麼</text>
+        <rect x="24" y="136" width="190" height="56" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="44" y="159" font-size="14.5" font-weight="700" class="svg-ink">做事風格觀察</text>
+        <text x="44" y="180" font-size="12.5" class="svg-ink2">我怎麼做事、怎麼拍板</text>
+        <rect x="24" y="232" width="190" height="56" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="44" y="255" font-size="14.5" font-weight="700" class="svg-ink">對話</text>
+        <text x="44" y="276" font-size="12.5" class="svg-ink2">我說我想要什麼</text>
+      </g>
+      <!-- 連線 -->
+      <g fill="none" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#arr2a)">
+        <path d="M214 68 C 270 68 275 140 316 155"/>
+        <path d="M214 164 H 316"/>
+        <path d="M214 260 C 270 260 275 188 316 173"/>
+        <path d="M506 148 C 550 120 560 84 600 66"/>
+        <path d="M506 180 C 550 208 560 244 600 262"/>
+      </g>
+      <!-- 中央人物模型 -->
+      <g>
+        <rect x="320" y="112" width="184" height="104" rx="6" fill="var(--accent)" opacity="0.08"/>
+        <rect x="320" y="112" width="184" height="104" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
+        <text x="412" y="146" font-size="15.5" font-weight="700" fill="var(--accent)" text-anchor="middle">人物模型</text>
+        <text x="412" y="170" font-size="12.5" class="svg-ink2" text-anchor="middle">它對我的持續理解</text>
+        <text x="412" y="190" font-size="12.5" class="svg-ink2" text-anchor="middle">（每次對話後更新）</text>
+      </g>
+      <!-- 右側輸出 -->
+      <g>
+        <rect x="604" y="36"  width="192" height="56" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="624" y="59" font-size="14.5" font-weight="700" class="svg-ink">狀態簡報</text>
+        <text x="624" y="80" font-size="12.5" class="svg-ink2">30 秒開場：燈號與新事</text>
+        <rect x="604" y="236" width="192" height="56" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="624" y="259" font-size="14.5" font-weight="700" class="svg-ink">教練提醒</text>
+        <text x="624" y="280" font-size="12.5" class="svg-ink2">說的和做的對不上時開口</text>
+      </g>
+      <text x="412" y="248" font-size="12.5" class="svg-muted" text-anchor="middle">不是待辦清單，是「它對我的理解」</text>
+    </svg>
+    <div class="cap">圖 1｜三路輸入，一份人物模型。左邊是它看我的三個管道，右邊是它給我的兩種輸出——中間那份文件才是系統的核心：建議是從理解長出來的。</div>
+  </div>
+
+  <p>抓落差靠的是第 5 點加上兩層資料：一層記「宣告」（我拍板過的優先序，白紙黑字含日期），一層記「行為」（git 活動＋對話紀錄）。兩層都有，落差才是算得出來的——不然所謂自我覺察，只是感覺良好。</p>
+  <p>它上線第一天就抓到開頭那個九成對零頭。被點出來之後那一週，比例回到約 63:37——沒有人逼我，「被看見」本身就有矯正力。但故事沒有到此圓滿：後來產品上線衝刺，比例又歪了回去，它把這件事掛成「待討論」繼續追。落差不一定是我的行為飄了，也可能是我的目標其實已經悄悄換了、只是文件沒跟上——這種時候該修的是宣告文件，不是我。兩種都算好結果，重點是把「漂移」變成一個可以攤開來談的東西。</p>
+</section>
+
+<section>
+  <h2><span class="n">四</span>真的用了之後，露餡的三個地方</h2>
+  <p><b>第一，我把它的目標設錯了。</b>第一版職位說明書寫的是「幫我達成我的目標」。聽起來合理，跑了幾天發現不對勁：我的目標會變，而且應該被允許變。如果它的使命綁在某個具體目標上，我哪天想法變了，它整個存在的前提就塌了。</p>
+  <p><b>第二，它只在我開機時活著。</b>所有的掃描、提醒、簡報，都發生在「我打開對話」之後。我不開，它就不存在——說好的每週讀產業情報，三週過去累積筆記數是零，因為那件事依賴的還是我的自律，而外包紀律不正是當初的目的嗎。</p>
+  <p><b>第三，整理的結果散得到處都是。</b>狀態在檔案裡、摘要在對話裡、關鍵數字是某天手抄的快照。手抄快照的問題是會過期——像現金水位這種每天在變的數字，抄下來的第二天就是舊的，而我後來需要拿它做重要決定。</p>
+</section>
+
+<section>
+  <h2><span class="n">五</span>針對這三個洞做的調整</h2>
+  <p><b>使命重設。</b>它的目標函數從「幫我達成目標」改成一句：<b>持續理解我</b>。我在做什麼、怎麼做事、想要什麼——理解夠準，建議自然有用。目標是我的，會換；「理解我」不會換。順序反過來之後，系統才站穩。</p>
+  <p><b>給它接上手腳。</b>行事曆、信箱、記帳試算表直連——關鍵數字它每次自己去讀最新的，不再手抄。然後給它一個每週自動執行的雲端分身：不管我開不開機，每週一早上自動掃完固定情報源、把摘要寄進我的信箱。它從「等我開機的顧問」變成「自己會動的幕僚」，我的自律從迴路裡被拿掉了。</p>
+  <p><b>立一條 source of truth 規矩。</b>email、對話、通知都只是傳遞通道，所有整理最終必須落地在同一個 dashboard 頁面。要回顧全局，永遠只看一個地方。</p>
+</section>
+
+<section>
+  <h2><span class="n">六</span>從幕僚長到附屬大腦</h2>
+  <p>補完這三個洞之後，我發現它做的事早就超出「幕僚長」的職位說明書了。現在的它：<b>行事曆和信箱是它的感官</b>——開場簡報會提醒我這週有什麼行程、有哪封信該處理，每週的情報摘要它自己掃、自己寄；<b>記帳試算表是它的儀表</b>——現金水位這類關鍵數字它直接讀最新的，我做重要決定時它拿得出即時的帳；<b>知識庫是我們的共筆</b>——我最近開了一個 Obsidian 庫（本地的 markdown 筆記軟體，靠雙向連結把筆記織成網），分工是「我丟、它整理」：我把有感的東西隨手扔進收件匣，它每次上班把值得留的寫成正式筆記、掛上連結、長出知識網。我讀到的、聊到的、學到的，開始真正累積在一個地方，而維護成本不在我身上。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 820 420" role="img" aria-label="附屬大腦全景：五種輸入接進 personal agent，輸出到 dashboard、簡報提醒與知識網">
+      <defs>
+        <marker id="arr2b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"/>
+        </marker>
+      </defs>
+      <!-- 左側輸入 -->
+      <g>
+        <rect x="24" y="26"  width="176" height="48" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="42" y="55" font-size="13.5" font-weight="700" class="svg-ink">行事曆</text>
+        <text x="112" y="55" font-size="12" class="svg-ink2">行程感官</text>
+        <rect x="24" y="100" width="176" height="48" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="42" y="129" font-size="13.5" font-weight="700" class="svg-ink">信箱</text>
+        <text x="94" y="129" font-size="12" class="svg-ink2">訊息感官</text>
+        <rect x="24" y="174" width="176" height="48" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="42" y="203" font-size="13.5" font-weight="700" class="svg-ink">記帳試算表</text>
+        <text x="128" y="203" font-size="12" class="svg-ink2">儀表</text>
+        <rect x="24" y="248" width="176" height="48" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="42" y="277" font-size="13.5" font-weight="700" class="svg-ink">專案 git 紀錄</text>
+        <rect x="24" y="322" width="176" height="48" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="42" y="345" font-size="13.5" font-weight="700" class="svg-ink">雲端分身</text>
+        <text x="42" y="362" font-size="12" class="svg-ink2">每週自動掃情報寄摘要</text>
+      </g>
+      <!-- 輸入連線 -->
+      <g fill="none" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr2b)">
+        <path d="M200 50  C 262 50 268 150 312 172"/>
+        <path d="M200 124 C 258 124 266 168 312 190"/>
+        <path d="M200 198 C 250 198 260 202 312 208"/>
+        <path d="M200 272 C 258 272 266 238 312 226"/>
+        <path d="M200 346 C 262 346 268 256 312 242"/>
+        <path d="M512 186 C 560 160 570 96 610 74"/>
+        <path d="M512 206 H 610"/>
+        <path d="M512 226 C 560 252 570 316 610 338"/>
+      </g>
+      <!-- 中央 personal agent -->
+      <g>
+        <rect x="316" y="146" width="192" height="122" rx="6" fill="var(--accent)" opacity="0.08"/>
+        <rect x="316" y="146" width="192" height="122" rx="6" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
+        <text x="412" y="178" font-size="15.5" font-weight="700" fill="var(--accent)" text-anchor="middle">Personal agent</text>
+        <text x="412" y="201" font-size="12.5" class="svg-ink2" text-anchor="middle">共用的一份記憶：</text>
+        <text x="412" y="221" font-size="12.5" class="svg-ink2" text-anchor="middle">專案・行程・財務・知識</text>
+        <text x="412" y="241" font-size="12.5" class="svg-ink2" text-anchor="middle">＋對我這個人的理解</text>
+      </g>
+      <!-- 右側輸出 -->
+      <g>
+        <rect x="614" y="44"  width="182" height="54" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="632" y="67" font-size="13.5" font-weight="700" class="svg-ink">Dashboard</text>
+        <text x="632" y="86" font-size="12" class="svg-ink2">唯一的 source of truth</text>
+        <rect x="614" y="180" width="182" height="54" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="632" y="203" font-size="13.5" font-weight="700" class="svg-ink">簡報與教練提醒</text>
+        <text x="632" y="222" font-size="12" class="svg-ink2">開場 30 秒＋落差警報</text>
+        <rect x="614" y="308" width="182" height="54" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="632" y="331" font-size="13.5" font-weight="700" class="svg-ink">知識網（Obsidian）</text>
+        <text x="632" y="350" font-size="12" class="svg-ink2">我丟、它整理</text>
+      </g>
+    </svg>
+    <div class="cap">圖 2｜附屬大腦全景。工具是一堆各自獨立的功能；附屬大腦的差別在<b>記憶是同一份</b>——左邊全部的輸入、右邊全部的輸出，中間共用同一個「它對我的理解」。</div>
+  </div>
+
+  <p>所以我現在對它的定位是：<b>personal agent——一顆跟我共用記憶的附屬大腦。</b>它不是一堆工具的集合，差別在記憶是同一份：專案的狀態、我的行程、我的財務、我的知識、還有「它對我這個人的理解」，全部長在一起。工具是你去用它；附屬大腦是它認識你，然後跟你協作。</p>
+  <p>還開著的缺口也照實說：我快要回去上班了。目前整套系統是為「全職做自己專案的我」設計的，等我的時間被工作吃掉大半，它的節奏、優先序、甚至存在方式都要重新設計——這會是這個系列之後的題目。</p>
+</section>
+
+<section>
+  <h2><span class="n">七</span>如果你想試：起手清單</h2>
+  <p>不用寫程式，你需要的是一個資料夾＋一份職位說明書，裡面寫清楚五件事：</p>
+  <ol class="steps">
+    <li><b>追蹤名單</b>——它替你看著哪些東西</li>
+    <li><b>開場例行</b>——每次見面它先自己做什麼（重點：不等你開口）</li>
+    <li><b>收尾例行</b>——結束時它怎麼記住這次，尤其是「對你的新理解」記在哪</li>
+    <li><b>紅線</b>——什麼事永遠必須由你手動做</li>
+    <li><b>講話授權</b>——明確寫下「發現我言行不一時，你必須說」</li>
+  </ol>
+  <p>一個經驗法則：先讓這個迴路手動跑順一兩週，再考慮接自動化。我的自動化全是被真實的洞逼出來的——反過來先蓋自動化，多半在蓋一座沒人住的城。</p>
+</section>
+
+<section>
+  <div class="note">
+    <div class="t">數據出處備註</div>
+    <table>
+      <thead><tr><th>文中數字</th><th>出處</th></tr></thead>
+      <tbody>
+        <tr><td>四週九成 vs 零頭（1487 vs 122 commits）</td><td>agent 工作區的對齊檢查紀錄（2026-08-10），git log 統計</td></tr>
+        <tr><td>被點名後該週約 63:37（282 vs 167 commits）</td><td>dashboard 注意力統計，8/10 當週（統計至 8/15）</td></tr>
+        <tr><td>之後又歪回去（同週後段 97:1）</td><td>對齊檢查註記（2026-08-16）</td></tr>
+        <tr><td>十幾個資料夾</td><td>2026-08-11 桌面盤點：12 個歷史專案＋4 個追蹤中</td></tr>
+        <tr><td>三週情報筆記累積為零</td><td>學習系統 takeaway 記錄（2026-08-10 設立至 8/16 為空）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <p class="next">上一篇：<a href="how-i-use-ai-01-overview.html">01 我用 AI 做了哪些事？——一張圖的全景導覽</a></p>
+  <p class="next">下一篇：<a href="how-i-use-ai-03-dev-factory.html">03 透過 AI 打造開發流程，實現開發產品的願望</a></p>
+  <p>「我如何使用 AI」系列——一個科技與財務背景的人，把 AI 真的用起來的實戰紀錄。</p>
+</footer>
+
+<script data-goatcounter="https://ai-notes.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
