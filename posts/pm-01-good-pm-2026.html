@@ -72,6 +72,16 @@
     background: var(--surface); border-left: 3px solid var(--accent); border-radius: 0 4px 4px 0;
     padding: 14px 18px; margin-top: 22px; font-size: 16.5px; color: var(--ink2);
   }
+  .figure {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 22px; margin-top: 22px; overflow-x: auto;
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .figure .cap { color: var(--muted); font-size: 13.5px; margin-top: 12px; line-height: 1.65; }
+  .figure svg { display: block; max-width: 100%; height: auto; min-width: 640px; }
+  .svg-ink   { fill: var(--ink); }
+  .svg-ink2  { fill: var(--ink2); }
+  .svg-muted { fill: var(--muted); }
   footer { margin-top: 64px; border-top: 1px solid var(--grid); padding-top: 20px; color: var(--muted); font-size: 14.5px; line-height: 1.8; }
   footer .next { color: var(--ink2); }
   footer a { color: var(--accent); }
@@ -101,6 +111,41 @@
   <p>用戶優先、價值導向、在對的時間做出最適合的決定——這三件事一個字都不用改。要改的是這句話的重量：</p>
   <p>2021 年我寫過，面試時聽到「我經驗豐富、判斷多半正確」就直接判定失格。2026 年這條紅線變得更嚴了。過去你還可以說「訪談要排程、數據要等分析師、我先憑經驗擋一下」；現在用戶訪談的逐字稿 AI 幾分鐘就能整理出痛點聚類，行為數據丟給 AI 能直接對話式追問，競品的公開評論一個下午就能掃完一輪。<b>洞察的取得成本崩落之後，「憑感覺」從偷懶升級成失職。</b></p>
   <p>那五個永恆的問題——我的用戶是誰、為什麼用我的產品、什麼情境用、為什麼不繼續用、數據告訴我什麼——問題本身不變，變的是你再也沒有理由答不出來。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 820 500" role="img" aria-label="2026 版產品經理三圈交集圖：用戶體驗、商業、技術三圈不變，底下新增 AI 執行層，執行的量下沉給 AI，判斷的質留在 PM">
+      <defs>
+        <marker id="arrpm1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+        </marker>
+      </defs>
+      <!-- 三圈 -->
+      <circle cx="330" cy="165" r="105" fill="var(--good)" opacity="0.05"/>
+      <circle cx="330" cy="165" r="105" fill="none" stroke="var(--good)" stroke-width="1.8"/>
+      <circle cx="490" cy="165" r="105" fill="var(--accent)" opacity="0.05"/>
+      <circle cx="490" cy="165" r="105" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
+      <circle cx="410" cy="270" r="105" fill="var(--muted)" opacity="0.05"/>
+      <circle cx="410" cy="270" r="105" fill="none" stroke="var(--muted)" stroke-width="1.8"/>
+      <text x="272" y="118" font-size="14.5" font-weight="700" fill="var(--good)">用戶體驗</text>
+      <text x="536" y="118" font-size="14.5" font-weight="700" fill="var(--accent)">商業</text>
+      <text x="410" y="338" font-size="14.5" font-weight="700" class="svg-muted" text-anchor="middle">技術</text>
+      <!-- 交集：PM -->
+      <text x="410" y="200" font-size="15.5" font-weight="700" fill="var(--accent)" text-anchor="middle">產品經理</text>
+      <text x="410" y="221" font-size="11.5" class="svg-ink2" text-anchor="middle">判斷・品味・信任</text>
+      <!-- AI 執行層 -->
+      <rect x="90" y="408" width="640" height="54" rx="8" fill="var(--accent)" opacity="0.08"/>
+      <rect x="90" y="408" width="640" height="54" rx="8" fill="none" stroke="var(--accent)" stroke-width="1.6"/>
+      <text x="410" y="430" font-size="14.5" font-weight="700" fill="var(--accent)" text-anchor="middle">AI 執行層（2026 新增的一層）</text>
+      <text x="410" y="450" font-size="11.5" class="svg-ink2" text-anchor="middle">訪談整理・數據分析・Prototype・文件生成・會議紀錄・溝通材料客製</text>
+      <g fill="none" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrpm1)">
+        <path d="M230 406 C 240 340 270 300 298 262"/>
+        <path d="M410 404 V 380"/>
+        <path d="M590 406 C 580 340 550 300 522 262"/>
+      </g>
+      <text x="410" y="490" font-size="12.5" class="svg-muted" text-anchor="middle">執行的量下沉給 AI；判斷的質留在 PM——三圈沒變，稀缺性上移了</text>
+    </svg>
+    <div class="cap">圖 1｜2021 年的三圈交集圖，2026 年多了一層。三個圈裡的「執行工作」大量下沉到 AI 執行層，PM 站的位置從「整合執行」上移到交集處真正不可替代的東西：判斷、品味、信任。</div>
+  </div>
 </section>
 
 <section>
@@ -116,6 +161,60 @@
     <li><b>新思路</b>：先寫下這次要驗證的假設（例如「用戶願意為了點數回饋改變消費行為」）→ 問「驗證這個假設的最小做法是什麼」→ 答案常常根本不是完整功能：可能是一個 AI 做的可點擊 prototype 給二十個目標用戶試、一個假門按鈕、一週就上線的粗糙版</li>
     <li>甚至，因為成本夠低，<b>同一個假設可以同時做兩三個版本比較</b>——過去這是大公司才有的奢侈</li>
   </ul>
+  <div class="figure">
+    <svg viewBox="0 0 820 420" role="img" aria-label="MVP 重心翻轉圖：舊思路是砍功能的單行道，新思路是問假設的循環">
+      <defs>
+        <marker id="arrpm2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"/>
+        </marker>
+        <marker id="arrpm3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+        </marker>
+      </defs>
+      <!-- 舊思路 -->
+      <text x="210" y="42" font-size="15" font-weight="700" class="svg-ink2" text-anchor="middle">舊思路：砍功能（單行道）</text>
+      <text x="210" y="64" font-size="12" class="svg-muted" text-anchor="middle">核心問題：「哪些功能非做不可？」</text>
+      <g>
+        <rect x="60" y="88"  width="300" height="46" rx="5" fill="var(--surface)" stroke="var(--baseline)"/>
+        <text x="210" y="116" font-size="13" class="svg-ink2" text-anchor="middle">列功能清單</text>
+        <rect x="60" y="168" width="300" height="46" rx="5" fill="var(--surface)" stroke="var(--baseline)"/>
+        <text x="210" y="196" font-size="13" class="svg-ink2" text-anchor="middle">痛苦地砍到最小（MoSCoW）</text>
+        <rect x="60" y="248" width="300" height="46" rx="5" fill="var(--surface)" stroke="var(--baseline)"/>
+        <text x="210" y="276" font-size="13" class="svg-ink2" text-anchor="middle">開發一個月</text>
+        <rect x="60" y="328" width="300" height="46" rx="5" fill="var(--surface)" stroke="var(--baseline)"/>
+        <text x="210" y="356" font-size="13" class="svg-ink2" text-anchor="middle">上線，祈禱數據好看</text>
+      </g>
+      <g fill="none" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arrpm2)">
+        <path d="M210 134 V 164"/>
+        <path d="M210 214 V 244"/>
+        <path d="M210 294 V 324"/>
+      </g>
+      <!-- 新思路 -->
+      <text x="610" y="42" font-size="15" font-weight="700" fill="var(--accent)" text-anchor="middle">新思路：問假設（循環）</text>
+      <text x="610" y="64" font-size="12" fill="var(--accent)" text-anchor="middle">核心問題：「我要驗證什麼假設？」</text>
+      <g>
+        <rect x="460" y="88"  width="300" height="46" rx="5" fill="var(--accent)" opacity="0.06"/>
+        <rect x="460" y="88"  width="300" height="46" rx="5" fill="none" stroke="var(--accent)" stroke-width="1.4"/>
+        <text x="610" y="116" font-size="13" class="svg-ink" text-anchor="middle">寫下這次要驗證的假設</text>
+        <rect x="460" y="168" width="300" height="46" rx="5" fill="var(--accent)" opacity="0.06"/>
+        <rect x="460" y="168" width="300" height="46" rx="5" fill="none" stroke="var(--accent)" stroke-width="1.4"/>
+        <text x="610" y="189" font-size="13" class="svg-ink" text-anchor="middle">做最小驗證物</text>
+        <text x="610" y="206" font-size="11" class="svg-ink2" text-anchor="middle">prototype・假門・一週上線的粗糙版</text>
+        <rect x="460" y="248" width="300" height="46" rx="5" fill="var(--accent)" opacity="0.06"/>
+        <rect x="460" y="248" width="300" height="46" rx="5" fill="none" stroke="var(--accent)" stroke-width="1.4"/>
+        <text x="610" y="276" font-size="13" class="svg-ink" text-anchor="middle">一週內看結果、學到東西</text>
+      </g>
+      <g fill="none" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrpm3)">
+        <path d="M610 134 V 164"/>
+        <path d="M610 214 V 244"/>
+        <path d="M610 294 V 330 H 788 V 111 H 764"/>
+      </g>
+      <text x="700" y="352" font-size="12" fill="var(--accent)">回到下一個假設</text>
+      <text x="410" y="404" font-size="12.5" class="svg-muted" text-anchor="middle">打造成本崩落之後，MVP 的重心從「範圍問題」變成「假設問題」——左邊走一趟一個月，右邊繞一圈一星期</text>
+    </svg>
+    <div class="cap">圖 2｜MVP 重心的翻轉。舊思路是單行道：砍完範圍就一路開發到上線，賭一次。新思路是循環：每一圈驗證一個假設，驗證物常常根本不是完整功能。MoSCoW 沒有死，但它從主框架降級成循環裡整理範圍的工具。</div>
+  </div>
+
   <p>MoSCoW 沒有死，它降級了：從「決定做什麼」的主框架，變成假設確認之後整理實作範圍的工具。金字塔原則也還在——再小的驗證物也要給用戶完整的價值體驗，這點沒變。</p>
   <p>2021 年那個 Loyalty Program 的例子，2026 年的正確打開方式是：先讓 AI 做一個含「功能提示＋反饋提示＋兌換」的可互動 prototype，找一批真實用戶走一遍，再決定要不要真的開發。當年我教你怎麼「砍得漂亮」，現在我會先問你「你確定要蓋嗎？先讓二十個人點點看。」</p>
 </section>
