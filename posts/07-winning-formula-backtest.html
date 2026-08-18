@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>投資有沒有所謂的必勝公式？——十一輪回測之後，分享我的心得｜AI 學徒筆記 07</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:     #f7f3ec;
+    --surface:  #fffdf8;
+    --ink:      #2c2620;
+    --ink2:     #5f574b;
+    --muted:    #93887a;
+    --grid:     #e7dfd2;
+    --baseline: #cfc5b4;
+    --border:   rgba(44,38,32,0.10);
+    --accent:   #b0492f;
+    --good:     #3e7c46;
+    --bad:      #a03030;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page:     #16130f;
+      --surface:  #1e1a15;
+      --ink:      #f0e9dd;
+      --ink2:     #beb3a2;
+      --muted:    #8d8375;
+      --grid:     #2e2921;
+      --baseline: #4a4336;
+      --border:   rgba(255,255,255,0.10);
+      --accent:   #d9744f;
+      --good:     #6fae77;
+      --bad:      #d97070;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #16130f; --surface: #1e1a15; --ink: #f0e9dd; --ink2: #beb3a2;
+    --muted: #8d8375; --grid: #2e2921; --baseline: #4a4336;
+    --border: rgba(255,255,255,0.10); --accent: #d9744f; --good: #6fae77; --bad: #d97070;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--page); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 48px 24px 80px; max-width: 900px; margin: 0 auto;
+    line-height: 1.85; font-size: 17px;
+  }
+  .serif, h1, h2, h3 { font-family: Georgia, "Noto Serif TC", "Songti TC", serif; }
+  header .series { color: var(--accent); font-size: 14px; letter-spacing: .12em; font-weight: 600; }
+  header .series .no { border: 1.5px solid var(--accent); border-radius: 99px; padding: 1px 9px; margin-right: 8px; }
+  h1 { font-size: 31px; font-weight: 700; margin-top: 14px; line-height: 1.4; }
+  .lede {
+    color: var(--ink2); margin-top: 16px; font-size: 17.5px;
+    border-left: 3px solid var(--accent); padding-left: 16px; line-height: 1.8;
+  }
+  .meta { color: var(--muted); font-size: 14px; margin-top: 16px; }
+  hr.rule { border: 0; border-top: 1px solid var(--grid); margin: 40px 0 0; }
+  section { margin-top: 44px; }
+  h2 { font-size: 23px; font-weight: 700; line-height: 1.45; }
+  h2 .n { color: var(--accent); margin-right: 10px; }
+  h3 { font-size: 18px; font-weight: 700; margin-top: 30px; }
+  p { margin-top: 16px; }
+  .figure {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 22px; margin-top: 22px; overflow-x: auto;
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .figure .cap { color: var(--muted); font-size: 13.5px; margin-top: 12px; line-height: 1.65; }
+  .figure svg { display: block; max-width: 100%; height: auto; }
+  .note {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+    padding: 16px 20px; margin-top: 22px; font-size: 16px;
+  }
+  .note .t { color: var(--accent); font-weight: 700; font-size: 14px; letter-spacing: .08em; }
+  .note p { margin-top: 6px; }
+  table.simple { border-collapse: collapse; margin-top: 18px; font-size: 15.5px; width: 100%; }
+  table.simple th, table.simple td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  table.simple th { color: var(--ink2); font-weight: 650; font-size: 14px; }
+  footer { margin-top: 64px; border-top: 1px solid var(--grid); padding-top: 20px; color: var(--muted); font-size: 14.5px; line-height: 1.8; }
+  footer .next { color: var(--ink2); }
+  footer a { color: var(--accent); }
+  .refs { margin-top: 12px; font-size: 13.5px; }
+  a.inl { color: var(--accent); }
+  .svg-ink   { fill: var(--ink); }
+  .svg-ink2  { fill: var(--ink2); }
+  .svg-muted { fill: var(--muted); }
+</style>
+</head>
+<body>
+
+<p style="margin-bottom:24px"><a href="../index.html" style="color:var(--accent);text-decoration:none;font-size:15px">← AI 世代的隨手筆記</a></p>
+
+<header>
+  <div class="series"><span class="no">07</span>AI 學徒筆記</div>
+  <h1>投資有沒有所謂的必勝公式？<br>——十一輪回測之後，分享我的心得</h1>
+  <p class="lede">每個開始投資的人遲早都會問：有沒有一套照著做就會賺的公式？我把市場上最常聽到的招式——跌深買、跟法人、追動能、看營收、等補漲——全部變成可以檢驗的假設，用自己的資料跑了<b>十一輪、65 條假設</b>的誠實回測。這一篇是完整的過程與結果：必勝公式我們沒有找到，但「為什麼找不到」和「什麼是必輸」，比公式本身值錢。</p>
+  <div class="meta">學徒筆記系列・第 7 篇｜閱讀約 14 分鐘｜※ 本篇為作者自有回測研究的過程與結論分享，性質同第 6 篇（含作者投資框架），請特別留意文末聲明</div>
+</header>
+
+<hr class="rule">
+
+<section>
+  <p>上一篇〈<a class="inl" href="06-market-psychology-and-chips.html">為什麼財報漂亮，股價卻不漲？</a>〉的結尾，我留了一張「三層檢核」清單：基本面看該不該、籌碼面看誰在買、預期面看價格反映到哪。寫完之後有個問題一直沒放下：<b>這些道理講起來都對，但放到真實資料上，到底站不站得住？</b></p>
+  <p>我手上剛好有驗證的條件：一個自己用的台股掃描工具（之後會有一篇細講它，這裡只需要知道它累積了一個乾淨的資料庫——價量、月營收、法人買賣超、融資融券），而且這個工具自己的規矩就寫著：任何訊號要從「顯示」升級成「主動提醒」，必須先過歷史回測。於是我請 AI 研究員開工，把市場上最常聽到的招式，一條一條變成可以檢驗的假設。</p>
+  <p>原本想的是跑個兩三輪，驗完工具的門檻就收工。結果一路跑了<b>十一輪、65 條假設</b>——因為每一輪的結果都在逼問下一個問題。</p>
+  <p>先講結論，免得你抱錯期待：<b>必勝公式，我們沒有找到。65 條假設，沒有一條產出可以拿去交易的優勢。</b>但這趟路上學到的東西，比找到一條「勝率 60% 的策略」值錢——因為它回答的是更根本的問題：為什麼你聽過的那些招式，測起來都不是那麼回事。</p>
+</section>
+
+<section>
+  <h2><span class="n">一</span>大家看股票的四個面向，就是我們的假設清單</h2>
+  <p>現在市場上看一檔股票，說法再多，拆開來不外乎四個面向：<b>基本面</b>（公司好不好）、<b>技術分析</b>（線型與價量）、<b>籌碼</b>（誰在買賣）、<b>題材</b>（故事與風口）。我們的假設清單，就是把每個面向裡最常聽到的常識，翻譯成可以檢驗的規則：</p>
+  <table class="simple">
+    <tr><th style="width:14%">面向</th><th style="width:40%">常識的說法</th><th>變成的假設</th></tr>
+    <tr><td><b>基本面</b></td><td>「營收成長的公司會漲」</td><td>營收動能家族（月營收年增率排序、營收驚喜事件）</td></tr>
+    <tr><td><b>技術分析</b></td><td>「跌深就是買點，優質股急殺要撿」</td><td>跌深反彈家族（急殺後進場，各種確認條件）</td></tr>
+    <tr><td><b>技術分析</b></td><td>「等突破確認再進場比較安全」</td><td>技術確認家族（帶量突破、盤整突破、突破後等回測）</td></tr>
+    <tr><td><b>技術分析</b></td><td>「漲多了就該獲利了結／不要追」</td><td>過熱燈號家族（水位型紅燈的各種用法）</td></tr>
+    <tr><td><b>籌碼</b></td><td>「跟著法人買就對了」</td><td>法人籌碼家族（連買跟隨、法人動向輪動、急殺承接）</td></tr>
+    <tr><td><b>題材</b></td><td>「買強勢股、站上風口，強者恆強」</td><td>動能輪動家族、題材環節輪動</td></tr>
+    <tr><td><b>題材</b></td><td>「龍頭漲完了，買還沒漲的補漲」</td><td>環節內落後補漲</td></tr>
+    <tr><td><b>事件</b></td><td>「除息前後有行情」</td><td>除息事件</td></tr>
+  </table>
+  <p>每一條都用同一套標準檢驗，誰也不偏袒——包括我自己工具的核心前提（跌深反彈）在內。</p>
+  <p>有一條路我們刻意沒走：<b>買昂貴的機構級資料</b>。專業機構做回測會用「時光機資料」（point-in-time：回到過去那天，當時的股池長什麼樣、當時看得到什麼），這種資料要花不少錢。我們用的是現在回頭看的資料，這會帶進一個系統性的偏誤，叫<b>倖存者偏差</b>——活到今天還在池子裡的股票，本來就是表現比較好的那批。這個限制我們從第一輪就寫在牆上，它怎麼影響結論的判讀，下一節會講——它其實是這篇文章最重要的伏筆。</p>
+</section>
+
+<section>
+  <h2><span class="n">二</span>怎麼避免自己騙自己：研究的設計</h2>
+  <p>回測最大的風險不是資料不夠，是<b>人會不自覺地作弊</b>。你調一調參數、換一換日期，總能調出一條漂亮的績效曲線——然後它在真實世界第一天就失靈。所以這次研究花最多力氣的地方，不是策略本身，是防弊：</p>
+  <p><b>把時間切成三段，考卷只能看一次。</b>2021 到 2024 年中是「訓練期」（隨便試）；2024 年中到 2025 年中是「驗證期」（訓練期表現好的才准來考）；2025 年中以後是「保留期」——每個策略家族一輩子只能碰一次，用掉就沒了。十一輪下來，保留期只動用過一次。</p>
+  <p><b>所有成績都算完交易成本。</b>手續費、交易稅、滑價。很多網路上的漂亮回測，成本一扣就死了。</p>
+  <p><b>先寫答案卡，再跑數字。</b>每輪開跑前，把要測哪些變體、什麼標準算過關，白紙黑字寫死。跑完不准移動球門，事後追加的實驗必須標注「非事前登錄」。</p>
+  <p><b>帳本記下所有嘗試，包括慘敗。</b>只報贏家就是另一種造假——你看到的「回測勝率 70%」文章，背後可能躺著 99 個沒被報出來的失敗版本。</p>
+  <p>然後是幾件判斷工具。這幾件工具是整趟研究最值得帶走的東西之一，因為它們不只適用於投資：</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 820 330" role="img" aria-label="65 條假設經過四道判死閘門的漏斗圖">
+      <text x="0" y="18" font-size="15" font-weight="650" class="svg-ink">十一輪的判死流程：65 條假設，四道閘門</text>
+      <defs>
+        <marker id="a71" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--muted)"/></marker>
+      </defs>
+      <g font-size="13">
+        <rect x="10" y="60" width="110" height="76" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="65" y="92" text-anchor="middle" class="svg-ink" font-weight="650">65 條假設</text>
+        <text x="65" y="114" text-anchor="middle" class="svg-ink2" font-size="12">四個面向</text>
+
+        <line x1="120" y1="98" x2="148" y2="98" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#a71)"/>
+
+        <rect x="152" y="52" width="106" height="92" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="205" y="80" text-anchor="middle" class="svg-ink" font-weight="650">① 贏過隨機</text>
+        <text x="205" y="103" text-anchor="middle" class="svg-ink2" font-size="11.5">先贏過閉眼亂抽</text>
+        <text x="205" y="122" text-anchor="middle" class="svg-ink2" font-size="11.5">的對照組</text>
+
+        <line x1="258" y1="98" x2="286" y2="98" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#a71)"/>
+
+        <rect x="290" y="52" width="106" height="92" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="343" y="80" text-anchor="middle" class="svg-ink" font-weight="650">② 反向對照</text>
+        <text x="343" y="103" text-anchor="middle" class="svg-ink2" font-size="11.5">反著做</text>
+        <text x="343" y="122" text-anchor="middle" class="svg-ink2" font-size="11.5">應該要變差</text>
+
+        <line x1="396" y1="98" x2="424" y2="98" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#a71)"/>
+
+        <rect x="428" y="52" width="106" height="92" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="481" y="80" text-anchor="middle" class="svg-ink" font-weight="650">③ 換段時間</text>
+        <text x="481" y="103" text-anchor="middle" class="svg-ink2" font-size="11.5">訓練期過了</text>
+        <text x="481" y="122" text-anchor="middle" class="svg-ink2" font-size="11.5">驗證期還要成立</text>
+
+        <line x1="534" y1="98" x2="562" y2="98" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#a71)"/>
+
+        <rect x="566" y="52" width="106" height="92" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="619" y="80" text-anchor="middle" class="svg-ink" font-weight="650">④ 偏差審查</text>
+        <text x="619" y="103" text-anchor="middle" class="svg-ink2" font-size="11.5">順著灌水方向的</text>
+        <text x="619" y="122" text-anchor="middle" class="svg-ink2" font-size="11.5">「有用」要打折</text>
+
+        <line x1="672" y1="80" x2="702" y2="62" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#a71)"/>
+        <line x1="672" y1="116" x2="702" y2="150" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#a71)"/>
+
+        <rect x="706" y="36" width="106" height="54" rx="5" fill="none" stroke="var(--bad)" stroke-width="1.5"/>
+        <text x="759" y="59" text-anchor="middle" class="svg-ink" font-weight="650">可交易策略</text>
+        <text x="759" y="80" text-anchor="middle" font-size="15" font-weight="700" fill="var(--bad)">0 條</text>
+
+        <rect x="706" y="130" width="106" height="94" rx="5" fill="var(--accent)" opacity="0.08"/>
+        <rect x="706" y="130" width="106" height="94" rx="5" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
+        <text x="759" y="156" text-anchor="middle" fill="var(--accent)" font-weight="700">帶得走的</text>
+        <text x="759" y="180" text-anchor="middle" class="svg-ink" font-size="12">一套判讀方法</text>
+        <text x="759" y="202" text-anchor="middle" class="svg-ink" font-size="12">一張必輸清單</text>
+
+        <rect x="152" y="176" width="520" height="72" rx="5" fill="none" stroke="var(--baseline)" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text x="412" y="204" text-anchor="middle" class="svg-ink2" font-size="12.5">另一把手術刀：把「同一天被觸發的股票」互相比——</text>
+        <text x="412" y="228" text-anchor="middle" class="svg-ink2" font-size="12.5">分開「挑對日子」和「挑對股票」（第三節的主角）</text>
+      </g>
+      <text x="410" y="290" text-anchor="middle" font-size="13" class="svg-muted">四道閘門沒有一道靠感覺：每一道都是可以重跑、可以被別人檢查的程序。</text>
+      <text x="410" y="312" text-anchor="middle" font-size="13" class="svg-muted">出口不是空的——找不到公式這件事，本身是花真金白銀也買不到的答案。</text>
+    </svg>
+    <div class="cap">為什麼要四道閘門：單看績效曲線，人一定會替自己的假設找理由。把「殺死假設的標準」寫成程序，判斷才輪不到情緒插手——這套流程對回測有效，對任何「用數據說話」的場合也有效。</div>
+  </div>
+
+  <p><b>先贏過隨機，才輪得到談實力。</b>我們做了一個殘忍的對照組：同樣的池子、同樣的成本、同樣的持股數，把「選股邏輯」換成純亂數，抽一兩百次看分布。結果是這篇文章最重要的一個數字：<b>在我們這個台股 AI 供應鏈池子裡，隨機抽 10 檔按月換股，中位數的年化報酬率約 +20%（訓練期、成本後）。</b>任何策略要先贏過閉著眼睛亂抽，才有資格說自己有選股能力。大部分過不了這關。</p>
+  <p><b>把條件反過來再跑一次。</b>如果「法人連買」是好訊號，那「法人連賣」應該是壞訊號。要是正反兩組績效差不多——這個條件根本沒有資訊量；要是反向組反而更好——它是有害的。這招殺掉的假設最多。</p>
+  <p><b>分開「挑對日子」和「挑對股票」。</b>一個訊號勝率很高，有兩種可能：它挑中了好股票，或它只是在好日子發訊號。檢驗方法是把「同一天被觸發的所有股票」放在一起互相比——如果訊號真有選股能力，被它挑中的應該贏過同一天沒被挑中的。這一刀下去，結果讓人清醒（下一節講）。</p>
+  <p><b>看偏誤往哪邊灌水。</b>還記得倖存者偏差嗎？它的方向是「把成績灌水」。所以判讀有一條不對稱規則：<b>灌了水還是負的結論，非常可信</b>（真實情況只會更差）；順著灌水方向的漂亮結論，必須打折。這就是為什麼「我們沒找到必勝公式」這個否定結論，反而是這套有偏誤資料能給出的最可靠的東西。</p>
+</section>
+
+<section>
+  <h2><span class="n">三</span>結果：四個面向逐一報告</h2>
+  <p>十一輪跑完，假設家族的墓誌銘長這樣：</p>
+  <table class="simple">
+    <tr><th style="width:34%">家族</th><th>死因（一句話）</th></tr>
+    <tr><td>跌深反彈</td><td>訓練期唯一穩定的版本，驗證期陣亡</td></tr>
+    <tr><td>法人籌碼</td><td>三條獨立路徑測不出資訊量，連買組甚至差於連賣組</td></tr>
+    <tr><td>動能輪動</td><td>會賺，但一段動能崩潰吃光全年（下面細講）</td></tr>
+    <tr><td>營收動能</td><td>驗證期符號翻轉——買「營收減速最兇」的反而比較好</td></tr>
+    <tr><td>技術確認（等回測、盤整突破）</td><td>「等確認」只是延後進場價；盤整最窄的那批是反指標</td></tr>
+    <tr><td>除息事件</td><td>把配息還原回去算，什麼都沒剩</td></tr>
+    <tr><td>水位型過熱紅燈</td><td>排除「漲太多」的標的讓績效變差，回撤卻沒改善</td></tr>
+    <tr><td>題材環節輪動／等補漲</td><td>熱度來不及追；落後組連隨機抽樣都不如（描述性研究）</td></tr>
+  </table>
+  <p>按四個面向逐一講：</p>
+
+  <h3>技術分析：指標挑的是日子，不是股票</h3>
+  <p>RSI（相對強弱指標）低於 25 是最經典的「超賣訊號」，我們測出來它的勝率高達八成四——聽起來像必勝公式對吧？解剖之後：這些訊號有 84% 落在大盤（0050）近 20 天跌超過 3% 的日子，而且訊號從不單獨出現，一亮就是同時三十幾檔一起亮。把「同一天被觸發的股票」拿來互比，它挑中的股票並沒有比較好。<b>它的高勝率是「整個市場在恐慌、之後整個市場反彈」的搭便車，跟選中哪一檔無關。</b>同樣的手術做在 RSI、MACD、均線位置、相對強弱、回檔深度上——全部一樣：沒有一個技術指標，能在同一天裡挑出比較好的那檔股票。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 820 350" role="img" aria-label="84% 勝率的解剖：挑對日子而非挑對股票">
+      <text x="0" y="18" font-size="15" font-weight="650" class="svg-ink">84% 勝率的解剖：訊號賺的是「日子」的錢</text>
+      <defs>
+        <marker id="a72" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--muted)"/></marker>
+      </defs>
+      <g font-size="13">
+        <text x="130" y="52" text-anchor="middle" class="svg-muted" font-weight="650" font-size="12.5">你以為的</text>
+        <rect x="30" y="64" width="200" height="44" rx="5" fill="none" stroke="var(--baseline)" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text x="130" y="91" text-anchor="middle" class="svg-ink2">超賣訊號亮了</text>
+        <line x1="130" y1="108" x2="130" y2="132" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#a72)"/>
+        <rect x="30" y="136" width="200" height="44" rx="5" fill="none" stroke="var(--baseline)" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text x="130" y="163" text-anchor="middle" class="svg-ink2">它挑中了好股票</text>
+        <line x1="130" y1="180" x2="130" y2="204" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#a72)"/>
+        <rect x="30" y="208" width="200" height="44" rx="5" fill="none" stroke="var(--baseline)" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text x="130" y="235" text-anchor="middle" class="svg-ink2">所以賺錢（勝率 84%）</text>
+
+        <text x="410" y="52" text-anchor="middle" class="svg-ink" font-weight="650" font-size="12.5">解剖後的</text>
+        <rect x="300" y="64" width="220" height="44" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="410" y="84" text-anchor="middle" class="svg-ink" font-weight="650">市場恐慌日</text>
+        <text x="410" y="102" text-anchor="middle" class="svg-ink2" font-size="11.5">84% 訊號落在大盤大跌的日子</text>
+        <line x1="410" y1="108" x2="410" y2="132" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#a72)"/>
+        <rect x="300" y="136" width="220" height="44" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="410" y="156" text-anchor="middle" class="svg-ink" font-weight="650">幾十檔同時亮訊號</text>
+        <text x="410" y="174" text-anchor="middle" class="svg-ink2" font-size="11.5">訊號從不單獨出現</text>
+        <line x1="410" y1="180" x2="410" y2="204" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#a72)"/>
+        <rect x="300" y="208" width="220" height="44" rx="5" fill="var(--surface)" stroke="var(--border)"/>
+        <text x="410" y="228" text-anchor="middle" class="svg-ink" font-weight="650">之後整個市場反彈</text>
+        <text x="410" y="246" text-anchor="middle" class="svg-ink2" font-size="11.5">那天隨便買都賺</text>
+
+        <line x1="520" y1="158" x2="574" y2="158" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#a72)"/>
+
+        <rect x="578" y="112" width="222" height="60" rx="5" fill="var(--accent)" opacity="0.08"/>
+        <rect x="578" y="112" width="222" height="60" rx="5" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
+        <text x="689" y="137" text-anchor="middle" fill="var(--accent)" font-weight="700" font-size="12.5">檢驗：同一天被觸發的</text>
+        <text x="689" y="158" text-anchor="middle" fill="var(--accent)" font-weight="700" font-size="12.5">股票，拿來互相比</text>
+        <line x1="689" y1="172" x2="689" y2="196" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#a72)"/>
+        <rect x="578" y="200" width="222" height="52" rx="5" fill="none" stroke="var(--bad)" stroke-width="1.5"/>
+        <text x="689" y="222" text-anchor="middle" class="svg-ink" font-size="12.5">被挑中的沒有比較好：</text>
+        <text x="689" y="243" text-anchor="middle" font-weight="700" fill="var(--bad)">選股能力 ≈ 0</text>
+      </g>
+      <text x="410" y="300" text-anchor="middle" font-size="13" class="svg-muted">高勝率的來源在中間那欄的「市場」，不在訊號的選股力——</text>
+      <text x="410" y="322" text-anchor="middle" font-size="13" class="svg-muted">RSI、MACD、均線、相對強弱、回檔深度，同一把手術刀下全部一樣。</text>
+    </svg>
+    <div class="cap">為什麼這件事重要：多數「高勝率訊號」的文章只給你左欄的故事。把同一天被觸發的股票互比，是任何人都能複製的檢驗——它分開了「這個訊號會挑股票」和「這個訊號只是在描述今天的市場」。</div>
+  </div>
+
+  <p>技術面還有一條反直覺的：<b>直覺上的「多重確認」，通常是在稀釋訊號。</b>帶量突破單獨看是唯一微弱偏正的技術腿（價值在賺賠比，不在勝率）。直覺說：再加上盤整打底、再加上基本面過濾、再加上排除大漲大跌，訊號會更純吧？實測是每加一條，超額報酬就掉一階：+1.10% → +1.03% → +0.42% → +0.23%，最後那個「千錘百鍊」的訊號，表現落在隨機分布的最底部。<b>每一條濾網都必須單獨舉證自己的邊際貢獻，「感覺更嚴謹」不是證據。</b></p>
+
+  <h3>基本面：營收好，不代表股價會理你</h3>
+  <p>「營收成長的公司會漲」大概是聽起來最無懈可擊的一條。實測：訓練期還行，驗證期<b>符號直接翻轉</b>——買「營收減速最兇」那組的反而比較好。這不是資料在惡作劇，它跟<a class="inl" href="06-market-psychology-and-chips.html">上一篇</a>講的「預期定價」是同一件事——市場交易的從來不是業績本身，是業績跟預期的落差：<b>營收年增率是全市場都看得到的舊聞，公布時早就在價格裡了</b>；行情熱的時候，市場買的是「基期已高、增速放緩但故事還在」的股票。另一個細節：營收的資訊量不在「年增率多高」這種絕對門檻（題材同步轉強時，「年增率為正」等於沒篩），而在<b>同一個環節裡誰相對比較強</b>——排序有用，門檻沒用。</p>
+
+  <h3>籌碼：法人跟單測不出，融資倒是像個警報</h3>
+  <p>這條最傷，因為<a class="inl" href="06-market-psychology-and-chips.html">上一篇</a>我自己才寫過：看法人動態的意義是「驗證」——確認你看到的利多，是不是早就被大錢定價、正在下車。三條完全獨立的測法（跟著連買的買、按法人動向排序換股、急殺時看法人有沒有承接）指向同一個結論：在我們的池子裡，跟著法人的每一種姿勢都不賺錢，其中跟隨連買組的十二種參數組合<b>全部</b>輸給大盤，甚至比跟著連賣組還差。要幫那篇說句公道話：它強調的本來就是「驗證，不是跟單」——這輪測的正是「跟單到底行不行」，答案是不行。細節裡有一絲光：拆開看，投信的訊號品質好於外資——但也只是「比較不差」。</p>
+  <p>籌碼面唯一表現得像警報的，是<b>融資單獨暴增</b>：漲勢裡只有散戶槓桿在衝、其他條件都沒亮的那批標的，之後 20 天平均 −5%，續漲率只剩三成五。過熱的危險不在漲了多少，在<b>是誰在推</b>。（誠實標注：這條只有十個半月的資料，是初步觀察，不是定律。）</p>
+
+  <h3>題材：風口是真的，但你追不上</h3>
+  <p>台股這幾年最熱的玩法就是題材輪動——哪個環節在風口上就換過去。我們做了一輪描述性研究（研究員明訂這輪不作為策略證據，以下當觀察讀）：<b>題材熱度的自然壽命，中位數只有十二到十四個交易日</b>，扣掉統計上的假象（回看窗的機械平滑）之後，真正有超額的日子只有四天左右；「這個月最強的環節、下個月還是最強」的機率，跟丟銅板差不多。用月頻「看到熱再進」，數學上就是進不去。</p>
+  <p>更慘的是散戶最愛的「等補漲」：環節內買落後者，不但輸給買強者，<b>連「環節內隨機亂抽」都不如</b>——落後是有原因的。還有一個口徑上的陷阱：用成交金額、名氣定義的「龍頭」，四種算法全部沒用；環節裡真正的「核心」，是<b>已經最強的那檔</b>，不是最大最有名的那檔。</p>
+
+  <h3>兩個跨面向的發現</h3>
+  <p><b>池子的紅利，大到讓選股努力看起來像雜訊。</b>再講一次那個數字：隨機抽 10 檔，年化 +20%。這代表過去幾年只要「人在 AI 供應鏈這個池子裡」，閉著眼睛都有這個成績——你以為的選股功力，絕大部分是池子的紅利（市場術語叫 beta）。這其實是把<a class="inl" href="03-demand-to-supply-chain.html">第三篇</a>、<a class="inl" href="04-taiwan-stock-map.html">第四篇</a>的功課翻過來再講一次：<b>看懂需求傳導、選對生態鏈環節（選池），才是報酬的大頭；池內挑股，是我們花了十一輪也沒能證明有超額報酬的地方。</b></p>
+  <p><b>追高的錢是真的，但代價也是真的。</b>這是整個知識庫被獨立確認最多次的一條，而且它打了我們自己的臉——我們工具的哲學是「不追高」，但數據說：動能優勢住在「剛漲多、還在漲」的股票身上。漲幅超過三成的「過熱」標的，之後反而更強；驗證期裡乖離最大的那一帶，報酬率超過 +20%。<b>然後同一份數據給了下半句</b>：這個家族死於「動能崩潰」——2025 年第一季一段回檔，動能組合單季 −18.9%，同期整個池子平均只 −6.4%，一季吃光全年優勢；任何濾網（營收、大盤位置判斷）在崩潰當下都保護不了；空頭段裡「買強勢股回檔」的勝率掉到 15%。合起來讀：<b>追高賺的是真錢，付的是「無預警深回撤、且無法事先防護」的保費。</b></p>
+</section>
+
+<section>
+  <h2><span class="n">四</span>加上前六篇，我的心得</h2>
+  <p>系列走到這裡，把 01 到 07 疊起來，我自己看到的股票投資心法是五條。照慣例先說性質：這是<b>一個散戶在自己的池子、自己的資料、帶著已揭露偏誤跑出來的自有結論</b>，它們對我成立，對你只是參考。</p>
+  <p><b>第一，報酬的大頭在選池，不在選股。</b>理解需求怎麼傳導（<a class="inl" href="03-demand-to-supply-chain.html">第三篇</a>）、生態鏈誰稀缺誰可替代（<a class="inl" href="04-taiwan-stock-map.html">第四篇</a>），決定你站在哪個池子；那個決定的份量，大於之後所有的進出場技巧。隨機抽 10 檔年化 +20% 就是證據——同時它也是警告：池子的紅利會讓你誤以為自己會選股。</p>
+  <p><b>第二，「懂一個機制」和「靠它賺超額」是兩回事。</b><a class="inl" href="06-market-psychology-and-chips.html">上一篇</a>講的那些機制——預期定價、融資是未來的賣壓、量是價格的說服力——都是真的；但機制為真，不代表散戶拿它當訊號能賺到超額報酬，中間隔著成本、容量，和「所有人都知道」。基本面不夠（上一篇講過）、技術面挑股測不出、法人跟單測不出——<b>知識讓你少犯錯，但它不自動變成 alpha。</b></p>
+  <p><b>第三，「寧可錯過不追高」是風險偏好，不是報酬最大化。</b>數據誠實地說了：追高有錢賺。選擇不追，是因為那份錢用「無預警、防不住的深回撤」計價，而錯過只是少賺。兩邊代價不對稱，我選代價小的那邊——這是選擇，不是真理，但做了這個選擇，就要吃得下「看著別人追高賺錢」的日子。</p>
+  <p><b>第四，過熱的危險不在漲多少，在誰在推。</b>價格漲三成本身不可怕（數據甚至說那批更強）；可怕的是漲勢的燃料是散戶槓桿——第三節那個融資警報，和上一篇講的「融資是未來的賣壓庫存」、<a class="inl" href="05-bubble-and-cycles.html">第五篇</a>講的槓桿與泡沫機制，串成同一句話：<b>看漲勢的燃料，比看漲幅有用。</b></p>
+  <p><b>第五，最大的敵人是自己騙自己。</b>十一輪下來最有用的不是任何策略，是那四道閘門：贏過隨機了嗎？反向對照組怎麼說？偏誤往哪邊灌水？換個參數還成立嗎？這四個問題不只擋回測造假——看任何用數據說話的結論（研報、達人文、AI 給你的分析），都用得上。</p>
+
+  <h3>所以，投資到底有沒有必勝公式？</h3>
+  <p>我們的答案分三層。</p>
+  <p><b>必勝公式：找不到。</b>65 條假設、四個面向全掃過，沒有一條在誠實的檢驗下活下來。而且因為偏誤的方向是灌水，這個「找不到」比一般回測的「找到了」可信得多。我不敢說它不存在——但至少可以說：<b>散戶用公開資料、常識招式、日線月線的頻率，找到它的機率非常低</b>。那些願意賣你必勝公式的人，值得你想一下為什麼。</p>
+  <p><b>必輸的方式：倒是很具體。</b>把池子的紅利當成自己的實力；用「感覺更嚴謹」的多重濾網把訊號稀釋到只剩安慰；看到題材熱了才進、龍頭漲了等補漲；跟著融資去追散戶槓桿推的漲勢；對著歷史答案調參數然後相信那條曲線。這張清單上的每一條，都是我們用數據親手驗證過的。</p>
+  <p><b>所以優勢在哪？</b>不在公式，在三件事：<b>把功課做在選池那一層</b>（這個系列第三、四篇教的，比任何線型都值錢）；<b>避開必輸清單</b>（少犯錯是散戶唯一可靠的超額來源）；<b>想清楚自己願意付什麼代價</b>——要動能的報酬就要吃它的回撤，要「寧可錯過」的安穩就要吃眼睜睜看別人賺的日子，這是風險偏好的選擇題，不是對錯題。選好之後，把規則交給紀律去執行，別讓收盤前手癢的那個自己碰方向盤。</p>
+  <p>我們沒有找到必勝公式，但把「為什麼它這麼難找」弄清楚了。這趟下來我最相信的一句話是：<b>在市場裡，知道什麼沒有用，跟知道什麼有用一樣值錢——而且前者可以被誠實地驗證，後者常常不行。</b></p>
+
+  <div class="note">
+    <div class="t">寫在系列脈絡裡</div>
+    <p>這一篇跟第 6 篇一樣，性質與 01~05 的知識內容不同：它是作者自己的研究過程與結論。所有數據都來自作者自有回測、帶著文中揭露的資料限制——請把它當成一個人做完功課後攤開的筆記本，不是研究報告，更不是操作指令。</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">附</span>名詞備註（給第一次接觸回測的讀者）</h2>
+  <table class="simple">
+    <tr><th style="width:26%">名詞</th><th>白話</th></tr>
+    <tr><td>回測</td><td>拿歷史資料檢驗「如果過去一直照某規則買賣，結果如何」——最大的陷阱是不知不覺對著答案調參數</td></tr>
+    <tr><td>訓練期／驗證期／保留期</td><td>把歷史切三段：隨便試的｜考試用的｜封存不碰的。目的是不讓「見過答案的規則」冒充有效</td></tr>
+    <tr><td>倖存者偏差</td><td>用「活到今天的名單」回測過去，成績天然灌水——陣亡的股票不在名單裡</td></tr>
+    <tr><td>年化報酬率（CAGR）</td><td>把一段期間的總報酬換算成「平均每年賺多少」的複利口徑</td></tr>
+    <tr><td>beta／alpha</td><td>beta＝跟著池子（市場）漲跌的部分；alpha＝超出池子的超額報酬。本文的結論可粗暴總結為：beta 很大，alpha 找不到</td></tr>
+    <tr><td>乖離</td><td>股價偏離自己均線的程度，常用來衡量「短期漲太多／跌太多」</td></tr>
+  </table>
+</section>
+
+<footer>
+  <p class="next"><b>系列到這裡</b>：01 接龍原理 → 02 幻覺與成本 → 03 需求鏈 → 04 台股地圖 → 05 泡沫與週期 → 06 市場心理與籌碼 → 07 十一輪回測。從「AI 是什麼」走到「怎麼面對用它定價的市場」，再走到「把常識放上手術台」。</p>
+  <p class="refs"><b>本篇為作者自有研究過程與結論的分享，所有數據來自作者自己的回測（含文中已揭露的資料偏誤），未經樣本外驗證，不構成任何投資建議、個股推薦或買賣邀約；投資決策請自行研究並承擔風險。</b></p>
+  <p>AI 學徒筆記——一個科技與財務背景的人，把 AI 真的學懂的公開筆記。</p>
+  <p class="next">上一篇：<a href="06-market-psychology-and-chips.html">為什麼財報漂亮，股價卻不漲？</a></p>
+</footer>
+
+<script data-goatcounter="https://ai-notes.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
